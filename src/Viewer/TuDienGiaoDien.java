@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Viewer;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author Huu Thanh
@@ -113,9 +116,10 @@ public class TuDienGiaoDien extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jListWord.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            ArrayList<String> list =new ArrayList<>();
+            
+            public int getSize() { return list.size(); }
+            public String getElementAt(int i) { return list.get(i); }
         });
         jScrollPane1.setViewportView(jListWord);
 
