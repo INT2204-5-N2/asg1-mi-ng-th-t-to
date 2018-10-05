@@ -34,7 +34,7 @@ public class DatabaseManagement {
     }
 
     public void setTable(String tableName, String columnName, String datatype) {
-        this.tableName = tableName;
+        //this.tableName = tableName;
         String statement = "CREATE TABLE " + tableName + "("+ columnName + " " + datatype +");";
         execute(statement);
     }
