@@ -5,6 +5,9 @@ import Controller.DatabaseManagement;
 import java.util.Scanner;
 
 public class Dictionary {
+    public enum DictType{
+        ENG2VIET, VIET2ENG
+    }
     private static final String DICT_PATH = "/src/Res/dict_hh.db";
     private DatabaseManagement DICT_db;
     Dictionary(){

@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Dictionary;
 import Models.Word;
 
 import java.sql.*;
@@ -45,13 +46,23 @@ public class DatabaseManagement {
     }
 
 
-    public ArrayList<Word> searchByWord(String wordSeatch, String dictType){
-        String cmd = "SELECT * FROM " + dictType + " where word like \"" + wordSeatch +"%\";";
+    public ArrayList<Word> searchByWord(String wordSeatch, Dictionary.DictType dictType){
+        String tableName;
+        switch (dictType){
+            case ENG2VIET:
+                tableName = "av";
+                break;
+            case VIET2ENG:
+                tableName = "va";
+                break;
+            default:
+                tableName = "";
+        }
+        String cmd = "SELECT * FROM " + tableName + " where word like \"" + wordSeatch +"%\";";
         System.out.println(cmd);
         ArrayList<Word> result = new ArrayList<>();
-        ResultSet resultSet = null;
         try {
-            resultSet = statement.executeQuery(cmd);
+            ResultSet resultSet = statement.executeQuery(cmd);
             while(resultSet.next()){
                 Word newWord = new Word();
                 newWord.setWord_target(resultSet.getString(2));
@@ -62,5 +73,8 @@ public class DatabaseManagement {
             e.printStackTrace();
         }
         return result;
+    }
+    public ArrayList<Word> showAllWords(Dictionary.DictType dictType){
+        return searchByWord("*", dictType);
     }
 }
