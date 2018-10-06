@@ -7,7 +7,7 @@ package Viewer;
 
 import java.util.ArrayList;
 
-/**
+/**fuck không chạy
  *
  * @author Huu Thanh
  */
