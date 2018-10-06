@@ -117,7 +117,6 @@ public class TuDienGiaoDien extends javax.swing.JFrame {
 
         jListWord.setModel(new javax.swing.AbstractListModel<String>() {
             ArrayList<String> list =new ArrayList<>();
-            
             public int getSize() { return list.size(); }
             public String getElementAt(int i) { return list.get(i); }
         });
