@@ -7,6 +7,8 @@ package Viewer;
 
 //import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.*;
@@ -15,7 +17,7 @@ import javax.swing.*;
  *
  * @author Huu Thanh
  */
-public final class DictionaryWindow extends JFrame {
+public final class DictionaryWindows extends JFrame implements ActionListener {
 
     //const
     public static final int JPANEL_LEFT_X = 0;
@@ -40,7 +42,7 @@ public final class DictionaryWindow extends JFrame {
     private JTextArea JtaMeanning;
     ArrayList<String> ListWord;
 
-    public DictionaryWindow() {
+    public DictionaryWindows() {
         Init();
     }
 
@@ -105,9 +107,21 @@ public final class DictionaryWindow extends JFrame {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        DictionaryWindow Diction = new DictionaryWindow();
+        DictionaryWindows Diction = new DictionaryWindows();
         Diction.setVisible(true);
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton jbAction=(JButton) e.getSource();
+        if(jbAction==jbEdit)
+        {
+            new EditWindow();
+        }
+        else if(jbAction==jbAdd)
+        {
+            new AddWindow();
+        }
+    }
 }

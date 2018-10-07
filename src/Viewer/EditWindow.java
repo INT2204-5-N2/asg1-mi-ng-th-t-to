@@ -7,12 +7,14 @@ package Viewer;
 
 import javax.swing.JFrame;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author Huu Thanh
  */
-public final class EditWindow extends JFrame {
+public final class EditWindow extends JFrame implements ActionListener {
     private JButton jbOk;
     private JButton jbCancel;
     private JTextField jtxtVietnamese;
@@ -61,5 +63,13 @@ public final class EditWindow extends JFrame {
     {
         EditWindow a=new EditWindow();
         a.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton jbAction=(JButton) e.getSource();
+        if(jbAction==jbOk)
+        {
+        }
     }
 }
