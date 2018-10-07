@@ -3,6 +3,7 @@ package Models;
 import javax.sound.sampled.AudioInputStream;
 
 public class Word {
+    private String id;
     private String word_target;
     private String word_explain;
     private boolean isStared;
