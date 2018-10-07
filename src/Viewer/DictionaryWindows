@@ -58,7 +58,7 @@ public final class DictionaryWindow extends JFrame {
         this.jlWord = new JList();
         this.jpnLeft = new JPanel();
         this.jpnRight = new JPanel();
-        this.setLayout(null)
+        this.setLayout(null);
 //        this.jpnLeft.setLayout(null);
 //        this.jpnRight.setLayout(null);
         //Set panel
