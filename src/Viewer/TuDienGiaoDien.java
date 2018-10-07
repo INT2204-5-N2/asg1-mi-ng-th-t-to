@@ -50,18 +50,23 @@ public class TuDienGiaoDien extends javax.swing.JFrame {
 
         jcheckboxNote.setText("Note");
         jcheckboxNote.setBorder(new javax.swing.border.MatteBorder(null));
+        jcheckboxNote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcheckboxNoteActionPerformed(evt);
+            }
+        });
 
-        jlNghia.setText("Meanning");
+        jlNghia.setText("Ngh?a");
 
         jScrollPane2.setViewportView(jTextPaneNghia);
 
         jbSound.setText("Loa");
         jbSound.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jbDelete.setText("delete");
+        jbDelete.setText("Xóa");
         jbDelete.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jibEdit.setText("edit");
+        jibEdit.setText("S?a");
         jibEdit.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jbAdd.setText("Add");
@@ -83,7 +88,7 @@ public class TuDienGiaoDien extends javax.swing.JFrame {
                 .addComponent(jbSound)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jcheckboxNote)
-                .addGap(21, 21, 21))
+                .addGap(39, 39, 39))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,15 +115,16 @@ public class TuDienGiaoDien extends javax.swing.JFrame {
                     .addComponent(jlNghia)
                     .addComponent(jbSound))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jListWord.setModel(new javax.swing.AbstractListModel<String>() {
-            ArrayList<String> list =new ArrayList<>();
-            public int getSize() { return list.size(); }
-            public String getElementAt(int i) { return list.get(i); }
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jListWord);
 
@@ -148,7 +154,7 @@ public class TuDienGiaoDien extends javax.swing.JFrame {
                     .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -160,16 +166,16 @@ public class TuDienGiaoDien extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 44, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -178,6 +184,10 @@ public class TuDienGiaoDien extends javax.swing.JFrame {
     private void jbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAddActionPerformed
+
+    private void jcheckboxNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcheckboxNoteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcheckboxNoteActionPerformed
 
     /**
      * @param args the command line arguments
