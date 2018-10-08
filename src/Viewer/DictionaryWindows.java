@@ -17,7 +17,7 @@ import javax.swing.*;
  *
  * @author Huu Thanh
  */
-public final class DictionaryWindows extends JFrame implements ActionListener {
+public class DictionaryWindows extends JFrame implements ActionListener {
 
     //const
     public static final int JPANEL_LEFT_X = 0;
@@ -109,9 +109,11 @@ public final class DictionaryWindows extends JFrame implements ActionListener {
         // TODO code application logic here
         DictionaryWindows Diction = new DictionaryWindows();
         Diction.setVisible(true);
-
+//        ActionEvent a;
+//        a = new ActionEvent();
+//        this.actionPerformed(a);
+        System.out.println("succcess");
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton jbAction=(JButton) e.getSource();
@@ -121,7 +123,15 @@ public final class DictionaryWindows extends JFrame implements ActionListener {
         }
         else if(jbAction==jbAdd)
         {
-            new AddWindow();
+           new AddWindow();
+        }
+        else if(jbAction==jbDelete)
+        {
+
+        }
+        else if(jbAction==jbSearch)
+        {
+
         }
     }
 }
