@@ -9,7 +9,10 @@ package Viewer;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.SocketOption;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.*;
 
@@ -41,25 +44,15 @@ public class DictionaryWindows extends JFrame implements ActionListener {
     private JList jlWord;
     private JTextArea JtaMeanning;
     ArrayList<String> ListWord;
+    private AddWindow addDic=null;
+    private EditWindow EdiDic=null;
 
     public DictionaryWindows() {
         Init();
     }
 
     public void Init() {
-        this.jbAdd = new JButton();
-        this.jbAdd.setName("Add");
-        this.jbDelete = new JButton();
-        this.jbDelete.setName("Delete");
-        this.jbEdit = new JButton("Edit" );
-        this.jbSearch = new JButton("Search");
-        this.jtxtSearch = new JTextField();
-        this.jtxtSearch.setColumns(10);
-        this.jcbNote = new JCheckBox();
-        this.JtaMeanning = new JTextArea();
-        this.jlWord = new JList();
-        this.jpnLeft = new JPanel();
-        this.jpnRight = new JPanel();
+        this.CreatAndSetProperties();
         this.setLayout(null);
 //        this.jpnLeft.setLayout(null);
 //        this.jpnRight.setLayout(null);
@@ -78,9 +71,6 @@ public class DictionaryWindows extends JFrame implements ActionListener {
         this.jtxtSearch.setBounds(125, 70, 100, 25);
         this.add(this.jbSearch);
         this.jbSearch.setBounds(130, 30, 80, 25);
-
-
-
         this.add(this.JtaMeanning);
         this.JtaMeanning.setBounds(365, 100, 320, 400);
         this.add(this.jcbNote);
@@ -91,13 +81,47 @@ public class DictionaryWindows extends JFrame implements ActionListener {
         this.jbDelete.setBounds(460,70 , 80, 20);
         this.add(this.jbEdit);
         this.jbEdit.setBounds(560, 70, 80, 20);
+
+        //Set action for button
+        this.jbAdd.setActionCommand("Add");
+        this.jbAdd.addActionListener(this);
+        this.jbEdit.setActionCommand("Edit");
+        this.jbEdit.addActionListener(this);
+        this.jtxtSearch.setActionCommand("JTxtSearch");
+        this.jtxtSearch.addActionListener(this);
+
+        //this.AddAction();
         //Set Frame
         this.setTitle("Dictionary");
         this.setSize(700, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+    public void CreatAndSetProperties()
+    {
+        this.jbAdd = new JButton("Add");
+        this.jbDelete = new JButton("Delete");
+        this.jbEdit = new JButton("Edit" );
+        this.jbSearch = new JButton("Search");
+        this.jtxtSearch = new JTextField();
+        this.jtxtSearch.setColumns(10);
+        this.jcbNote = new JCheckBox("Note");
+        this.JtaMeanning = new JTextArea();
+        this.jlWord = new JList();
+        this.jpnLeft = new JPanel();
+        this.jpnRight = new JPanel();
 
+    }
+    public void AddAction()
+    {
+        this.jbEdit.addActionListener(this);
+        this.jbAdd.addActionListener(this);
+        this.jbDelete.addActionListener(this);
+        this.jbSearch.addActionListener(this);
+        this.jtxtSearch.addActionListener(this);
+        //this.jlWord.addAncestorListener();
+
+    }
     public void LoadWord() {
 
     }
@@ -116,22 +140,35 @@ public class DictionaryWindows extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton jbAction=(JButton) e.getSource();
-        if(jbAction==jbEdit)
+        if("Add".equals(e.getActionCommand()))
         {
-            new EditWindow();
-        }
-        else if(jbAction==jbAdd)
-        {
-           new AddWindow();
-        }
-        else if(jbAction==jbDelete)
-        {
+            if (addDic==null)
+            {
+                addDic = new AddWindow();
+
+            }
+            addDic.setVisible(true);
+
 
         }
-        else if(jbAction==jbSearch)
+        else if("Edit".equals(e.getActionCommand()))
         {
+            if(EdiDic==null)
+            {
+                EdiDic=new EditWindow();
+            }
+            EdiDic.setVisible(true);
 
         }
+        else if("JTxtSearch".equals(e.getActionCommand()))
+        {
+            jtxtSearch.setText(new Scanner(System.in).nextLine());
+            String a=jtxtSearch.getText();
+            System.out.println(a);
+        }
+//        else if(jbAction==jbSearch)
+//        {
+//
+//        }
     }
 }

@@ -56,7 +56,7 @@ public final class EditWindow extends JFrame implements ActionListener {
         this.setTitle("Edit Word");
         this.setLayout(null);
         this.setSize(700, 500);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setVisible(true);
     }
     public static void main(String []argv)

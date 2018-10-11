@@ -50,10 +50,10 @@ public final class AddWindow extends JFrame implements ActionListener {
         this.add(this.jtxtVietnamese);
 
         //set Frame
-        this.setTitle("Edit Word");
+        this.setTitle("Add Word");
         this.setLayout(null);
         this.setSize(700, 500);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setVisible(true);
     }
 
