@@ -2,6 +2,7 @@ package Helper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -9,13 +10,13 @@ import java.net.URL;
 
 public class HttpConnection {
 
-    public static String sendGet(String url){
+    public static InputStream sendGet(String url){
         try {
             URL urlCon = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) urlCon.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("User-Agent", "Rigor API Tester");
-            int responseCode = connection.getResponseCode();
+            /*int responseCode = connection.getResponseCode();
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(
                     connection.getInputStream()));
             String inputLine;
@@ -25,7 +26,8 @@ public class HttpConnection {
                 response.append(inputLine);
             }
             inputStream.close();
-            return response.toString();
+            return response.toString();*/
+            return connection.getInputStream();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
