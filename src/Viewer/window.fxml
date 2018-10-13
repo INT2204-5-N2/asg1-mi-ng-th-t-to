@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.Control">
+   <children>
+      <ListView fx:id="jlWord" fixedCellSize="10.0" layoutX="14.0" layoutY="110.0" prefHeight="488.0" prefWidth="160.0" />
+      <TextField fx:id="jtxtSearch" layoutX="14.0" layoutY="73.0" onAction="#jtxtSearchClick" promptText="Search" />
+      <Pane layoutX="180.0" layoutY="107.0" prefHeight="479.0" prefWidth="309.0">
+         <children>
+            <TextArea layoutX="-1.0" layoutY="28.0" prefHeight="450.0" prefWidth="309.0" />
+            <Button fx:id="jbSound" layoutX="214.0" mnemonicParsing="false" text="Sound" />
+            <Button alignment="BOTTOM_CENTER" layoutX="144.0" mnemonicParsing="false" text="Edit" />
+            <Label layoutX="37.0" prefHeight="25.0" prefWidth="36.0" text="Nghĩa" textAlignment="JUSTIFY" wrapText="true" />
+            <CheckBox layoutX="274.0" layoutY="6.0" mnemonicParsing="false" />
+         </children>
+      </Pane>
+      <Button fx:id="jbOnline" layoutX="169.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="online" />
+      <Label layoutX="169.0" layoutY="14.0" prefHeight="43.0" prefWidth="172.0" text="DICTIONARY" textAlignment="CENTER">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="jbAdd" layoutX="251.0" layoutY="71.0" mnemonicParsing="false" onAction="#showAddWindow" text="Add" />
+   </children>
+</Pane>

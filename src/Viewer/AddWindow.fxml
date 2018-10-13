@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane prefHeight="328.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.AddControl">
+   <children>
+      <Label layoutX="200.0" layoutY="8.0" prefHeight="55.0" prefWidth="227.0" text="ADD WORD">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="jtaVietnamese" layoutX="313.0" layoutY="114.0" prefHeight="155.0" prefWidth="281.0" />
+      <Button fx:id="jbAdd" layoutX="345.0" layoutY="292.0" mnemonicParsing="false" onAction="#start1" text="Add" />
+      <Button fx:id="jbCancel" layoutX="227.0" layoutY="292.0" mnemonicParsing="false" text="Cancel" />
+      <Label layoutX="400.0" layoutY="77.0" text="English" />
+      <Label layoutX="83.0" layoutY="77.0" text="Vietnamese" />
+      <TextArea fx:id="jtaEnglish" layoutY="114.0" prefHeight="155.0" prefWidth="281.0" />
+   </children>
+</Pane>
