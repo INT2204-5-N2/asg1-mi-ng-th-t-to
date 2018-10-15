@@ -60,7 +60,7 @@ public class AddController implements Initializable {
             newWord.setWord_target(jtaEnglish.getText());
             newWord.setWord_explain(jtaVietnamese.getText());
             DatabaseManagement dbManagement = new DatabaseManagement(Dictionary.DICT_PATH);
-            dbManagement.addNewWord(newWord, Dictionary.DictType.ENG2VIET);
+            dbManagement.addNewWord(newWord);
 //            Alert imformation=new Alert(Alert.AlertType.INFORMATION);
 //            imformation.setTitle("Add Word");
 //            imformation.setHeaderText("Thêm từ");
