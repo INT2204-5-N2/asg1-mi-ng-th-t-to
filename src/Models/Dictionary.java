@@ -6,7 +6,7 @@ public class Dictionary {
         ENG2VIET, VIET2ENG
     }
 
-    private static final String DICT_PATH = "/src/Res/dict_hh.db";
+    public static final String DICT_PATH = "/src/Res/dict_hh.db";
 
     public static String getTableName(DictType dictType){
         switch (dictType){

@@ -26,6 +26,10 @@ public class DatabaseManagement {
         }
     }
 
+    public DatabaseManagement() {
+
+    }
+
 
     /*public void execute(String sqlCommand){
         try {
