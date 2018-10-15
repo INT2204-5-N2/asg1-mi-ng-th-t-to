@@ -1,32 +1,53 @@
 package Controller;
 
-import Models.Word;
-
-import java.util.ArrayList;
-
 public class DictionaryManagement {
-    public ArrayList<Word> lookup(String wordSearch){
 
-        return null;
+    private static DictionaryManagement dictionaryManager;
+    private static DatabaseManagement dbManager;
+    private String dictType;
+    private static final String evDict = "ENG-VIET";
+    private static final String veDict = "VIET-ENG";
+
+    private DictionaryManagement(){
+        dictType = evDict;
+        dbManager = new DatabaseManagement(getDictPath());
     }
 
-    public void addNewWord(){
-
+    public static DictionaryManagement getInstance(){
+        if(dictionaryManager == null){
+            dictionaryManager = new DictionaryManagement();
+        }
+        return dictionaryManager;
     }
 
-    public void deleteWord(String id){
+    public void setDictType(String dictType){
+        this.dictType = dictType;
+        dbManager = new DatabaseManagement(getDictPath());
+    }
+    public DatabaseManagement getDBManager(){
+        return dbManager;
+    }
+    public String getTableName(){
+        switch (dictType){
+            case veDict:
+                return "va";
+            case evDict:
+                return "av";
+            default:
+                return "";
 
+        }
     }
 
-    public void editWord(String id){
+    public String getDictPath(){
+        switch (dictType){
+            case evDict:
+                return "/src/Res/envn.sqlite";
+            case veDict:
+                return "/src/Res/database/va_all_v2.db";
+            default:
+                return "";
 
-    }
-
-    public Word getSelectedWord(){
-        return null;
-    }
-
-    public void insertFromFile(String url){
-
+        }
     }
 }
