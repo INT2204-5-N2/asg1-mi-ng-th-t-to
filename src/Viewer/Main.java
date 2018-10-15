@@ -17,17 +17,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            //window=primaryStage;
-            Parent root = FXMLLoader.load(getClass().getResource("window.fxml"));
+            Parent root = FXMLLoader.load(this.getClass().getResource("window.fxml"));
             Scene scene=new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
         }catch (Exception e)
         {
-//            return ;
-//            Alert a=new Alert(Alert.AlertType.INFORMATION);
-//            a.setContentText(e.getMessage());
-//            a.show();
             System.out.println(e.getMessage());
         }
     }
