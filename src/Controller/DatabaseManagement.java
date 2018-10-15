@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseManagement {
-    private static Connection dbConnection;
+    private Connection dbConnection;
     private String path;
     private Statement statement;
     private String tableName = "";
@@ -60,6 +60,7 @@ public class DatabaseManagement {
 
     public ArrayList<Word> searchByWord(String wordSeatch, Dictionary.DictType dictType){
         String cmd = "SELECT * FROM " + Dictionary.getTableName(dictType) + " where word like \"" + wordSeatch +"%\" order by word ASC;";
+        System.out.println(cmd);
         try {
             ResultSet resultSet = statement.executeQuery(cmd);
             return SQLQuery.getInstance().resultSetToWordConvert(resultSet);

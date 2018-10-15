@@ -40,4 +40,9 @@ public class Word {
     public void setPronounce(Pronounce pronounce) {
         this.pronounce = pronounce;
     }
+
+    @Override
+    public String toString() {
+        return word_target;
+    }
 }
