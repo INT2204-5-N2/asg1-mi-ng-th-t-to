@@ -18,3 +18,6 @@ public class GoogleTranslation {
         return result.substring(result.indexOf("[[[\"") + 4, result.indexOf("\",\""));
     }
 }
+//srcLang: En
+//targerLang: Vi
+

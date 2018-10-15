@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.Control">
+   <children>
+      <ListView fx:id="jlWord" fixedCellSize="10.0" layoutX="14.0" layoutY="110.0" onEditStart="#LoadData" prefHeight="488.0" prefWidth="160.0" />
+      <TextField fx:id="jtxtSearch" layoutX="14.0" layoutY="73.0" onAction="#selectWord" promptText="Search" />
+      <Button fx:id="jbOnline" layoutX="169.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="online" />
+      <Label layoutX="169.0" layoutY="14.0" prefHeight="43.0" prefWidth="172.0" text="DICTIONARY" textAlignment="CENTER">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="jbAdd" layoutX="236.0" layoutY="73.0" mnemonicParsing="false" onAction="#showAddWindow" text="Add" />
+      <TabPane layoutX="189.0" layoutY="121.0" prefHeight="474.0" prefWidth="291.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Nghĩa" />
+          <Tab text="Chuyên ngành" />
+            <Tab text="Đồng/Trài Nghĩa" />
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
