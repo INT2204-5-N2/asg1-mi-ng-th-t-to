@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.web.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.HomeController">
    <children>
-      <ListView fx:id="jlWord" fixedCellSize="10.0" layoutX="14.0" layoutY="110.0" onEditStart="#LoadData" prefHeight="488.0" prefWidth="160.0" />
-      <TextField fx:id="jtxtSearch" layoutX="14.0" layoutY="73.0" onAction="#selectWord" promptText="Search" />
-      <Button fx:id="jbOnline" layoutX="169.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="online" />
+      <ListView fx:id="jlWord" editable="true" layoutX="14.0" layoutY="110.0" prefHeight="488.0" prefWidth="160.0" />
+      <TextField fx:id="jtxtSearch" layoutX="14.0" layoutY="73.0" promptText="Search" />
+      <Button fx:id="jbOnline" layoutX="284.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="online" />
       <Label layoutX="169.0" layoutY="14.0" prefHeight="43.0" prefWidth="172.0" text="DICTIONARY" textAlignment="CENTER">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Button fx:id="jbAdd" layoutX="251.0" layoutY="71.0" mnemonicParsing="false" onAction="#showAddWindow" text="Add" />
+      <Button fx:id="jbAdd" layoutX="341.0" layoutY="73.0" mnemonicParsing="false" onAction="#showAddWindow" text="Add" />
       <Pane layoutX="180.0" layoutY="107.0" prefHeight="479.0" prefWidth="309.0">
          <children>
             <TabPane layoutX="-6.0" prefHeight="488.0" prefWidth="318.0" tabClosingPolicy="UNAVAILABLE">
@@ -29,7 +24,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <WebView layoutX="1.0" layoutY="1.0" prefHeight="458.0" prefWidth="318.0" />
+                              <WebView fx:id="wbvMeaning" prefHeight="463.0" prefWidth="318.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -56,5 +51,6 @@
             </TabPane>
          </children>
       </Pane>
+      <ChoiceBox fx:id="jCBDictType" layoutX="169.0" layoutY="73.0" prefHeight="25.0" prefWidth="71.0" />
    </children>
 </Pane>

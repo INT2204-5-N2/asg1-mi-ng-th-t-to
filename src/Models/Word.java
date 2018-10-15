@@ -9,6 +9,14 @@ public class Word {
     private boolean isStared;
     private Pronounce pronounce;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getWord_target() {
         return word_target;
     }

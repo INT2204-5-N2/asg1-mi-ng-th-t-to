@@ -1,22 +1,23 @@
 package Viewer;
 
 import Controller.DatabaseManagement;
-import Models.Dictionary;
+import Controller.DictionaryManagement;
 import Models.Word;
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,12 +26,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable  {
-
-
     @FXML
-    private Button jbEdit;
-    @FXML
-    private TextArea jtaMeaning;
+    ChoiceBox<String> jCBDictType;
+
     @FXML
     private TextField jtxtSearch;
     @FXML
@@ -38,51 +36,33 @@ public class HomeController implements Initializable  {
     @FXML
     private Button jbOnline;
     @FXML
-    private ListView <Word> jlWord=new ListView<>();
-
-    public ArrayList<Word> listWord=new ArrayList<>();
-    ObservableList list=FXCollections.observableArrayList();
-    private DatabaseManagement dbManager = new DatabaseManagement(Dictionary.DICT_PATH);
-    public void LoadData()
+    private ListView<Word> jlWord;
+    @FXML
+    private WebView wbvMeaning;
+    public void loadSuggestList(String value)
     {
-        //list.removeAll(list);
-        String a="thanh";
-        String b="nam";
-        String c="Nhung";
-        String d="Hai";
-        list.addAll(a,b,c,d);
-        //jlWord.setItems(list);
-        jlWord.getItems().addAll(listWord);
-
-//        jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//        listWord=dbManager.showAllWords(Dictionary.DictType.ENG2VIET);
-//        ObservableList<Word> list= FXCollections.observableArrayList();
-//        //jlWord.setItems(list);
-//        jlWord.getItems().addAll(list);
-
-
-//        jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//        jlWord.getFocusModel().focus(1);
-//        //Bắt sự kiện thay đổi text và load lên listView
-//        ArrayList<Word> suggestList = dbManager.showAllWords(Dictionary.DictType.ENG2VIET);
-//        jlWord.setItems(FXCollections.observableArrayList(suggestList));
-//        System.out.println(suggestList.get(0).getWord_target() + " " + suggestList.get(0).getWord_explain());
-//        //Cái visible này của ng ko cần
-//        jlWord.setVisible(true);
+        ArrayList<Word> suggestList = DictionaryManagement.getInstance().getDBManager().searchByWord(value);
+        if(suggestList.size() == 0){
+            System.out.println("size 0");
+            return;
+        }
+        ObservableList<Word> list = FXCollections.observableArrayList(suggestList);
+        jlWord.setItems(list);
     }
+
     @FXML
     //Lấy kết quả khi từ được chọn
     public void selectWord(){
         Word selectedWord = jlWord.getSelectionModel().getSelectedItem();
-        jlWord.setVisible(false);
-        jtxtSearch.setText(selectedWord.getWord_explain());
+        System.out.println(selectedWord.getWord_explain());
+        wbvMeaning.getEngine().loadContent(selectedWord.getWord_explain());
     }
-    public void Subbit(ActionEvent e) {
+    /*public void Subbit(ActionEvent e) {
         String a = jtxtSearch.getText();
         Alert show = new Alert(Alert.AlertType.INFORMATION);
         show.setContentText(a);
         show.show();
-    }
+    }*/
     @FXML
     public void showEditWindow(ActionEvent e)  throws  IOException
     {
@@ -95,27 +75,41 @@ public class HomeController implements Initializable  {
     }
     @FXML
     public void showAddWindow(ActionEvent e) throws IOException {
-        /*Stage stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
-        FXMLLoader loader=new FXMLLoader();
-        loader.setLocation(getClass().getResource("AddWindow.fxml"));
-        Parent ShowAdd=loader.load();
-        Scene scene1=new Scene(ShowAdd);
-        stage.setScene(scene1);*/
         Parent root = FXMLLoader.load(getClass().getResource("AddWindow.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setTitle("Add Window");
         stage.setScene(scene);
         stage.show();
-        //jlWord.get
     }
-    public void jtxtSearchClick(MouseEvent event)
-    {
-        jtxtSearch.setText("");
-    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        LoadData();
+        jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        jlWord.getFocusModel().focus(1);
+        jtxtSearch.textProperty().addListener((observable, oldValue, newValue) -> loadSuggestList(newValue));
+        jtxtSearch.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue && jtxtSearch.getText().equals("")){
+                    loadSuggestList("");
+                }
+            }
+        });
+        jlWord.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                selectWord();
+            }
+        });
+        jCBDictType.setItems(FXCollections.observableArrayList("ENG-VIET", "VIET-ENG"));
+        jCBDictType.getSelectionModel().selectFirst();
+        jCBDictType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                DictionaryManagement.getInstance().setDictType(jCBDictType.getValue());
+            }
+        });
     }
 
 }
