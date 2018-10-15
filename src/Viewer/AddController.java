@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddControl implements Initializable {
+public class AddController implements Initializable {
     @FXML
     private TextArea jtaEnglish;
     @FXML

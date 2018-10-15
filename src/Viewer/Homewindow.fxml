@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.Control">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.HomeController">
    <children>
       <ListView fx:id="jlWord" fixedCellSize="10.0" layoutX="14.0" layoutY="110.0" onEditStart="#LoadData" prefHeight="488.0" prefWidth="160.0" />
       <TextField fx:id="jtxtSearch" layoutX="14.0" layoutY="73.0" onAction="#selectWord" promptText="Search" />

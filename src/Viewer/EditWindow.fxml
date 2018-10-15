@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="286.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.Editcontrol">
+<AnchorPane prefHeight="286.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.EditController">
    <children>
       <Button fx:id="jbEdit" layoutX="210.0" layoutY="247.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Edit" />
       <Button fx:id="jbCancel" layoutX="331.0" layoutY="247.0" mnemonicParsing="false" text="Cancel" />

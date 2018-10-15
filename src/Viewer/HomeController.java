@@ -24,8 +24,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Control implements Initializable  {
+public class HomeController implements Initializable  {
 
+
+    @FXML
+    private Button jbEdit;
     @FXML
     private TextArea jtaMeaning;
     @FXML
@@ -79,6 +82,16 @@ public class Control implements Initializable  {
         Alert show = new Alert(Alert.AlertType.INFORMATION);
         show.setContentText(a);
         show.show();
+    }
+    @FXML
+    public void showEditWindow(ActionEvent e)  throws  IOException
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("EditWindow.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Edit Window");
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     public void showAddWindow(ActionEvent e) throws IOException {

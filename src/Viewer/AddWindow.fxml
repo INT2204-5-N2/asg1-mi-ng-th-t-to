@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="328.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.AddControl">
+<Pane prefHeight="328.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.AddController">
    <children>
       <Label layoutX="200.0" layoutY="8.0" prefHeight="41.0" prefWidth="227.0" text="ADD WORD">
          <font>
