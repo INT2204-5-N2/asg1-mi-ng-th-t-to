@@ -5,12 +5,16 @@ public class DictionaryManagement {
     private static DictionaryManagement dictionaryManager;
     private static DatabaseManagement dbManager;
     private String dictType;
-    private static final String evDict = "ENG-VIET";
-    private static final String veDict = "VIET-ENG";
+    public static final String evDict = "ENG-VIET";
+    public static final String veDict = "VIET-ENG";
 
     private DictionaryManagement(){
         dictType = evDict;
         dbManager = new DatabaseManagement(getDictPath());
+    }
+
+    public String getDictType() {
+        return dictType;
     }
 
     public static DictionaryManagement getInstance(){
@@ -28,7 +32,7 @@ public class DictionaryManagement {
         return dbManager;
     }
     public String getTableName(){
-        switch (dictType){
+        /*switch (dictType){
             case veDict:
                 return "va";
             case evDict:
@@ -36,13 +40,15 @@ public class DictionaryManagement {
             default:
                 return "";
 
-        }
+        }*/
+        return "word_btl";
     }
 
     public String getDictPath(){
         switch (dictType){
             case evDict:
-                return "/src/Res/envn.sqlite";
+                //return "/src/Res/envn.sqlite";
+                return "/src/Res/database/av_all_v2.db";
             case veDict:
                 return "/src/Res/database/va_all_v2.db";
             default:

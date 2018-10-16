@@ -1,14 +1,15 @@
 package Controller;
 
 import Models.Word;
+import com.google.rpc.Help;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseManagement {
-    private static Connection dbConnection;
+    private Connection dbConnection;
     private String path;
-    private static Statement statement;
+    private Statement statement;
     private String tableName = "";
     private String sqlPrefix = "jdbc:sqlite:";
     private static final int MAX_ITEM = 30;
@@ -41,16 +42,27 @@ public class DatabaseManagement {
 
     public ArrayList<Word> searchByWord(String wordSeatch){
         String cmd = "SELECT * FROM " + DictionaryManagement.getInstance().getTableName() + " where word like \"" + wordSeatch +"%\" order by word ASC;";
-        System.out.println(cmd);
         try {
             ResultSet resultSet = statement.executeQuery(cmd);
             ArrayList<Word> result = new ArrayList<>();
-            while(result.size() < MAX_ITEM && resultSet.next()){
-                Word newWord = new Word();
-                newWord.setId(resultSet.getString(1));
-                newWord.setWord_target(resultSet.getString(2));
-                newWord.setWord_explain("<p>" + resultSet.getString(3) + "</p><p>" + resultSet.getString(4) + "</p><p>" + resultSet.getString(5) + "</p>");
-                result.add(newWord);
+            if(DictionaryManagement.getInstance().getDictType().equals(DictionaryManagement.evDict)){
+                while(result.size() < MAX_ITEM && resultSet.next()){
+                    Word newWord = new Word();
+                    newWord.setWord_target(resultSet.getString("word"));
+                    newWord.setWord_explain(new String(resultSet.getBytes("av")));
+                    newWord.setTechnical(new String(resultSet.getBytes("cnav")));
+                    newWord.setSynonym(new String(resultSet.getBytes("dnpn")));
+                    newWord.setEng2Eng(new String(resultSet.getBytes("aa")));
+                    result.add(newWord);
+                }
+            }
+            else {
+                while (result.size() < MAX_ITEM && resultSet.next()){
+                    Word newWord = new Word();
+                    newWord.setWord_target(resultSet.getString("word"));
+                    newWord.setWord_explain(new String(resultSet.getBytes(3)));
+                    result.add(newWord);
+                }
             }
             resultSet.close();
             return result;

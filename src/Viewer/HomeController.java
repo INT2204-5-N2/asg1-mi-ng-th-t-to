@@ -38,7 +38,15 @@ public class HomeController implements Initializable  {
     @FXML
     private ListView<Word> jlWord;
     @FXML
-    private WebView wbvMeaning;
+    private WebView tabMeaning;
+    @FXML
+    private WebView tabTechnical;
+    @FXML
+    private WebView tabSynonym;
+    @FXML
+    private WebView tabEngEng;
+    @FXML
+    private TabPane translationPane;
     public void loadSuggestList(String value)
     {
         ArrayList<Word> suggestList = DictionaryManagement.getInstance().getDBManager().searchByWord(value);
@@ -49,20 +57,29 @@ public class HomeController implements Initializable  {
         ObservableList<Word> list = FXCollections.observableArrayList(suggestList);
         jlWord.setItems(list);
     }
-
+    public void changeTabPaneView(){
+        Tab[] arrayTab = translationPane.getTabs().toArray( new Tab[0]);
+        if(arrayTab[0].getText().equals("Anh - Việt")){
+            arrayTab[0].setText("Việt - Anh");
+        } else {
+            arrayTab[0].setText("Anh - Việt");
+        }
+        for (int i = 1; i < 4; i++){
+            arrayTab[i].disableProperty().setValue(!arrayTab[i].isDisabled());
+        }
+    }
     @FXML
     //Lấy kết quả khi từ được chọn
     public void selectWord(){
         Word selectedWord = jlWord.getSelectionModel().getSelectedItem();
-        System.out.println(selectedWord.getWord_explain());
-        wbvMeaning.getEngine().loadContent(selectedWord.getWord_explain());
+        tabMeaning.getEngine().loadContent(selectedWord.getWord_explain());
+        if(DictionaryManagement.getInstance().getDictType().equals(DictionaryManagement.evDict)){
+            tabEngEng.getEngine().loadContent(selectedWord.getEng2Eng());
+            tabSynonym.getEngine().loadContent(selectedWord.getSynonym());
+            tabTechnical.getEngine().loadContent(selectedWord.getTechnical());
+        }
     }
-    /*public void Subbit(ActionEvent e) {
-        String a = jtxtSearch.getText();
-        Alert show = new Alert(Alert.AlertType.INFORMATION);
-        show.setContentText(a);
-        show.show();
-    }*/
+
     @FXML
     public void showEditWindow(ActionEvent e)  throws  IOException
     {
@@ -108,6 +125,10 @@ public class HomeController implements Initializable  {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 DictionaryManagement.getInstance().setDictType(jCBDictType.getValue());
+                changeTabPaneView();
+                loadSuggestList(jtxtSearch.getText());
+                jlWord.getSelectionModel().selectFirst();
+                selectWord();
             }
         });
     }

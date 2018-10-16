@@ -1,7 +1,7 @@
 package Viewer;
 
 import Controller.DatabaseManagement;
-import Models.Dictionary;
+import Controller.DictionaryManagement;
 import Models.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,7 +59,7 @@ public class AddController implements Initializable {
             Word newWord=new Word();
             newWord.setWord_target(jtaEnglish.getText());
             newWord.setWord_explain(jtaVietnamese.getText());
-            DatabaseManagement dbManagement = new DatabaseManagement(Dictionary.DICT_PATH);
+            DatabaseManagement dbManagement = DictionaryManagement.getInstance().getDBManager();
             dbManagement.addNewWord(newWord);
 //            Alert imformation=new Alert(Alert.AlertType.INFORMATION);
 //            imformation.setTitle("Add Word");
