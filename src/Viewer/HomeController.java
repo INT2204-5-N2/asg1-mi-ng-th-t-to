@@ -1,12 +1,12 @@
 package Viewer;
 
-import Controller.DatabaseManagement;
 import Controller.DictionaryManagement;
 import Models.Word;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,9 +26,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable  {
+    private String curentWord;
+    private Voice voice;
     @FXML
     ChoiceBox<String> jCBDictType;
-
     @FXML
     private TextField jtxtSearch;
     @FXML
@@ -47,6 +48,10 @@ public class HomeController implements Initializable  {
     private WebView tabEngEng;
     @FXML
     private TabPane translationPane;
+    @FXML
+    public void playSound(){
+        voice.speak(curentWord);
+    }
     public void loadSuggestList(String value)
     {
         ArrayList<Word> suggestList = DictionaryManagement.getInstance().getDBManager().searchByWord(value);
@@ -72,6 +77,7 @@ public class HomeController implements Initializable  {
     //Lấy kết quả khi từ được chọn
     public void selectWord(){
         Word selectedWord = jlWord.getSelectionModel().getSelectedItem();
+        curentWord = selectedWord.getWord_target();
         tabMeaning.getEngine().loadContent(selectedWord.getWord_explain());
         if(DictionaryManagement.getInstance().getDictType().equals(DictionaryManagement.evDict)){
             tabEngEng.getEngine().loadContent(selectedWord.getEng2Eng());
@@ -102,6 +108,20 @@ public class HomeController implements Initializable  {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        System.out.println(VoiceManager.getInstance().toString());
+        if(VoiceManager.getInstance().contains("kevin16")){
+            voice = VoiceManager.getInstance().getVoice("kevin");
+            if(voice != null){
+                voice.allocate();
+                voice.setVolume(4.0f);
+                voice.setRate(150);
+                voice.setPitch(150);
+            }
+        } else {
+            System.out.println("NO name available");
+        }
+
         jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         jlWord.getFocusModel().focus(1);
         jtxtSearch.textProperty().addListener((observable, oldValue, newValue) -> loadSuggestList(newValue));
