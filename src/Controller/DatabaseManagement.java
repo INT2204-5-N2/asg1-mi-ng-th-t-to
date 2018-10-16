@@ -44,24 +44,12 @@ public class DatabaseManagement {
         try {
             ResultSet resultSet = statement.executeQuery(cmd);
             ArrayList<Word> result = new ArrayList<>();
-            if(DictionaryManagement.getInstance().getDictType().equals(DictionaryManagement.evDict)){
-                while(result.size() < MAX_ITEM && resultSet.next()){
-                    Word newWord = new Word();
-                    newWord.setWord_target(resultSet.getString("word"));
-                    newWord.setWord_explain(new String(resultSet.getBytes("av")));
-                    newWord.setTechnical(new String(resultSet.getBytes("cnav")));
-                    newWord.setSynonym(new String(resultSet.getBytes("dnpn")));
-                    newWord.setEng2Eng(new String(resultSet.getBytes("aa")));
-                    result.add(newWord);
-                }
-            }
-            else {
-                while (result.size() < MAX_ITEM && resultSet.next()){
-                    Word newWord = new Word();
-                    newWord.setWord_target(resultSet.getString("word"));
-                    newWord.setWord_explain(new String(resultSet.getBytes(3)));
-                    result.add(newWord);
-                }
+            while (result.size() < MAX_ITEM && resultSet.next())
+            {
+                Word newWord = new Word();
+                newWord.setWord_target(resultSet.getString("word"));
+                newWord.setWord_explain(new String(resultSet.getBytes("html")));
+                result.add(newWord);
             }
             resultSet.close();
             return result;

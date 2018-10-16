@@ -26,13 +26,12 @@ public class DictionaryManagement {
 
     public void setDictType(String dictType){
         this.dictType = dictType;
-        dbManager = new DatabaseManagement(getDictPath());
     }
     public DatabaseManagement getDBManager(){
         return dbManager;
     }
     public String getTableName(){
-        /*switch (dictType){
+        switch (dictType){
             case veDict:
                 return "va";
             case evDict:
@@ -40,20 +39,10 @@ public class DictionaryManagement {
             default:
                 return "";
 
-        }*/
-        return "word_btl";
+        }
     }
 
     public String getDictPath(){
-        switch (dictType){
-            case evDict:
-                //return "/src/Res/envn.sqlite";
-                return "/src/Res/database/av_all_v2.db";
-            case veDict:
-                return "/src/Res/database/va_all_v2.db";
-            default:
-                return "";
-
-        }
+        return "/src/Res/dict_hh.db";
     }
 }

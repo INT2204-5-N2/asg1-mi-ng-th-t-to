@@ -18,41 +18,18 @@
          </font>
       </Label>
       <Button fx:id="jbAdd" layoutX="341.0" layoutY="73.0" mnemonicParsing="false" onAction="#showAddWindow" text="Add" />
-      <Pane layoutX="180.0" layoutY="107.0" prefHeight="479.0" prefWidth="337.0">
+      <Pane layoutX="180.0" layoutY="110.0" prefHeight="476.0" prefWidth="337.0">
          <children>
-            <TabPane fx:id="translationPane" layoutX="-6.0" prefHeight="488.0" prefWidth="344.0" tabClosingPolicy="UNAVAILABLE">
-               <tabs>
-                  <Tab text="Anh - Việt">
-                     <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <WebView fx:id="tabMeaning" prefHeight="459.0" prefWidth="344.0" />
-                              <ImageView fx:id="btnSound" fitHeight="25.0" fitWidth="27.0" layoutX="279.0" layoutY="14.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Res/image/sound.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Chuyên ngành">
-                     <content>
-                        <WebView fx:id="tabTechnical" prefHeight="200.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-                  <Tab text="Đồng/trái nghĩa">
-                     <content>
-                        <WebView fx:id="tabSynonym" prefHeight="200.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-                  <Tab closable="false" text="Anh - Anh">
-                     <content>
-                        <WebView fx:id="tabEngEng" prefHeight="200.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
+            <AnchorPane layoutY="3.0" prefHeight="456.0" prefWidth="344.0">
+               <children>
+                  <WebView fx:id="tabMeaning" prefHeight="459.0" prefWidth="344.0" />
+                  <ImageView fx:id="btnSound" fitHeight="25.0" fitWidth="27.0" layoutX="279.0" layoutY="14.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Res/image/sound.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
       </Pane>
       <ChoiceBox fx:id="jCBDictType" layoutX="169.0" layoutY="73.0" prefHeight="25.0" prefWidth="83.0" />
