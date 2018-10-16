@@ -67,11 +67,16 @@ public class AddController implements Initializable {
 //            imformation.setContentText("Thêm thành công");
 //            imformation.show();
             System.out.println("Thêm thành công");
+            HomeController.stage=null;
             ((Node)(event.getSource())).getScene().getWindow().hide();
+
         }
         else
         {
+
+            HomeController.stage=null;
             Addwindow.close();
+
         }
     }
     public void JtaEnglishGetText(ActionEvent e)

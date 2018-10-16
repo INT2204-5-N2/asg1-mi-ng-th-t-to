@@ -65,7 +65,7 @@ public class HomeController implements Initializable  {
         curentWord = selectedWord.getWord_target();
         tabMeaning.getEngine().loadContent(selectedWord.getWord_explain());
     }
-    private Stage stage =null;
+    public static Stage stage =null;
     @FXML
     public void showEditWindow(ActionEvent e)  throws  IOException
     {
@@ -95,7 +95,20 @@ public class HomeController implements Initializable  {
         }
 
     }
-
+    public static Stage stage1=null;
+    public void ShowGoogleTranslate(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("GoogleTranslate.fxml"));
+        Scene scene = new Scene(root);
+        {
+            if(stage1==null)
+            {
+                stage1 = new Stage();
+                stage1.setTitle("Google Search");
+                stage1.setScene(scene);
+                stage1.show();
+            }
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
