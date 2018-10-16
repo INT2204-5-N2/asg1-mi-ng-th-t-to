@@ -85,25 +85,35 @@ public class HomeController implements Initializable  {
             tabTechnical.getEngine().loadContent(selectedWord.getTechnical());
         }
     }
-
+    private Stage stage =null;
     @FXML
     public void showEditWindow(ActionEvent e)  throws  IOException
     {
         Parent root = FXMLLoader.load(getClass().getResource("EditWindow.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Edit Window");
-        stage.setScene(scene);
-        stage.show();
+        if(stage==null)
+        {
+            stage=new Stage();
+            stage.setTitle("Edit Window");
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
     @FXML
     public void showAddWindow(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddWindow.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Add Window");
-        stage.setScene(scene);
-        stage.show();
+        {
+            if(stage==null)
+            {
+                stage = new Stage();
+                stage.setTitle("Add Window");
+                stage.setScene(scene);
+                stage.show();
+            }
+        }
+
     }
 
     @Override
