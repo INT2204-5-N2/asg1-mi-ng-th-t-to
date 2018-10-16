@@ -23,9 +23,9 @@
             <AnchorPane layoutY="3.0" prefHeight="456.0" prefWidth="344.0">
                <children>
                   <WebView fx:id="tabMeaning" prefHeight="459.0" prefWidth="344.0" />
-                  <ImageView fx:id="btnSound" fitHeight="25.0" fitWidth="27.0" layoutX="279.0" layoutY="14.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnSound" fitHeight="37.0" fitWidth="38.0" layoutX="272.0" layoutY="14.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Res/image/sound.png" />
+                        <Image url="@../Res/image/kisspng-volume-computer-icons-sound-icon-blue-orange-volume-5ac0c0ba0c0192.6247835715225816900492.jpg" />
                      </image>
                   </ImageView>
                </children>

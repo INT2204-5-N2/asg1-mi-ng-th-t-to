@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -40,7 +41,8 @@ public class HomeController implements Initializable  {
     private ListView<Word> jlWord;
     @FXML
     private WebView tabMeaning;
-
+    @FXML
+    private ImageView btnSound;
     @FXML
     public void playSound(){
         voice.speak(curentWord);
@@ -132,6 +134,7 @@ public class HomeController implements Initializable  {
         jCBDictType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                btnSound.setVisible(!btnSound.isVisible());
                 DictionaryManagement.getInstance().setDictType(jCBDictType.getValue());
                 loadSuggestList(jtxtSearch.getText());
                 jlWord.getSelectionModel().selectFirst();
