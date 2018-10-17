@@ -9,6 +9,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
@@ -16,33 +18,39 @@
    <children>
       <ImageView fitHeight="637.0" fitWidth="526.0" layoutX="-1.0" layoutY="-31.0">
          <image>
-            <Image url="@../../../../Users/Huu%20Thanh/Desktop/vforum.vn-hinh-nen-xanh-dep-6.jpg" />
+            <Image url="@Image/Nen.jpg" />
          </image>
       </ImageView>
-      <ListView fx:id="jlWord" editable="true" layoutX="14.0" layoutY="110.0" prefHeight="488.0" prefWidth="160.0" />
+      <ListView fx:id="jlWord" editable="true" layoutX="8.0" layoutY="110.0" prefHeight="476.0" prefWidth="160.0" />
       <TextField fx:id="jtxtSearch" layoutX="14.0" layoutY="73.0" promptText="Search" />
       <Button fx:id="jbOnline" layoutX="284.0" layoutY="73.0" mnemonicParsing="false" onAction="#ShowGoogleTranslate" prefHeight="25.0" prefWidth="57.0" style="-fx-background-radius: 0.5em;" text="online" />
       <Label layoutX="169.0" layoutY="14.0" prefHeight="43.0" prefWidth="172.0" text="DICTIONARY" textAlignment="CENTER">
          <font>
             <Font size="29.0" />
          </font>
+         <textFill>
+            <RadialGradient centerX="1.0" centerY="1.0" radius="0.5">
+               <stops>
+                  <Stop color="#8a476d21" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </textFill>
       </Label>
       <Button fx:id="jbAdd" layoutX="341.0" layoutY="73.0" mnemonicParsing="false" onAction="#showAddWindow" text="Add" />
       <Pane layoutX="180.0" layoutY="110.0" prefHeight="476.0" prefWidth="337.0">
          <children>
             <AnchorPane layoutY="3.0" prefHeight="456.0" prefWidth="344.0">
                <children>
-                  <WebView fx:id="tabMeaning" prefHeight="488.0" prefWidth="344.0" />
+                  <WebView fx:id="tabMeaning" layoutX="-7.0" prefHeight="476.0" prefWidth="344.0" />
                   <ImageView fx:id="btnSound" fitHeight="37.0" fitWidth="38.0" layoutX="272.0" layoutY="14.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Res/image/kisspng-volume-computer-icons-sound-icon-blue-orange-volume-5ac0c0ba0c0192.6247835715225816900492.jpg" />
                      </image>
                   </ImageView>
-<<<<<<< HEAD
-                  <Button layoutX="220.0" layoutY="12.0" mnemonicParsing="false" text="Edit" />
-=======
+
                   <Button layoutX="265.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#deleteWord" text="Delete" />
->>>>>>> cdf8fac9198df223ef3507db4490c7f979553dbf
+
                </children>
             </AnchorPane>
          </children>
