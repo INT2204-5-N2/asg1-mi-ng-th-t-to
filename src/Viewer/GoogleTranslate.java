@@ -46,8 +46,6 @@ public class GoogleTranslate extends Thread implements Initializable {
     {
         GoogleTranslation translation=new GoogleTranslation();
         String a=translation.translate(jtasrcLang.getText(),"en","vn");
-        //jtasrcLang.textProperty().addListener(new );
-
         jtargetLang.setText(a);
 
     }

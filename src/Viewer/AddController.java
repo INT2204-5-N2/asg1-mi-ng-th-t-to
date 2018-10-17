@@ -50,7 +50,6 @@ public class AddController implements Initializable {
         Alert Addwindow =new Alert(Alert.AlertType.CONFIRMATION);
         Addwindow.setTitle("Confirmation Add Word ");
         Addwindow.setHeaderText("Ban co muon them?");
-        Addwindow.setContentText(jtaEnglish.getText());
         Optional<ButtonType> result= Addwindow.showAndWait();
         ButtonType button=result.orElse(ButtonType.CANCEL);
         if(button==ButtonType.OK)
