@@ -1,7 +1,7 @@
 package Viewer;
 
 import Controller.DictionaryManagement;
-import Controller.GoogleTranslation;
+import Controller.GoogleTranslator;
 import Models.Word;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
@@ -19,7 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -51,8 +50,8 @@ public class HomeController implements Initializable  {
     private ImageView btnSound;
     @FXML
     public void playSound(){
-        GoogleTranslation gg = new GoogleTranslation();
-        Media sound = new Media(gg.getSoundFile(curentWord, GoogleTranslation.Language.en).toURI().toString());
+        GoogleTranslator gg = new GoogleTranslator();
+        Media sound = new Media(gg.getSoundFile(curentWord, GoogleTranslator.Language.en).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
         //voice.speak(curentWord);

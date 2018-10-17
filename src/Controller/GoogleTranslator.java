@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-public class GoogleTranslation {
+public class GoogleTranslator {
     public enum Language{
         en, vi
     }
