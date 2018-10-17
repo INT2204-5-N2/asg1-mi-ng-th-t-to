@@ -3,14 +3,12 @@ package Viewer;
 import Controller.DatabaseManagement;
 import Controller.DictionaryManagement;
 import Models.Word;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.Optional;
@@ -18,13 +16,15 @@ import java.util.ResourceBundle;
 
 public class AddController implements Initializable {
     @FXML
-    private TextArea jtaEnglish;
+    private TextField jtaWordTarget;
     @FXML
-    private  TextArea jtaVietnamese;
+    private  TextArea jtaWordExplain;
     @FXML
     private Button jbAdd;
     @FXML
     private Button jbCancel;
+    @FXML
+    private ChoiceBox<String> cbLanguage;
     public  void CloseAddWindow(ActionEvent event)
     {
         Alert close =new Alert(Alert.AlertType.CONFIRMATION);
@@ -45,48 +45,42 @@ public class AddController implements Initializable {
         }
     }
 
-    public void AddWord(ActionEvent event)
+    public void AddWord()
     {
         Alert Addwindow =new Alert(Alert.AlertType.CONFIRMATION);
         Addwindow.setTitle("Confirmation Add Word ");
         Addwindow.setHeaderText("Ban co muon them?");
+<<<<<<< HEAD
+=======
+        Addwindow.setContentText(jtaWordTarget.getText());
+>>>>>>> cdf8fac9198df223ef3507db4490c7f979553dbf
         Optional<ButtonType> result= Addwindow.showAndWait();
         ButtonType button=result.orElse(ButtonType.CANCEL);
         if(button==ButtonType.OK)
         {
             System.out.println("Dong cua so");
             Word newWord=new Word();
-            newWord.setWord_target(jtaEnglish.getText());
-            newWord.setWord_explain(jtaVietnamese.getText());
+            newWord.setWord_target(jtaWordTarget.getText());
+            newWord.setWord_explain(jtaWordExplain.getText());
             DatabaseManagement dbManagement = DictionaryManagement.getInstance().getDBManager();
+            if(cbLanguage.getSelectionModel().getSelectedItem().equals("Tiếng Anh")){
+                DictionaryManagement.getInstance().setDictType(DictionaryManagement.evDict);
+            } else {
+                DictionaryManagement.getInstance().setDictType(DictionaryManagement.veDict);
+            }
             dbManagement.addNewWord(newWord);
-//            Alert imformation=new Alert(Alert.AlertType.INFORMATION);
-//            imformation.setTitle("Add Word");
-//            imformation.setHeaderText("Thêm từ");
-//            imformation.setContentText("Thêm thành công");
-//            imformation.show();
             System.out.println("Thêm thành công");
             HomeController.stage=null;
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-
         }
         else
         {
-
             HomeController.stage=null;
             Addwindow.close();
-
         }
     }
-    public void JtaEnglishGetText(ActionEvent e)
-    {
-        String a=jtaEnglish.getText();
-        Alert notif=new Alert(Alert.AlertType.INFORMATION);
-        notif.setContentText(a);
-        notif.show();
-    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        cbLanguage.setItems(FXCollections.observableArrayList("Tiếng Anh", "Tiếng Việt"));
     }
 }

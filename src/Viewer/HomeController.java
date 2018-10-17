@@ -1,6 +1,7 @@
 package Viewer;
 
 import Controller.DictionaryManagement;
+import Controller.GoogleTranslator;
 import Models.Word;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
@@ -18,6 +19,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -45,19 +50,31 @@ public class HomeController implements Initializable  {
     private ImageView btnSound;
     @FXML
     public void playSound(){
-        voice.speak(curentWord);
+        GoogleTranslator gg = new GoogleTranslator();
+        Media sound = new Media(gg.getSoundFile(curentWord, GoogleTranslator.Language.en).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+        //voice.speak(curentWord);
+    }
+    @FXML
+    public void deleteWord(){
+        DictionaryManagement.getInstance().getDBManager().delete(curentWord);
+        loadDefault();
     }
     public void loadSuggestList(String value)
     {
         ArrayList<Word> suggestList = DictionaryManagement.getInstance().getDBManager().searchByWord(value);
         if(suggestList.size() == 0){
-            System.out.println("size 0");
-            return;
         }
         ObservableList<Word> list = FXCollections.observableArrayList(suggestList);
         jlWord.setItems(list);
     }
-
+    private void loadDefault(){
+        DictionaryManagement.getInstance().setDictType(jCBDictType.getValue());
+        loadSuggestList(jtxtSearch.getText());
+        jlWord.getSelectionModel().selectFirst();
+        selectWord();
+    }
     @FXML
     //Lấy kết quả khi từ được chọn
     public void selectWord(){
@@ -112,7 +129,6 @@ public class HomeController implements Initializable  {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
-        System.out.println(VoiceManager.getInstance().toString());
         if(VoiceManager.getInstance().contains("kevin16")){
             voice = VoiceManager.getInstance().getVoice("kevin");
             if(voice != null){
@@ -127,6 +143,10 @@ public class HomeController implements Initializable  {
 
         jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         jlWord.getFocusModel().focus(1);
+        VBox vBox = new VBox();
+        vBox.getChildren().add(new Text("No matching word"));
+        //vBox.getChildren().add(jbOnline);
+        jlWord.setPlaceholder(vBox);
         jtxtSearch.textProperty().addListener((observable, oldValue, newValue) -> loadSuggestList(newValue));
         jtxtSearch.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -148,10 +168,7 @@ public class HomeController implements Initializable  {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 btnSound.setVisible(!btnSound.isVisible());
-                DictionaryManagement.getInstance().setDictType(jCBDictType.getValue());
-                loadSuggestList(jtxtSearch.getText());
-                jlWord.getSelectionModel().selectFirst();
-                selectWord();
+                loadDefault();
             }
         });
     }

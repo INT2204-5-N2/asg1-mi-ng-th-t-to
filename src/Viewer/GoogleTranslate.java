@@ -1,6 +1,6 @@
 package Viewer;
 
-import Controller.GoogleTranslation;
+import Controller.GoogleTranslator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -44,8 +44,15 @@ public class GoogleTranslate extends Thread implements Initializable {
     }
     public void TranslateEngVie()
     {
+<<<<<<< HEAD
         GoogleTranslation translation=new GoogleTranslation();
         String a=translation.translate(jtasrcLang.getText(),"en","vn");
+=======
+        GoogleTranslator translation=new GoogleTranslator();
+        String a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
+        //jtasrcLang.textProperty().addListener(new );
+
+>>>>>>> cdf8fac9198df223ef3507db4490c7f979553dbf
         jtargetLang.setText(a);
 
     }

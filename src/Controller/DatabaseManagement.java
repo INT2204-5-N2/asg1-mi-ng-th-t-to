@@ -26,7 +26,7 @@ public class DatabaseManagement {
     }
 
     public void addNewWord(Word newWord){
-        String cmd = "INSERT INTO " + DictionaryManagement.getInstance().getTableName() + "(word,description) VALUES(?,?)";
+        String cmd = "INSERT INTO " + DictionaryManagement.getInstance().getTableName() + "(word,html) VALUES(?,?)";
         try
         {
             PreparedStatement pstmt = dbConnection.prepareStatement(cmd);
@@ -48,7 +48,7 @@ public class DatabaseManagement {
             {
                 Word newWord = new Word();
                 newWord.setWord_target(resultSet.getString("word"));
-                newWord.setWord_explain(new String(resultSet.getBytes("html")));
+                newWord.setWord_explain(resultSet.getString("html"));
                 result.add(newWord);
             }
             resultSet.close();
@@ -59,8 +59,8 @@ public class DatabaseManagement {
         return null;
     }
 
-    public void delete(String id){
-        String cmd = "DELETE FROM " + DictionaryManagement.getInstance().getTableName() + " WHERE id = " + id + ";";
+    public void delete(String word){
+        String cmd = "DELETE FROM " + DictionaryManagement.getInstance().getTableName() + " WHERE word = '" + word + "';";
         System.out.println(cmd);
         try {
             statement.execute(cmd);
