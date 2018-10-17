@@ -28,6 +28,7 @@
                         <Image url="@../Res/image/kisspng-volume-computer-icons-sound-icon-blue-orange-volume-5ac0c0ba0c0192.6247835715225816900492.jpg" />
                      </image>
                   </ImageView>
+                  <Button layoutX="265.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#deleteWord" text="Delete" />
                </children>
             </AnchorPane>
          </children>
