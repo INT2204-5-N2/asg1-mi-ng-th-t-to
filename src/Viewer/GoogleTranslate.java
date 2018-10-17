@@ -34,10 +34,12 @@ public class GoogleTranslate extends Thread implements Initializable {
         {
             System.out.println("Dong cua so");
             ((Node)(event.getSource())).getScene().getWindow().hide();
+            HomeController.stage1=null;
         }
         else
         {
             close.close();
+            HomeController.stage1=null;
         }
     }
     public void TranslateEngVie()
