@@ -159,6 +159,12 @@ public class HomeController implements Initializable  {
                 }
             }
         });
+        jtxtSearch.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                jtxtSearch.setText("");
+            }
+        });
         jlWord.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

@@ -38,6 +38,7 @@ public class AddController implements Initializable {
         {
             System.out.println("Dong cua so");
             ((Node)(event.getSource())).getScene().getWindow().hide();
+            HomeController.stage=null;
         }
         else if(button==ButtonType.CANCEL)
         {

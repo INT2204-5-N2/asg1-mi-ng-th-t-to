@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.web.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="305.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.GoogleTranslate">
+<AnchorPane prefHeight="305.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.GoogleTranslate">
    <children>
+      <ImageView fitHeight="476.0" fitWidth="870.0" layoutX="-5.0" layoutY="-170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Image/Nen.jpg" />
+         </image></ImageView>
       <TextArea fx:id="jtasrcLang" layoutX="6.0" layoutY="60.0" prefHeight="200.0" prefWidth="304.0" />
       <TextArea fx:id="jtargetLang" layoutX="318.0" layoutY="60.0" prefHeight="200.0" prefWidth="310.0" />
       <Button fx:id="jbExit" layoutX="384.0" layoutY="266.0" mnemonicParsing="false" onAction="#CloseGoogleTranslateWindow" text="Cancel" />
-      <Label layoutX="172.0" layoutY="-7.0" prefHeight="54.0" prefWidth="285.0" text="Google Translate">
+      <Label layoutX="172.0" layoutY="-7.0" prefHeight="54.0" prefWidth="285.0" text="Google Translate" textFill="#e7f5e6">
          <font>
             <Font size="37.0" />
          </font>

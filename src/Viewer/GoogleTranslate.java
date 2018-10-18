@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
+import java.util.Calendar;
 
 import java.net.URL;
 import java.util.Optional;
@@ -39,16 +40,22 @@ public class GoogleTranslate extends Thread implements Initializable {
         else
         {
             close.close();
-            HomeController.stage1=null;
         }
     }
+    private long begin = System.currentTimeMillis();
     public void TranslateEngVie()
     {
-        GoogleTranslator translation=new GoogleTranslator();
-        String a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
-        //jtasrcLang.textProperty().addListener(new );
+        long end = System.currentTimeMillis();
+        System.out.println("\nTime: " + (end - begin));
+        if(end-begin>=1000)
+        {
+            GoogleTranslator translation=new GoogleTranslator();
+            String a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
+            jtargetLang.setText(a);
+            begin=end;
+        }
 
-        jtargetLang.setText(a);
+        //jtasrcLang.textProperty().addListener(new );
 
     }
 
