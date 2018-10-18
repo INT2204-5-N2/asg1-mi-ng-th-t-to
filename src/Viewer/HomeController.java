@@ -25,6 +25,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -106,6 +107,7 @@ public class HomeController implements Initializable  {
             {
                 stage = new Stage();
                 stage.setTitle("Add Window");
+                stage.initStyle(StageStyle.UNDECORATED);
                 stage.setScene(scene);
                 stage.show();
             }
@@ -120,6 +122,7 @@ public class HomeController implements Initializable  {
             if(stage1==null)
             {
                 stage1 = new Stage();
+                stage1.initStyle((StageStyle.UNDECORATED));
                 stage1.setTitle("Google Search");
                 stage1.setScene(scene);
                 stage1.show();
