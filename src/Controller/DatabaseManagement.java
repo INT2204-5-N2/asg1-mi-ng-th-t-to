@@ -9,7 +9,6 @@ public class DatabaseManagement {
     private Connection dbConnection;
     private String path;
     private Statement statement;
-    private String tableName = "";
     private String sqlPrefix = "jdbc:sqlite:";
     private static final int MAX_ITEM = 30;
 
@@ -58,10 +57,21 @@ public class DatabaseManagement {
         }
         return null;
     }
+    public void edit(Word word){
+        String cmd = "UPDATE " + DictionaryManagement.getInstance().getTableName() +
+                     " SET description = ? WHERE word = ?";
+        try {
+            PreparedStatement ppsm = dbConnection.prepareStatement(cmd);
+            ppsm.setString(1, word.getWord_explain());
+            ppsm.setString(2, word.getWord_target());
+            ppsm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+    }
     public void delete(String word){
         String cmd = "DELETE FROM " + DictionaryManagement.getInstance().getTableName() + " WHERE word = '" + word + "';";
-        System.out.println(cmd);
         try {
             statement.execute(cmd);
         } catch (SQLException e) {

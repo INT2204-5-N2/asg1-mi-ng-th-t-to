@@ -19,13 +19,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +36,8 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable  {
     private String curentWord;
     private Voice voice;
+    public static Stage addStage =null;
+    public static Stage editStage =null;
     @FXML
     ChoiceBox<String> jCBDictType;
     @FXML
@@ -55,12 +58,31 @@ public class HomeController implements Initializable  {
         Media sound = new Media(gg.getSoundFile(curentWord, GoogleTranslator.Language.en).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-        //voice.speak(curentWord);
     }
     @FXML
     public void deleteWord(){
         DictionaryManagement.getInstance().getDBManager().delete(curentWord);
         loadDefault();
+    }
+    @FXML
+    public void editWord(){
+        FXMLLoader editLoader = new FXMLLoader(getClass().getResource("EditWindow.fxml"));
+        editLoader.setController(new EditController(jlWord.getSelectionModel().getSelectedItem()));
+        Pane root = null;
+        try {
+            root = editLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(editStage == null){
+            Scene scene = new Scene(root);
+            editStage = new Stage();
+            editStage.setTitle("Sửa từ vựng");
+            editStage.setScene(scene);
+            editStage.resizableProperty().setValue(false);
+            editStage.show();
+        }
+        editStage.setUserData(curentWord);
     }
     public void loadSuggestList(String value)
     {
@@ -77,39 +99,24 @@ public class HomeController implements Initializable  {
         selectWord();
     }
     @FXML
-    //Lấy kết quả khi từ được chọn
+
     public void selectWord(){
         Word selectedWord = jlWord.getSelectionModel().getSelectedItem();
         curentWord = selectedWord.getWord_target();
         tabMeaning.getEngine().loadContent(selectedWord.getWord_explain());
-    }
-    public static Stage stage =null;
-    @FXML
-    public void showEditWindow(ActionEvent e)  throws  IOException
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("EditWindow.fxml"));
-        Scene scene = new Scene(root);
-        if(stage==null)
-        {
-            stage=new Stage();
-            stage.setTitle("Edit Window");
-            stage.setScene(scene);
-            stage.show();
-        }
-
     }
     @FXML
     public void showAddWindow(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddWindow.fxml"));
         Scene scene = new Scene(root);
         {
-            if(stage==null)
+            if(addStage ==null)
             {
-                stage = new Stage();
-                stage.setTitle("Add Window");
-                stage.initStyle(StageStyle.UNDECORATED);
-                stage.setScene(scene);
-                stage.show();
+                addStage = new Stage();
+                addStage.setTitle("Thêm từ mới");
+                addStage.setScene(scene);
+                addStage.resizableProperty().setValue(false);
+                addStage.show();
             }
         }
 
@@ -122,33 +129,19 @@ public class HomeController implements Initializable  {
             if(stage1==null)
             {
                 stage1 = new Stage();
-                stage1.initStyle((StageStyle.UNDECORATED));
                 stage1.setTitle("Google Search");
                 stage1.setScene(scene);
+                stage1.resizableProperty().setValue(false);
                 stage1.show();
             }
         }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
-        if(VoiceManager.getInstance().contains("kevin16")){
-            voice = VoiceManager.getInstance().getVoice("kevin");
-            if(voice != null){
-                voice.allocate();
-                voice.setVolume(4.0f);
-                voice.setRate(150);
-                voice.setPitch(150);
-            }
-        } else {
-            System.out.println("NO name available");
-        }
-
         jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         jlWord.getFocusModel().focus(1);
         VBox vBox = new VBox();
-        vBox.getChildren().add(new Text("No matching word"));
-        //vBox.getChildren().add(jbOnline);
+        vBox.getChildren().add(new Text("Không tìm thấy từ tương ứng"));
         jlWord.setPlaceholder(vBox);
         jtxtSearch.textProperty().addListener((observable, oldValue, newValue) -> loadSuggestList(newValue));
         jtxtSearch.focusedProperty().addListener(new ChangeListener<Boolean>() {
