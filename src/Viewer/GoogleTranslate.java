@@ -3,14 +3,14 @@ package Viewer;
 import Controller.GoogleTranslator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+
 import java.util.Calendar;
 
 import java.net.URL;
@@ -24,6 +24,8 @@ public class GoogleTranslate extends Thread implements Initializable {
     private TextArea jtasrcLang;
     @FXML
     private TextArea jtargetLang;
+    @FXML
+    private ChoiceBox<String> cbSelectLanguage;
 
     public void CloseGoogleTranslateWindow(ActionEvent event)
     {
@@ -43,14 +45,22 @@ public class GoogleTranslate extends Thread implements Initializable {
         }
     }
     private long begin = System.currentTimeMillis();
-    public void TranslateEngVie()
+    public void Translate()
     {
         long end = System.currentTimeMillis();
         System.out.println("\nTime: " + (end - begin));
         if(end-begin>=1000)
         {
+            String a=null;
             GoogleTranslator translation=new GoogleTranslator();
-            String a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
+            if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("ENG-VIE"))
+            {
+                a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
+            }
+            else if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("VIE-ENG"))
+            {
+                a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.vi, GoogleTranslator.Language.en);
+            }
             jtargetLang.setText(a);
             begin=end;
         }
@@ -61,14 +71,14 @@ public class GoogleTranslate extends Thread implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        cbSelectLanguage.setItems(FXCollections.observableArrayList("ENG-VIE", "VIE-ENG"));
         jtasrcLang.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
-                TranslateEngVie();
+                Translate();
                 System.out.print("Dang dich tu");
-
             }
         });
+
     }
 }
