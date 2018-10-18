@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane prefHeight="328.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.AddController">
+<Pane prefHeight="328.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.AddController">
    <children>
+      <ImageView fitHeight="438.0" fitWidth="484.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Image/Nen.jpg" />
+         </image></ImageView>
       <Button fx:id="jbCancel" contentDisplay="CENTER" layoutX="294.0" layoutY="289.0" mnemonicParsing="false" onAction="#CloseAddWindow" onMouseClicked="#CloseAddWindow" text="Cancel" />
-      <Label layoutX="421.0" layoutY="68.0" text="Vietnamese" />
       <Button fx:id="jbAdd" layoutX="229.0" layoutY="289.0" mnemonicParsing="false" onMouseClicked="#AddWord" prefHeight="25.0" prefWidth="45.0" text="Add" />
-      <Text layoutX="31.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Từ gốc" />
+      <Text fill="#faf7f7" layoutX="31.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Từ gốc" />
       <TextField fx:id="jtaWordTarget" layoutX="105.0" layoutY="29.0" prefHeight="25.0" prefWidth="215.0" />
-      <Text layoutX="31.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ngôn ngữ" />
+      <Text fill="#fff9f9" layoutX="31.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ngôn ngữ" />
       <ChoiceBox fx:id="cbLanguage" layoutX="107.0" layoutY="64.0" prefHeight="25.0" prefWidth="122.0" />
       <TextArea fx:id="jtaWordExplain" layoutX="31.0" layoutY="131.0" prefHeight="143.0" prefWidth="297.0" />
-      <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nghĩa" />
+      <Text fill="#f8f8f8" layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nghĩa" />
    </children>
 </Pane>

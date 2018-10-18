@@ -40,7 +40,6 @@ public class GoogleTranslate extends Thread implements Initializable {
         else
         {
             close.close();
-            HomeController.stage1=null;
         }
     }
     private long begin = System.currentTimeMillis();
