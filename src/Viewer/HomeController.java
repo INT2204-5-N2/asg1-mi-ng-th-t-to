@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -64,9 +66,11 @@ public class HomeController implements Initializable  {
     }
     @FXML
     public void editWord(){
-        Parent root = null;
+        FXMLLoader editLoader = new FXMLLoader(getClass().getResource("EditWindow.fxml"));
+        editLoader.setController(new EditController(jlWord.getSelectionModel().getSelectedItem()));
+        Pane root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("EditWindow.fxml"));
+            root = editLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,6 +79,7 @@ public class HomeController implements Initializable  {
             editStage = new Stage();
             editStage.setTitle("Sửa từ vựng");
             editStage.setScene(scene);
+            editStage.resizableProperty().setValue(false);
             editStage.show();
         }
         editStage.setUserData(curentWord);
@@ -94,7 +99,7 @@ public class HomeController implements Initializable  {
         selectWord();
     }
     @FXML
-    //Lấy kết quả khi từ được chọn
+
     public void selectWord(){
         Word selectedWord = jlWord.getSelectionModel().getSelectedItem();
         curentWord = selectedWord.getWord_target();
@@ -110,6 +115,7 @@ public class HomeController implements Initializable  {
                 addStage = new Stage();
                 addStage.setTitle("Thêm từ mới");
                 addStage.setScene(scene);
+                addStage.resizableProperty().setValue(false);
                 addStage.show();
             }
         }
@@ -125,30 +131,17 @@ public class HomeController implements Initializable  {
                 stage1 = new Stage();
                 stage1.setTitle("Google Search");
                 stage1.setScene(scene);
+                stage1.resizableProperty().setValue(false);
                 stage1.show();
             }
         }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
-        if(VoiceManager.getInstance().contains("kevin16")){
-            voice = VoiceManager.getInstance().getVoice("kevin");
-            if(voice != null){
-                voice.allocate();
-                voice.setVolume(4.0f);
-                voice.setRate(150);
-                voice.setPitch(150);
-            }
-        } else {
-            System.out.println("NO name available");
-        }
-
         jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         jlWord.getFocusModel().focus(1);
         VBox vBox = new VBox();
-        vBox.getChildren().add(new Text("No matching word"));
-        //vBox.getChildren().add(jbOnline);
+        vBox.getChildren().add(new Text("Không tìm thấy từ tương ứng"));
         jlWord.setPlaceholder(vBox);
         jtxtSearch.textProperty().addListener((observable, oldValue, newValue) -> loadSuggestList(newValue));
         jtxtSearch.focusedProperty().addListener(new ChangeListener<Boolean>() {

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.EditController">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fx:id="txtWord" layoutX="159.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
@@ -15,8 +15,8 @@
       <Text layoutX="30.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phát âm" />
       <Text layoutX="30.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nghĩa mới" />
       <TextField fx:id="txtPronounce" layoutX="99.0" layoutY="59.0" prefHeight="25.0" prefWidth="232.0" />
-      <TextArea fx:id="txtMeaning" layoutX="30.0" layoutY="128.0" prefHeight="146.0" prefWidth="312.0" />
-      <Button layoutX="294.0" layoutY="289.0" mnemonicParsing="false" onMouseClicked="#CloseEditWindow" text="Canncel" />
+      <TextArea fx:id="txtMeaning" layoutX="30.0" layoutY="128.0" prefHeight="146.0" prefWidth="312.0" wrapText="true" />
+      <Button layoutX="294.0" layoutY="289.0" mnemonicParsing="false" onAction="#CloseEditWindow" text="Cancel" />
       <Button layoutX="223.0" layoutY="289.0" mnemonicParsing="false" onMouseClicked="#saveDB" prefHeight="25.0" prefWidth="56.0" text="Save" />
    </children>
 </Pane>

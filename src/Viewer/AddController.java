@@ -3,6 +3,10 @@ package Viewer;
 import Controller.DatabaseManagement;
 import Controller.DictionaryManagement;
 import Models.Word;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,23 +30,21 @@ public class AddController implements Initializable {
     private Button jbCancel;
     @FXML
     private ChoiceBox<String> cbLanguage;
+
     public  void CloseAddWindow(ActionEvent event)
     {
         Alert close =new Alert(Alert.AlertType.CONFIRMATION);
-        close.setTitle("Comfirmation close Window");
-        close.setHeaderText("Ban co chac chan");
-        close.setContentText("Thoát");
+        close.setTitle("Comfirm");
+        close.setHeaderText("Bạn có chắc chắn muốn thoát không?");
         Optional<ButtonType> result= close.showAndWait();
         ButtonType button=result.orElse(ButtonType.CANCEL);
         if(button==ButtonType.OK)
         {
-            System.out.println("Dong cua so");
             ((Node)(event.getSource())).getScene().getWindow().hide();
-            HomeController.stage=null;
+            HomeController.addStage=null;
         }
         else if(button==ButtonType.CANCEL)
         {
-            System.out.println("Khong dong cua so nay");
             close.close();
         }
     }
@@ -50,14 +52,13 @@ public class AddController implements Initializable {
     public void AddWord()
     {
         Alert Addwindow =new Alert(Alert.AlertType.CONFIRMATION);
-        Addwindow.setTitle("Confirmation Add Word ");
-        Addwindow.setHeaderText("Ban co muon them?");
+        Addwindow.setTitle("Confirm");
+        Addwindow.setHeaderText("Bạn có muốn thêm từ này vào từ điển không?");
         Addwindow.setContentText(jtaWordTarget.getText());
         Optional<ButtonType> result= Addwindow.showAndWait();
         ButtonType button=result.orElse(ButtonType.CANCEL);
         if(button==ButtonType.OK)
         {
-            System.out.println("Dong cua so");
             Word newWord=new Word();
             newWord.setWord_target(jtaWordTarget.getText());
             newWord.setWord_explain(jtaWordExplain.getText());
@@ -68,7 +69,6 @@ public class AddController implements Initializable {
                 DictionaryManagement.getInstance().setDictType(DictionaryManagement.veDict);
             }
             dbManagement.addNewWord(newWord);
-            System.out.println("Thêm thành công");
 
         }
         Addwindow.close();
@@ -78,5 +78,26 @@ public class AddController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cbLanguage.setItems(FXCollections.observableArrayList("Tiếng Anh", "Tiếng Việt"));
+        cbLanguage.getSelectionModel().selectFirst();
+        jtaWordTarget.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.trim().equals("") || jtaWordExplain.getText().trim().equals("")){
+                    jbAdd.disableProperty().setValue(true);
+                } else {
+                    jbAdd.disableProperty().setValue(false);
+                }
+            }
+        });
+        jtaWordExplain.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.trim().equals("") || jtaWordTarget.getText().trim().equals("")){
+                    jbAdd.disableProperty().setValue(true);
+                } else {
+                    jbAdd.disableProperty().setValue(false);
+                }
+            }
+        });
     }
 }

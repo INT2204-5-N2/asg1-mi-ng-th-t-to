@@ -18,6 +18,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(this.getClass().getResource("Homewindow.fxml"));
         Scene scene=new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.resizableProperty().setValue(false);
         primaryStage.show();
     }
 }

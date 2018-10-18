@@ -28,11 +28,11 @@ public class EditController implements Initializable {
     private Pane rootPane;
     private Word wordToEdit;
 
+    public EditController(Word word){
+        wordToEdit = word;
+    }
     public void setWordToEdit(Word wordToEdit) {
         this.wordToEdit = wordToEdit;
-        txtWord.setText(wordToEdit.getWord_target());
-        txtPronounce.setText("///");
-        txtPronounce.setText(wordToEdit.getWord_explain());
     }
 
     public  void CloseEditWindow(ActionEvent event)
@@ -52,6 +52,7 @@ public class EditController implements Initializable {
         }
         HomeController.editStage = null;
     }
+
     @FXML
     public void saveDB(){
         wordToEdit.setWord_explain(txtMeaning.getText());
@@ -59,8 +60,8 @@ public class EditController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(rootPane.getParent().getUserData() instanceof Word){
-            wordToEdit = (Word) txtWord.getParent().getUserData();
-        }
+        txtWord.setText(wordToEdit.getWord_target());
+        txtPronounce.setText("///");
+        txtMeaning.setText(wordToEdit.getWord_explain());
     }
 }

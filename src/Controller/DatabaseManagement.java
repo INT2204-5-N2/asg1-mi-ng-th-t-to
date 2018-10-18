@@ -9,7 +9,6 @@ public class DatabaseManagement {
     private Connection dbConnection;
     private String path;
     private Statement statement;
-    private String tableName = "";
     private String sqlPrefix = "jdbc:sqlite:";
     private static final int MAX_ITEM = 30;
 
@@ -73,7 +72,6 @@ public class DatabaseManagement {
     }
     public void delete(String word){
         String cmd = "DELETE FROM " + DictionaryManagement.getInstance().getTableName() + " WHERE word = '" + word + "';";
-        System.out.println(cmd);
         try {
             statement.execute(cmd);
         } catch (SQLException e) {
