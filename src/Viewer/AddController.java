@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Optional;
@@ -67,13 +68,10 @@ public class AddController implements Initializable {
             }
             dbManagement.addNewWord(newWord);
             System.out.println("Thêm thành công");
-            HomeController.stage=null;
+
         }
-        else
-        {
-            HomeController.stage=null;
-            Addwindow.close();
-        }
+        Addwindow.close();
+        HomeController.addStage = null;
     }
 
     @Override

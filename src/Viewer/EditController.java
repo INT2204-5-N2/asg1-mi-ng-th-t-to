@@ -1,12 +1,14 @@
 package Viewer;
 
+import Controller.DictionaryManagement;
+import Models.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.Optional;
@@ -15,7 +17,24 @@ import java.util.ResourceBundle;
 public class EditController implements Initializable {
 
     @FXML
+    private Text txtWord;
+    @FXML
+    private TextField txtPronounce;
+    @FXML
+    private TextArea txtMeaning;
+    @FXML
     private Button jbCancel;
+    @FXML
+    private Pane rootPane;
+    private Word wordToEdit;
+
+    public void setWordToEdit(Word wordToEdit) {
+        this.wordToEdit = wordToEdit;
+        txtWord.setText(wordToEdit.getWord_target());
+        txtPronounce.setText("///");
+        txtPronounce.setText(wordToEdit.getWord_explain());
+    }
+
     public  void CloseEditWindow(ActionEvent event)
     {
         Alert close =new Alert(Alert.AlertType.INFORMATION);
@@ -31,10 +50,17 @@ public class EditController implements Initializable {
         {
             close.close();
         }
+        HomeController.editStage = null;
     }
-
+    @FXML
+    public void saveDB(){
+        wordToEdit.setWord_explain(txtMeaning.getText());
+        DictionaryManagement.getInstance().getDBManager().edit(wordToEdit);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        if(rootPane.getParent().getUserData() instanceof Word){
+            wordToEdit = (Word) txtWord.getParent().getUserData();
+        }
     }
 }

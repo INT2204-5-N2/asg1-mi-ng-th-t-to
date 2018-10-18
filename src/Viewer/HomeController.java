@@ -34,6 +34,8 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable  {
     private String curentWord;
     private Voice voice;
+    public static Stage addStage =null;
+    public static Stage editStage =null;
     @FXML
     ChoiceBox<String> jCBDictType;
     @FXML
@@ -54,12 +56,28 @@ public class HomeController implements Initializable  {
         Media sound = new Media(gg.getSoundFile(curentWord, GoogleTranslator.Language.en).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-        //voice.speak(curentWord);
     }
     @FXML
     public void deleteWord(){
         DictionaryManagement.getInstance().getDBManager().delete(curentWord);
         loadDefault();
+    }
+    @FXML
+    public void editWord(){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("EditWindow.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(editStage == null){
+            Scene scene = new Scene(root);
+            editStage = new Stage();
+            editStage.setTitle("Sửa từ vựng");
+            editStage.setScene(scene);
+            editStage.show();
+        }
+        editStage.setUserData(curentWord);
     }
     public void loadSuggestList(String value)
     {
@@ -82,32 +100,17 @@ public class HomeController implements Initializable  {
         curentWord = selectedWord.getWord_target();
         tabMeaning.getEngine().loadContent(selectedWord.getWord_explain());
     }
-    public static Stage stage =null;
-    @FXML
-    public void showEditWindow(ActionEvent e)  throws  IOException
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("EditWindow.fxml"));
-        Scene scene = new Scene(root);
-        if(stage==null)
-        {
-            stage=new Stage();
-            stage.setTitle("Edit Window");
-            stage.setScene(scene);
-            stage.show();
-        }
-
-    }
     @FXML
     public void showAddWindow(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("AddWindow.fxml"));
         Scene scene = new Scene(root);
         {
-            if(stage==null)
+            if(addStage ==null)
             {
-                stage = new Stage();
-                stage.setTitle("Add Window");
-                stage.setScene(scene);
-                stage.show();
+                addStage = new Stage();
+                addStage.setTitle("Thêm từ mới");
+                addStage.setScene(scene);
+                addStage.show();
             }
         }
 

@@ -58,7 +58,19 @@ public class DatabaseManagement {
         }
         return null;
     }
+    public void edit(Word word){
+        String cmd = "UPDATE " + DictionaryManagement.getInstance().getTableName() +
+                     " SET description = ? WHERE word = ?";
+        try {
+            PreparedStatement ppsm = dbConnection.prepareStatement(cmd);
+            ppsm.setString(1, word.getWord_explain());
+            ppsm.setString(2, word.getWord_target());
+            ppsm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+    }
     public void delete(String word){
         String cmd = "DELETE FROM " + DictionaryManagement.getInstance().getTableName() + " WHERE word = '" + word + "';";
         System.out.println(cmd);

@@ -19,7 +19,7 @@
       <TextField fx:id="jtaWordTarget" layoutX="105.0" layoutY="29.0" prefHeight="25.0" prefWidth="215.0" />
       <Text layoutX="31.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ngôn ngữ" />
       <ChoiceBox fx:id="cbLanguage" layoutX="107.0" layoutY="64.0" prefHeight="25.0" prefWidth="122.0" />
-      <TextArea fx:id="jtaWordExplain" layoutX="31.0" layoutY="131.0" prefHeight="143.0" prefWidth="297.0" />
+      <TextArea fx:id="jtaWordExplain" layoutX="31.0" layoutY="131.0" prefHeight="143.0" prefWidth="297.0" wrapText="true" />
       <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nghĩa" />
    </children>
 </Pane>
