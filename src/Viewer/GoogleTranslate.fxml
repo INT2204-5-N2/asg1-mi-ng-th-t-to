@@ -23,7 +23,7 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <Button fx:id="jbSearch" layoutX="184.0" layoutY="266.0" mnemonicParsing="false" onAction="#TranslateEngVie" text="Search" />
+      <Button fx:id="jbSearch" layoutX="184.0" layoutY="266.0" mnemonicParsing="false" onAction="#Translate" text="Search" />
       <ChoiceBox fx:id="cbSelectLanguage" layoutX="473.0" layoutY="2.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

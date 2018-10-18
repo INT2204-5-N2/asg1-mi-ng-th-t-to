@@ -79,6 +79,7 @@ public class GoogleTranslate extends Thread implements Initializable {
                 System.out.print("Dang dich tu");
             }
         });
+        cbSelectLanguage.selectionModelProperty().addListener((observable, oldValue, newValue) -> Translate());
 
     }
 }
