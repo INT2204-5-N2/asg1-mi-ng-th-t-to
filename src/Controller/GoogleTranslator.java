@@ -21,7 +21,7 @@ public class GoogleTranslator {
             URL urlCon = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) urlCon.openConnection();
             connection.setRequestMethod("GET");
-            connection.setRequestProperty("User-Agent", "Rigor API Tester");
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:2.0) Gecko/20100101 Firefox/4.0");
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             return connection.getInputStream();
         } catch (MalformedURLException e) {
