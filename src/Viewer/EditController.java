@@ -6,9 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Optional;
@@ -44,7 +46,8 @@ public class EditController implements Initializable {
         if(button==ButtonType.OK)
         {
             System.out.println("Dong cua so");
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            Stage currentStage = (Stage) ((Node)(event.getSource())).getScene().getWindow();
+            currentStage.close();
         }
         else
         {
@@ -56,12 +59,13 @@ public class EditController implements Initializable {
     @FXML
     public void saveDB(){
         wordToEdit.setWord_explain(txtMeaning.getText());
+        wordToEdit.setPronounce(txtPronounce.getText());
         DictionaryManagement.getInstance().getDBManager().edit(wordToEdit);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         txtWord.setText(wordToEdit.getWord_target());
-        txtPronounce.setText("///");
+        txtPronounce.setText(wordToEdit.getPronounce());
         txtMeaning.setText(wordToEdit.getWord_explain());
     }
 }

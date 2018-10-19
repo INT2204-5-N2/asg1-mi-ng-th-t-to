@@ -27,6 +27,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,9 +50,14 @@ public class HomeController implements Initializable  {
     @FXML
     private ListView<Word> jlWord;
     @FXML
-    private WebView tabMeaning;
+    private Text txtWord;
+    @FXML
+    private Text txtPronounce;
+    @FXML
+    private TextArea txtMeaning;
     @FXML
     private ImageView btnSound;
+    public static Stage stage1=null;
     @FXML
     public void playSound(){
         GoogleTranslator gg = new GoogleTranslator();
@@ -80,9 +86,17 @@ public class HomeController implements Initializable  {
             editStage.setTitle("Sửa từ vựng");
             editStage.setScene(scene);
             editStage.resizableProperty().setValue(false);
+            editStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    HomeController.editStage = null;
+                }
+            });
             editStage.show();
+        } else {
+            editStage.requestFocus();
+            editStage.setIconified(false);
         }
-        editStage.setUserData(curentWord);
     }
     public void loadSuggestList(String value)
     {
@@ -102,8 +116,12 @@ public class HomeController implements Initializable  {
 
     public void selectWord(){
         Word selectedWord = jlWord.getSelectionModel().getSelectedItem();
-        curentWord = selectedWord.getWord_target();
-        tabMeaning.getEngine().loadContent(selectedWord.getWord_explain());
+        if(selectedWord != null){
+            curentWord = selectedWord.getWord_target();
+            txtWord.setText(curentWord);
+            txtPronounce.setText("/" + selectedWord.getPronounce() + "/");
+            txtMeaning.setText(selectedWord.getWord_explain());
+        }
     }
     @FXML
     public void showAddWindow(ActionEvent e) throws IOException {
@@ -121,7 +139,7 @@ public class HomeController implements Initializable  {
         }
 
     }
-    public static Stage stage1=null;
+
     public void ShowGoogleTranslate(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("GoogleTranslate.fxml"));
         Scene scene = new Scene(root);

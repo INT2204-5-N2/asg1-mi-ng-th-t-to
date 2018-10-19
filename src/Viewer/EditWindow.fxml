@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -7,13 +8,18 @@
 
 <Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="txtWord" layoutX="159.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <ImageView fitHeight="488.0" fitWidth="582.0" layoutX="-83.0" layoutY="-54.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Res/image/Nen.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="txtWord" fill="#f2eeee" layoutX="159.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="30.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phát âm" />
-      <Text layoutX="30.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nghĩa mới" />
+      <Text fill="#f8f8f8" layoutX="30.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phát âm" />
+      <Text fill="#f8f5f5" layoutX="30.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nghĩa mới" />
       <TextField fx:id="txtPronounce" layoutX="99.0" layoutY="59.0" prefHeight="25.0" prefWidth="232.0" />
       <TextArea fx:id="txtMeaning" layoutX="30.0" layoutY="128.0" prefHeight="146.0" prefWidth="312.0" wrapText="true" />
       <Button layoutX="294.0" layoutY="289.0" mnemonicParsing="false" onAction="#CloseEditWindow" text="Cancel" />

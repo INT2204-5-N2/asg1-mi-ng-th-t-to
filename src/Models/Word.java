@@ -4,6 +4,7 @@ public class Word {
     private String id;
     private String word_target;
     private String word_explain;
+    private String pronounce;
 
     public String getId() {
         return id;
@@ -27,6 +28,14 @@ public class Word {
 
     public void setWord_explain(String word_explain) {
         this.word_explain = word_explain;
+    }
+
+    public String getPronounce() {
+        return pronounce;
+    }
+
+    public void setPronounce(String pronounce) {
+        this.pronounce = pronounce;
     }
 
     @Override

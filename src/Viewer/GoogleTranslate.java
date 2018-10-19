@@ -65,7 +65,6 @@ public class GoogleTranslate extends Thread implements Initializable {
             begin=end;
         }
 
-        //jtasrcLang.textProperty().addListener(new );
 
     }
 

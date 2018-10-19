@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.HomeController">
    <children>
       <ImageView fitHeight="637.0" fitWidth="526.0" layoutX="-1.0" layoutY="-31.0">
          <image>
-            <Image url="@Image/Nen.jpg" />
+            <Image url="@../Res/image/Nen.jpg" />
          </image>
       </ImageView>
       <ListView fx:id="jlWord" editable="true" layoutX="8.0" layoutY="110.0" prefHeight="476.0" prefWidth="160.0" />
@@ -36,15 +36,33 @@
          <children>
             <AnchorPane layoutY="3.0" prefHeight="456.0" prefWidth="344.0">
                <children>
-                  <WebView fx:id="tabMeaning" prefHeight="476.0" prefWidth="337.0" />
-                  <ImageView fx:id="btnSound" fitHeight="25.0" fitWidth="29.0" layoutX="278.0" layoutY="14.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Res/image/btnsound.jpg" />
-                     </image>
-                  </ImageView>
-
-                  <Button layoutX="265.0" layoutY="77.0" mnemonicParsing="false" onMouseClicked="#deleteWord" text="Delete" />
-                  <Button layoutX="265.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#editWord" prefHeight="25.0" prefWidth="51.0" text="Edit" />
+                  <AnchorPane prefHeight="476.0" prefWidth="337.0" style="-fx-background-color: white;">
+                     <children>
+                        <Text fx:id="txtWord" fill="#ee2222" layoutX="27.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-size: 23;" textOrigin="CENTER" wrappingWidth="225.13671875">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="txtPronounce" fill="#141414" layoutX="27.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-font-style: italic;" wrappingWidth="207.13671875">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="txtMeaning" layoutX="14.0" layoutY="122.0" prefHeight="323.0" prefWidth="305.0" style="-fx-wrap-text: true;" stylesheets="@textAreaStyle.css">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextArea>
+                        <ImageView fx:id="btnSound" fitHeight="25.0" fitWidth="29.0" layoutX="278.0" layoutY="95.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Res/image/btnsound.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="265.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#editWord" prefHeight="25.0" prefWidth="51.0" text="Edit" />
+      
+                        <Button layoutX="265.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#deleteWord" prefHeight="25.0" prefWidth="51.0" text="Delete" />
+                     </children>
+                  </AnchorPane>
 
                </children>
             </AnchorPane>

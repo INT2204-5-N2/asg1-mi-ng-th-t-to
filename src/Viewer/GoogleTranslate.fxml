@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="476.0" fitWidth="870.0" layoutX="-5.0" layoutY="-170.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Image/Nen.jpg" />
+            <Image url="@../Res/image/Nen.jpg" />
          </image></ImageView>
       <TextArea fx:id="jtasrcLang" layoutX="6.0" layoutY="60.0" prefHeight="200.0" prefWidth="304.0" />
       <TextArea fx:id="jtargetLang" layoutX="318.0" layoutY="60.0" prefHeight="200.0" prefWidth="310.0" />

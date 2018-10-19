@@ -10,7 +10,7 @@ public class DatabaseManagement {
     private String path;
     private Statement statement;
     private String sqlPrefix = "jdbc:sqlite:";
-    private static final int MAX_ITEM = 30;
+    //private static final int MAX_ITEM = 100;
 
     public DatabaseManagement(String path){
         this.path = path;
@@ -43,11 +43,12 @@ public class DatabaseManagement {
         try {
             ResultSet resultSet = statement.executeQuery(cmd);
             ArrayList<Word> result = new ArrayList<>();
-            while (result.size() < MAX_ITEM && resultSet.next())
+            while (/*result.size() < MAX_ITEM &&*/ resultSet.next())
             {
                 Word newWord = new Word();
                 newWord.setWord_target(resultSet.getString("word"));
-                newWord.setWord_explain(resultSet.getString("html"));
+                newWord.setWord_explain(resultSet.getString("description"));
+                newWord.setPronounce(resultSet.getString("pronounce"));
                 result.add(newWord);
             }
             resultSet.close();
