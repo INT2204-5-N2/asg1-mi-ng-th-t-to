@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="305.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.GoogleTranslate">
+<AnchorPane prefHeight="305.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Viewer.GoogleTranslate">
    <children>
       <ImageView fitHeight="476.0" fitWidth="870.0" layoutX="-5.0" layoutY="-170.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,7 +28,7 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <Button fx:id="jbSearch" layoutX="184.0" layoutY="266.0" mnemonicParsing="false" onAction="#Translate" text="Search" />
+      <Button fx:id="jbSearch" layoutX="184.0" layoutY="266.0" mnemonicParsing="false" onAction="#autoTranslate" text="Search" />
       <ChoiceBox fx:id="cbSelectLanguage" layoutX="473.0" layoutY="2.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

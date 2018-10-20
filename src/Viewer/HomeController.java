@@ -4,7 +4,6 @@ import Controller.DictionaryManagement;
 import Controller.GoogleTranslator;
 import Models.Word;
 import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,18 +13,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -80,23 +76,13 @@ public class HomeController implements Initializable  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(editStage == null){
-            Scene scene = new Scene(root);
-            editStage = new Stage();
-            editStage.setTitle("Sửa từ vựng");
-            editStage.setScene(scene);
-            editStage.resizableProperty().setValue(false);
-            editStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent event) {
-                    HomeController.editStage = null;
-                }
-            });
-            editStage.show();
-        } else {
-            editStage.requestFocus();
-            editStage.setIconified(false);
-        }
+        editStage = openNewWindow(editStage, "Sửa từ vựng", root);
+        editStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                HomeController.editStage = null;
+            }
+        });
     }
     public void loadSuggestList(String value)
     {
@@ -125,34 +111,25 @@ public class HomeController implements Initializable  {
     }
     @FXML
     public void showAddWindow(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddWindow.fxml"));
-        Scene scene = new Scene(root);
-        {
-            if(addStage ==null)
-            {
-                addStage = new Stage();
-                addStage.setTitle("Thêm từ mới");
-                addStage.setScene(scene);
-                addStage.resizableProperty().setValue(false);
-                addStage.show();
+        Pane root = FXMLLoader.load(getClass().getResource("AddWindow.fxml"));
+        addStage = openNewWindow(addStage, "Thêm từ mới", root);
+        addStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                HomeController.addStage = null;
             }
-        }
-
+        });
     }
 
     public void ShowGoogleTranslate(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("GoogleTranslate.fxml"));
-        Scene scene = new Scene(root);
-        {
-            if(stage1==null)
-            {
-                stage1 = new Stage();
-                stage1.setTitle("Google Search");
-                stage1.setScene(scene);
-                stage1.resizableProperty().setValue(false);
-                stage1.show();
+        Pane root = FXMLLoader.load(getClass().getResource("GoogleTranslate.fxml"));
+        stage1 = openNewWindow(stage1, "Tra từ online",  root);
+        stage1.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                HomeController.stage1 = null;
             }
-        }
+        });
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -192,5 +169,18 @@ public class HomeController implements Initializable  {
             }
         });
     }
-
+    private Stage openNewWindow(Stage stage, String title, Pane root){
+        if(stage == null){
+            Scene scene = new Scene(root);
+            stage = new Stage();
+            stage.setTitle("Sửa từ vựng");
+            stage.setScene(scene);
+            stage.resizableProperty().setValue(false);
+            stage.show();
+        } else {
+            stage.requestFocus();
+            stage.setIconified(false);
+        }
+        return stage;
+    }
 }

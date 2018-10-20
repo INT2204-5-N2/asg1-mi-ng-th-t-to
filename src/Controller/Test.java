@@ -1,7 +1,5 @@
 package Controller;
 
-import java.nio.charset.StandardCharsets;
-
 public class Test {
     public static void main(String[] args){
         GoogleTranslator gg = new GoogleTranslator();

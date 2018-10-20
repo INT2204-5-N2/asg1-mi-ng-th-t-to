@@ -11,11 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
-import java.util.Calendar;
+import java.util.*;
 
 import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class GoogleTranslate extends Thread implements Initializable {
     @FXML
@@ -26,16 +24,17 @@ public class GoogleTranslate extends Thread implements Initializable {
     private TextArea jtargetLang;
     @FXML
     private ChoiceBox<String> cbSelectLanguage;
+    private Timer timer = new Timer();
+    private static long DELAY_TIME = 200;
 
     public void CloseGoogleTranslateWindow(ActionEvent event)
     {
         Alert close=new Alert(Alert.AlertType.INFORMATION);
         close.setContentText("You want close GoogleTranslate Window??");
-        Optional<ButtonType> result= close.showAndWait();
+        Optional <ButtonType> result= close.showAndWait();
         ButtonType button=result.orElse(ButtonType.CANCEL);
         if(button==ButtonType.OK)
         {
-            System.out.println("Dong cua so");
             ((Node)(event.getSource())).getScene().getWindow().hide();
             HomeController.stage1=null;
         }
@@ -44,28 +43,19 @@ public class GoogleTranslate extends Thread implements Initializable {
             close.close();
         }
     }
-    private long begin = System.currentTimeMillis();
-    public void Translate()
-    {
-        long end = System.currentTimeMillis();
-        System.out.println("\nTime: " + (end - begin));
-        if(end-begin>=1000)
+
+    public void autoTranslate(){
+        String a=null;
+        GoogleTranslator translation=new GoogleTranslator();
+        if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("ENG-VIE"))
         {
-            String a=null;
-            GoogleTranslator translation=new GoogleTranslator();
-            if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("ENG-VIE"))
-            {
-                a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
-            }
-            else if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("VIE-ENG"))
-            {
-                a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.vi, GoogleTranslator.Language.en);
-            }
-            jtargetLang.setText(a);
-            begin=end;
+            a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
         }
-
-
+        else if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("VIE-ENG"))
+        {
+            a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.vi, GoogleTranslator.Language.en);
+        }
+        jtargetLang.setText(a);
     }
 
     @Override
@@ -74,11 +64,20 @@ public class GoogleTranslate extends Thread implements Initializable {
         jtasrcLang.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                Translate();
-                System.out.print("Dang dich tu");
+                /*Translate();
+                System.out.print("Dang dich tu");*/
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        autoTranslate();
+                    }
+                }, DELAY_TIME);
             }
         });
-        cbSelectLanguage.selectionModelProperty().addListener((observable, oldValue, newValue) -> Translate());
+        cbSelectLanguage.getSelectionModel().selectFirst();
+        cbSelectLanguage.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> autoTranslate());
 
     }
 }
