@@ -181,7 +181,7 @@ public class HomeController implements Initializable  {
             }
         });
 
-        loadDefault();
+        //loadDefault();
     }
     private Stage openNewWindow(Stage stage, String title, Pane root){
         if(stage == null){

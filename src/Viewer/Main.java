@@ -10,6 +10,7 @@ public class Main extends Application {
     //public static  Stage window=new Stage();
     public static  void main(String [] argv)
     {
+        System.setProperty("file.encoding","utf-8");
         launch(argv);
     }
 

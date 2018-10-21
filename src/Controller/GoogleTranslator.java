@@ -47,7 +47,7 @@ public class GoogleTranslator {
                     + generateToken(wordToTranslate);
 
         InputStream resultStream = sendGet(url);
-        Scanner scanner = new Scanner(resultStream);
+        Scanner scanner = new Scanner(resultStream, "UTF-8");
         String result = scanner.nextLine();
         System.out.println(url);
         System.out.println(result);

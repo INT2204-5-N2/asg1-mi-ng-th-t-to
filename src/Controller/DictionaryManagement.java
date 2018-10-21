@@ -49,6 +49,6 @@ public class DictionaryManagement {
     }
 
     public String getDictPath(){
-        return "Res/dict_hh.db";
+        return "Res/dictionary.db";
     }
 }

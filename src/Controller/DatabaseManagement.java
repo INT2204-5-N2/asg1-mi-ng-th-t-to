@@ -6,15 +6,16 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseManagement {
-    private Connection dbConnection;
+    private static Connection dbConnection;
     private String path;
-    private Statement statement;
+    private static Statement statement;
     private String sqlPrefix = "jdbc:sqlite:";
-    //private static final int MAX_ITEM = 100;
 
     public DatabaseManagement(String path) throws SQLException {
         this.path = path;
-        dbConnection = DriverManager.getConnection(sqlPrefix + getClass().getClassLoader().getResource(path).getPath());
+        String cmd = sqlPrefix + getClass().getClassLoader().getResource(path).getPath();
+        System.out.println(cmd);
+        dbConnection = DriverManager.getConnection(/*sqlPrefix + getClass().getClassLoader().getResource(path).getPath()*/ cmd);
         statement = dbConnection.createStatement();
     }
 
@@ -36,6 +37,7 @@ public class DatabaseManagement {
     public ArrayList<Word> searchByWord(String wordSeatch){
         String cmd = "SELECT * FROM " + DictionaryManagement.getInstance().getTableName() + " where word like \"" + wordSeatch +"%\" order by word ASC;";
         try {
+            //statement = dbConnection.createStatement();
             ResultSet resultSet = statement.executeQuery(cmd);
             ArrayList<Word> result = new ArrayList<>();
             while (resultSet.next())
