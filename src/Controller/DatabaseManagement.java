@@ -2,21 +2,31 @@ package Controller;
 
 import Models.Word;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseManagement {
     private static Connection dbConnection;
-    private String path;
+    //private String path;
     private static Statement statement;
     private String sqlPrefix = "jdbc:sqlite:";
 
-    public DatabaseManagement(String path) throws SQLException {
-        this.path = path;
-        String cmd = sqlPrefix + getClass().getClassLoader().getResource(path).getPath();
-        System.out.println(cmd);
-        dbConnection = DriverManager.getConnection(/*sqlPrefix + getClass().getClassLoader().getResource(path).getPath()*/ cmd);
-        statement = dbConnection.createStatement();
+    public DatabaseManagement(String path) {
+        File dbFile = new File(path);
+        try {
+            if(!dbFile.exists()){
+                Files.copy(getClass().getClassLoader().getResourceAsStream(path),dbFile.toPath());
+            }
+            dbConnection = DriverManager.getConnection(sqlPrefix + path);
+            statement = dbConnection.createStatement();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addNewWord(Word newWord){

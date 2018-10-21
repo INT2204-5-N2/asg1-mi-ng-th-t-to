@@ -1,7 +1,5 @@
 package Controller;
 
-import java.sql.SQLException;
-
 public class DictionaryManagement {
 
     private static DictionaryManagement dictionaryManager;
@@ -10,7 +8,7 @@ public class DictionaryManagement {
     public static final String evDict = "ENG-VIET";
     public static final String veDict = "VIET-ENG";
 
-    private DictionaryManagement() throws SQLException {
+    private DictionaryManagement(){
         dictType = evDict;
         dbManager = new DatabaseManagement(getDictPath());
     }
@@ -21,11 +19,7 @@ public class DictionaryManagement {
 
     public static DictionaryManagement getInstance(){
         if(dictionaryManager == null){
-            try {
-                dictionaryManager = new DictionaryManagement();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            dictionaryManager = new DictionaryManagement();
         }
         return dictionaryManager;
     }
@@ -49,6 +43,6 @@ public class DictionaryManagement {
     }
 
     public String getDictPath(){
-        return "Res/dictionary.db";
+        return "dictionary.db";
     }
 }

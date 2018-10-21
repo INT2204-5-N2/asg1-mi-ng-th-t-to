@@ -59,7 +59,7 @@ public class GoogleTranslator {
         String url = "https://translate.google.com.vn/translate_tts?ie=UTF-8&q="+ wordToRead +"&tl=" + srcLang + "&client=tw-ob ";
         InputStream soundStream = sendGet(url);
         try {
-            File temp = new File(getClass().getClassLoader().getResource("").getPath() + "Res/tts.mp3");
+            File temp = new File("tts.mp3");
             Files.write(temp.toPath(), soundStream.readAllBytes());
             return temp;
         } catch (IOException e) {
