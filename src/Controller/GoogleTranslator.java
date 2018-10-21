@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GoogleTranslator {
     public enum Language{
@@ -48,10 +50,20 @@ public class GoogleTranslator {
 
         InputStream resultStream = sendGet(url);
         Scanner scanner = new Scanner(resultStream, "UTF-8");
-        String result = scanner.nextLine();
-        System.out.println(url);
-        System.out.println(result);
-        return result.substring(result.indexOf("[[[\"") + 4, result.indexOf("\",\""));
+
+        String rawData = scanner.nextLine();
+        Pattern pattern = Pattern.compile("\\[(\\[\".*?\\])\\]");
+        Matcher matcher = pattern.matcher(rawData);
+        matcher.find();
+        rawData = matcher.group(1);
+        pattern = Pattern.compile("\\[\"(.*?)\"");
+        matcher = pattern.matcher(rawData);
+        String result = "";
+        while (matcher.find()){
+            result = result + matcher.group(1);
+        }
+        result = result.replace("\\n", "\n");
+        return result;
     }
 
     public File getSoundFile(String wordToRead, Language srcLang){

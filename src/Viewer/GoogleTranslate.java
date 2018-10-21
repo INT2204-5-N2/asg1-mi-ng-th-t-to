@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.util.*;
 
@@ -24,6 +26,8 @@ public class GoogleTranslate extends Thread implements Initializable {
     private TextArea jtargetLang;
     @FXML
     private ChoiceBox<String> cbSelectLanguage;
+    private MediaPlayer mediaPlayer;
+    private GoogleTranslator translator = new GoogleTranslator();
     private Timer timer = new Timer();
     private static long DELAY_TIME = 200;
 
@@ -47,19 +51,32 @@ public class GoogleTranslate extends Thread implements Initializable {
     }
 
     public void autoTranslate(){
-        String a=null;
-        GoogleTranslator translation=new GoogleTranslator();
+        String result=null;
         if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("ENG-VIE"))
         {
-            a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
+            result=translator.translate(jtasrcLang.getText(), GoogleTranslator.Language.en, GoogleTranslator.Language.vi);
         }
         else if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("VIE-ENG"))
         {
-            a=translation.translate(jtasrcLang.getText(), GoogleTranslator.Language.vi, GoogleTranslator.Language.en);
+            result=translator.translate(jtasrcLang.getText(), GoogleTranslator.Language.vi, GoogleTranslator.Language.en);
         }
-        jtargetLang.setText(a);
+        jtargetLang.setText(result);
     }
 
+    @FXML
+    public void playSound(){
+        Media sound = null;
+        if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("ENG-VIE"))
+        {
+            sound = new Media(translator.getSoundFile(jtasrcLang.getText(), GoogleTranslator.Language.en).toURI().toString());
+        }
+        else if(cbSelectLanguage.getSelectionModel().getSelectedItem().equals("VIE-ENG"))
+        {
+            sound = new Media(translator.getSoundFile(jtasrcLang.getText(), GoogleTranslator.Language.vi).toURI().toString());
+        }
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cbSelectLanguage.setItems(FXCollections.observableArrayList("ENG-VIE", "VIE-ENG"));
