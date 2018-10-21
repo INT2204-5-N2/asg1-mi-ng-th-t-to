@@ -111,7 +111,12 @@ public class HomeController implements Initializable  {
         if(selectedWord != null){
             curentWord = selectedWord.getWord_target();
             txtWord.setText(curentWord);
-            txtPronounce.setText("[" + selectedWord.getPronounce() + "]");
+            if(selectedWord.getPronounce() != null && !selectedWord.getPronounce().equals("")){
+                txtPronounce.setText("[" + selectedWord.getPronounce() + "]");
+            }
+            else {
+                txtPronounce.setText("");
+            }
             txtMeaning.setText(selectedWord.getWord_explain());
         } else {
             txtWord.setText("");
