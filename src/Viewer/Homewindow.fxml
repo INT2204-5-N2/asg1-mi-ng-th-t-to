@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="637.0" fitWidth="526.0" layoutX="-1.0" layoutY="-31.0">
          <image>
-            <Image url="@../Res/image/Nen.jpg" />
+            <Image url="@../Resource/image/Nen.jpg" />
          </image>
       </ImageView>
       <ListView fx:id="jlWord" editable="true" layoutX="8.0" layoutY="110.0" prefHeight="476.0" prefWidth="160.0" />
@@ -27,7 +27,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../Res/image/searchOnlineButton.png" />
+                  <Image url="@../Resource/image/searchOnlineButton.png" />
                </source>
             </ImageInput>
          </effect></Button>
@@ -40,7 +40,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../Res/image/AddButton.jpg" />
+                  <Image url="@../Resource/image/AddButton.jpg" />
                </source>
             </ImageInput>
          </effect></Button>
@@ -67,14 +67,14 @@
                         </TextArea>
                         <ImageView fx:id="btnSound" fitHeight="25.0" fitWidth="29.0" layoutX="278.0" layoutY="95.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Res/image/btnsound.jpg" />
+                              <Image url="@../Resource/image/btnsound.jpg" />
                            </image>
                         </ImageView>
                         <Button layoutX="249.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#editWord" prefHeight="31.0" prefWidth="83.0" text="Edit">
                            <effect>
                               <ImageInput>
                                  <source>
-                                    <Image url="@../Res/image/EditButton.png" />
+                                    <Image url="@../Resource/image/EditButton.png" />
                                  </source>
                               </ImageInput>
                            </effect></Button>
@@ -83,7 +83,7 @@
                            <effect>
                               <ImageInput>
                                  <source>
-                                    <Image url="@../Res/image/deleteButton.jpg" />
+                                    <Image url="@../Resource/image/deleteButton.jpg" />
                                  </source>
                               </ImageInput>
                            </effect></Button>

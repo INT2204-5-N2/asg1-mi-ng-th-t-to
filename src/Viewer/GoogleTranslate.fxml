@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="476.0" fitWidth="870.0" layoutX="-5.0" layoutY="-170.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Res/image/Nen.jpg" />
+            <Image url="@../Resource/image/Nen.jpg" />
          </image></ImageView>
       <TextArea fx:id="jtasrcLang" layoutX="6.0" layoutY="60.0" prefHeight="200.0" prefWidth="304.0" promptText="Nhập đoạn văn muốn dịch" />
       <TextArea fx:id="jtargetLang" editable="false" layoutX="318.0" layoutY="60.0" prefHeight="200.0" prefWidth="310.0" promptText="Kết quả" />
@@ -32,7 +32,7 @@
       <ChoiceBox fx:id="cbSelectLanguage" layoutX="473.0" layoutY="2.0" prefWidth="150.0" />
       <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="268.0" layoutY="215.0" onMouseClicked="#playSound" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Res/image/btnsound.jpg" />
+            <Image url="@../Resource/image/btnsound.jpg" />
          </image>
       </ImageView>
    </children>

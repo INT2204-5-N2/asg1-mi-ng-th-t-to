@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="488.0" fitWidth="582.0" layoutX="-83.0" layoutY="-54.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Res/image/Nen.jpg" />
+            <Image url="@../Resource/image/Nen.jpg" />
          </image>
       </ImageView>
       <Text fx:id="txtWord" fill="#f2eeee" layoutX="28.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" textOrigin="TOP" wrappingWidth="295.708984375">

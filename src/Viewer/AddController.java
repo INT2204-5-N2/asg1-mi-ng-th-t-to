@@ -3,8 +3,6 @@ package Viewer;
 import Controller.DatabaseManagement;
 import Controller.DictionaryManagement;
 import Models.Word;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Optional;
