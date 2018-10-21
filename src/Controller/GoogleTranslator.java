@@ -67,7 +67,11 @@ public class GoogleTranslator {
     }
 
     public File getSoundFile(String wordToRead, Language srcLang){
-        wordToRead = wordToRead.replace(" ", "+");
+        try {
+            wordToRead = URLEncoder.encode(wordToRead, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String url = "https://translate.google.com.vn/translate_tts?ie=UTF-8&q="+ wordToRead +"&tl=" + srcLang + "&client=tw-ob ";
         InputStream soundStream = sendGet(url);
         try {
