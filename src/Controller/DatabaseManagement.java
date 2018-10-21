@@ -19,12 +19,13 @@ public class DatabaseManagement {
     }
 
     public void addNewWord(Word newWord){
-        String cmd = "INSERT INTO " + DictionaryManagement.getInstance().getTableName() + "(word,html) VALUES(?,?)";
+        String cmd = "INSERT INTO " + DictionaryManagement.getInstance().getTableName() + "(word,pronounce,description) VALUES(?,?,?)";
         try
         {
             PreparedStatement pstmt = dbConnection.prepareStatement(cmd);
             pstmt.setString(1, newWord.getWord_target());
-            pstmt.setString(2, newWord.getWord_explain());
+            pstmt.setString(2, newWord.getPronounce());
+            pstmt.setString(3, newWord.getWord_explain());
             pstmt.executeUpdate();
             pstmt.close();
         } catch (SQLException e) {
@@ -54,11 +55,12 @@ public class DatabaseManagement {
     }
     public void edit(Word word){
         String cmd = "UPDATE " + DictionaryManagement.getInstance().getTableName() +
-                     " SET description = ? WHERE word = ?";
+                     " SET pronounce = ?, description = ? WHERE word = ?";
         try {
             PreparedStatement ppsm = dbConnection.prepareStatement(cmd);
-            ppsm.setString(1, word.getWord_explain());
-            ppsm.setString(2, word.getWord_target());
+            ppsm.setString(1, word.getPronounce());
+            ppsm.setString(2, word.getWord_explain());
+            ppsm.setString(3, word.getWord_target());
             ppsm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

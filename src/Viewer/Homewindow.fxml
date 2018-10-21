@@ -27,7 +27,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Github/asg1-mi-ng-th-t-to/src/Res/image/searchOnlineButton.png" />
+                  <Image url="@../Res/image/searchOnlineButton.png" />
                </source>
             </ImageInput>
          </effect></Button>
@@ -40,7 +40,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Github/asg1-mi-ng-th-t-to/src/Res/image/AddButton.jpg" />
+                  <Image url="@../Res/image/AddButton.jpg" />
                </source>
             </ImageInput>
          </effect></Button>
@@ -74,7 +74,7 @@
                            <effect>
                               <ImageInput>
                                  <source>
-                                    <Image url="file:/C:/Github/asg1-mi-ng-th-t-to/src/Res/image/EditButton.png" />
+                                    <Image url="@../Res/image/EditButton.png" />
                                  </source>
                               </ImageInput>
                            </effect></Button>
@@ -83,7 +83,7 @@
                            <effect>
                               <ImageInput>
                                  <source>
-                                    <Image url="file:/C:/Github/asg1-mi-ng-th-t-to/src/Res/image/deleteButton.jpg" />
+                                    <Image url="@../Res/image/deleteButton.jpg" />
                                  </source>
                               </ImageInput>
                            </effect></Button>
