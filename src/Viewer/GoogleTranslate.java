@@ -29,8 +29,10 @@ public class GoogleTranslate extends Thread implements Initializable {
 
     public void CloseGoogleTranslateWindow(ActionEvent event)
     {
-        Alert close=new Alert(Alert.AlertType.INFORMATION);
-        close.setContentText("You want close GoogleTranslate Window??");
+        Alert close=new Alert(Alert.AlertType.CONFIRMATION);
+        close.setTitle("Xác nhận");
+        close.setHeaderText(null);
+        close.setContentText("Bạn có chắc chắc muốn thoát");
         Optional <ButtonType> result= close.showAndWait();
         ButtonType button=result.orElse(ButtonType.CANCEL);
         if(button==ButtonType.OK)
@@ -64,8 +66,6 @@ public class GoogleTranslate extends Thread implements Initializable {
         jtasrcLang.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                /*Translate();
-                System.out.print("Dang dich tu");*/
                 timer.cancel();
                 timer = new Timer();
                 timer.schedule(new TimerTask() {

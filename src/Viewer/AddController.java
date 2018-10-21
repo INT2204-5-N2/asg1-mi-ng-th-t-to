@@ -34,8 +34,9 @@ public class AddController implements Initializable {
     public  void CloseAddWindow(ActionEvent event)
     {
         Alert close =new Alert(Alert.AlertType.CONFIRMATION);
-        close.setTitle("Comfirm");
-        close.setHeaderText("Bạn có chắc chắn muốn thoát không?");
+        close.setTitle("Xác nhận");
+        close.setContentText("Bạn có chắc chắn muốn thoát không?");
+        close.setHeaderText(null);
         Optional<ButtonType> result= close.showAndWait();
         ButtonType button=result.orElse(ButtonType.CANCEL);
         if(button==ButtonType.OK)

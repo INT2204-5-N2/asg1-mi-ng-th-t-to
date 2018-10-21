@@ -39,13 +39,14 @@ public class EditController implements Initializable {
 
     public  void CloseEditWindow(ActionEvent event)
     {
-        Alert close =new Alert(Alert.AlertType.INFORMATION);
-        close.setContentText("Thoát");
+        Alert close =new Alert(Alert.AlertType.CONFIRMATION);
+        close.setTitle("Xác nhận");
+        close.setHeaderText(null);
+        close.setContentText("Bạn có chắc chắn muốn thoát");
         Optional<ButtonType> result= close.showAndWait();
         ButtonType button=result.orElse(ButtonType.CANCEL);
         if(button==ButtonType.OK)
         {
-            System.out.println("Dong cua so");
             Stage currentStage = (Stage) ((Node)(event.getSource())).getScene().getWindow();
             currentStage.close();
         }
@@ -61,6 +62,11 @@ public class EditController implements Initializable {
         wordToEdit.setWord_explain(txtMeaning.getText());
         wordToEdit.setPronounce(txtPronounce.getText());
         DictionaryManagement.getInstance().getDBManager().edit(wordToEdit);
+        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+        successAlert.setTitle("Thông báo");
+        successAlert.setHeaderText(null);
+        successAlert.setContentText("Sửa thành công");
+        successAlert.showAndWait();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

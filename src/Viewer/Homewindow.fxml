@@ -21,8 +21,8 @@
          </image>
       </ImageView>
       <ListView fx:id="jlWord" editable="true" layoutX="8.0" layoutY="110.0" prefHeight="476.0" prefWidth="160.0" />
-      <TextField fx:id="jtxtSearch" layoutX="14.0" layoutY="73.0" promptText="Search" />
-      <Button fx:id="jbOnline" layoutX="272.0" layoutY="73.0" mnemonicParsing="false" onAction="#ShowGoogleTranslate" prefHeight="25.0" prefWidth="102.0" style="-fx-background-radius: 0.5em;" text="Tìm kiếm online" wrapText="true" />
+      <TextField fx:id="jtxtSearch" layoutX="14.0" layoutY="73.0" promptText="Tìm kiếm" />
+      <Button fx:id="jbOnline" layoutX="272.0" layoutY="73.0" mnemonicParsing="false" onAction="#ShowGoogleTranslate" prefHeight="25.0" prefWidth="84.0" style="-fx-background-radius: 0.5em;" text="Dịch online" wrapText="true" />
       <Label layoutX="174.0" layoutY="7.0" prefHeight="43.0" prefWidth="172.0" text="DICTIONARY" textAlignment="CENTER">
          <font>
             <Font size="29.0" />
@@ -63,9 +63,9 @@
                               <Image url="@../Res/image/btnsound.jpg" />
                            </image>
                         </ImageView>
-                        <Button layoutX="265.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#editWord" prefHeight="25.0" prefWidth="51.0" text="Edit" />
+                        <Button layoutX="265.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#editWord" prefHeight="25.0" prefWidth="51.0" text="Sửa" />
       
-                        <Button layoutX="265.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#deleteWord" prefHeight="25.0" prefWidth="51.0" text="Delete" />
+                        <Button layoutX="265.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#deleteWord" prefHeight="25.0" prefWidth="51.0" text="Xóa" />
                      </children>
                   </AnchorPane>
 

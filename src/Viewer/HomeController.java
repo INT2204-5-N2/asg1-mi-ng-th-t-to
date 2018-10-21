@@ -3,7 +3,6 @@ package Viewer;
 import Controller.DictionaryManagement;
 import Controller.GoogleTranslator;
 import Models.Word;
-import com.sun.speech.freetts.Voice;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,11 +27,11 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable  {
     private String curentWord;
-    private Voice voice;
     public static Stage addStage =null;
     public static Stage editStage =null;
     @FXML
@@ -54,17 +53,25 @@ public class HomeController implements Initializable  {
     @FXML
     private ImageView btnSound;
     public static Stage stage1=null;
+    private MediaPlayer mediaPlayer;
     @FXML
     public void playSound(){
         GoogleTranslator gg = new GoogleTranslator();
         Media sound = new Media(gg.getSoundFile(curentWord, GoogleTranslator.Language.en).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
     @FXML
     public void deleteWord(){
-        DictionaryManagement.getInstance().getDBManager().delete(curentWord);
-        loadDefault();
+        Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteAlert.setTitle("Xác nhận");
+        deleteAlert.setHeaderText(null);
+        deleteAlert.setContentText("Bạn có chắc chắn muốn xóa từ này?");
+        Optional<ButtonType> result = deleteAlert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            DictionaryManagement.getInstance().getDBManager().delete(curentWord);
+            loadDefault();
+        }
     }
     @FXML
     public void editWord(){
@@ -84,7 +91,7 @@ public class HomeController implements Initializable  {
             }
         });
     }
-    public void loadSuggestList(String value)
+    private void loadSuggestList(String value)
     {
         ArrayList<Word> suggestList = DictionaryManagement.getInstance().getDBManager().searchByWord(value);
         if(suggestList.size() == 0){
@@ -99,14 +106,17 @@ public class HomeController implements Initializable  {
         selectWord();
     }
     @FXML
-
     public void selectWord(){
         Word selectedWord = jlWord.getSelectionModel().getSelectedItem();
         if(selectedWord != null){
             curentWord = selectedWord.getWord_target();
             txtWord.setText(curentWord);
-            txtPronounce.setText("/" + selectedWord.getPronounce() + "/");
+            txtPronounce.setText("[" + selectedWord.getPronounce() + "]");
             txtMeaning.setText(selectedWord.getWord_explain());
+        } else {
+            txtWord.setText("");
+            txtMeaning.setText("");
+            txtPronounce.setText("");
         }
     }
     @FXML
@@ -123,7 +133,7 @@ public class HomeController implements Initializable  {
 
     public void ShowGoogleTranslate(ActionEvent event) throws IOException {
         Pane root = FXMLLoader.load(getClass().getResource("GoogleTranslate.fxml"));
-        stage1 = openNewWindow(stage1, "Tra từ online",  root);
+        stage1 = openNewWindow(stage1, "Dịch online",  root);
         stage1.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
@@ -133,11 +143,18 @@ public class HomeController implements Initializable  {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        jlWord.getFocusModel().focus(1);
         VBox vBox = new VBox();
         vBox.getChildren().add(new Text("Không tìm thấy từ tương ứng"));
         jlWord.setPlaceholder(vBox);
+        jlWord.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        jlWord.getFocusModel().focus(1);
+        jlWord.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                selectWord();
+            }
+        });
+
         jtxtSearch.textProperty().addListener((observable, oldValue, newValue) -> loadSuggestList(newValue));
         jtxtSearch.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -153,12 +170,7 @@ public class HomeController implements Initializable  {
                 jtxtSearch.setText("");
             }
         });
-        jlWord.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                selectWord();
-            }
-        });
+
         jCBDictType.setItems(FXCollections.observableArrayList("ENG-VIET", "VIET-ENG"));
         jCBDictType.getSelectionModel().selectFirst();
         jCBDictType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -168,12 +180,14 @@ public class HomeController implements Initializable  {
                 loadDefault();
             }
         });
+
+        loadDefault();
     }
     private Stage openNewWindow(Stage stage, String title, Pane root){
         if(stage == null){
             Scene scene = new Scene(root);
             stage = new Stage();
-            stage.setTitle("Sửa từ vựng");
+            stage.setTitle(title);
             stage.setScene(scene);
             stage.resizableProperty().setValue(false);
             stage.show();

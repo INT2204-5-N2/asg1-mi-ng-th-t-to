@@ -12,16 +12,10 @@ public class DatabaseManagement {
     private String sqlPrefix = "jdbc:sqlite:";
     //private static final int MAX_ITEM = 100;
 
-    public DatabaseManagement(String path){
+    public DatabaseManagement(String path) throws SQLException {
         this.path = path;
-        if(dbConnection == null){
-            try {
-                dbConnection = DriverManager.getConnection(sqlPrefix + "." + path);
-                statement = dbConnection.createStatement();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        dbConnection = DriverManager.getConnection(sqlPrefix + getClass().getClassLoader().getResource(path).getPath());
+        statement = dbConnection.createStatement();
     }
 
     public void addNewWord(Word newWord){
@@ -43,7 +37,7 @@ public class DatabaseManagement {
         try {
             ResultSet resultSet = statement.executeQuery(cmd);
             ArrayList<Word> result = new ArrayList<>();
-            while (/*result.size() < MAX_ITEM &&*/ resultSet.next())
+            while (resultSet.next())
             {
                 Word newWord = new Word();
                 newWord.setWord_target(resultSet.getString("word"));

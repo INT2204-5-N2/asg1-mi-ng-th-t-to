@@ -35,7 +35,6 @@ public class GoogleTranslator {
         return null;
     }
     public String translate(String wordToTranslate, Language srcLang, Language targetLang){
-        //wordToTranslate = wordToTranslate.replace(" ", "+");
         String encodedWord = wordToTranslate;
         try {
             encodedWord = URLEncoder.encode(wordToTranslate, "UTF-8");
@@ -50,6 +49,7 @@ public class GoogleTranslator {
         InputStream resultStream = sendGet(url);
         Scanner scanner = new Scanner(resultStream);
         String result = scanner.nextLine();
+        System.out.println(url);
         System.out.println(result);
         return result.substring(result.indexOf("[[[\"") + 4, result.indexOf("\",\""));
     }
@@ -59,7 +59,7 @@ public class GoogleTranslator {
         String url = "https://translate.google.com.vn/translate_tts?ie=UTF-8&q="+ wordToRead +"&tl=" + srcLang + "&client=tw-ob ";
         InputStream soundStream = sendGet(url);
         try {
-            File temp = File.createTempFile("tts", ".mp3");
+            File temp = new File(getClass().getClassLoader().getResource("").getPath() + "Res/tts.mp3");
             Files.write(temp.toPath(), soundStream.readAllBytes());
             return temp;
         } catch (IOException e) {
@@ -67,20 +67,14 @@ public class GoogleTranslator {
         }
         return null;
     }
-
+    /* Code to generate google translate token
+       @author Aaron Gokaslan and Dean1510
+       Source: https://github.com/lkuza2/java-speech-api
+     */
     private static int[] TKK() {
         return new int[]{ 0x6337E , 0x217A58DC + 0x5AF91132 };
     }
 
-    /**
-     * An implementation of an unsigned right shift. Necessary since Java does not have unsigned ints.
-     *
-     * @param x
-     *            The number you wish to shift.
-     * @param bits
-     *            The number of bytes you wish to shift.
-     * @return The shifted number, unsigned.
-     */
     private static int shr32(int x , int bits) {
         if (x < 0) {
             long x_l = 0xffffffffl + x + 1;
@@ -99,13 +93,6 @@ public class GoogleTranslator {
         return a;
     }
 
-    /**
-     * Generates the token needed for translation.
-     *
-     * @param text
-     *            The text you want to generate the token for.
-     * @return The generated token as a string.
-     */
     private static String generateToken(String text) {
         int tkk[] = TKK();
         int b = tkk[0];
