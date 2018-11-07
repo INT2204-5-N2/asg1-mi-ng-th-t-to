@@ -110,7 +110,7 @@ public class Bomb extends AnimatedEntitiy {
         // TODO: <DONE> xử lý khi Bomber đi ra sau khi vừa đặt bom (_allowedToPassThru)
         // TODO: <DONE> xử lý va chạm với Flame của Bomb khác
 		if(e instanceof Bomber){
-			if(e.getX() == _x && e.getY() == _y){
+			if(e.getXTile() == getXTile() && e.getYTile() == getYTile()){
 				_allowedToPassThru = true;
 				return true;
 			} else {

@@ -60,8 +60,6 @@ public class FileLevelLoader extends LevelLoader {
 
 	@Override
 	public void createEntities() {
-		// TODO: <DONE> tạo các Entity của màn chơi
-		// TODO: <DONE> sau khi tạo xong, gọi _board.addEntity() để thêm Entity vào game
 		for (int y = 0; y < _height; y++){
 			for (int x = 0; x < _width; x++){
 				int pos = x + y * _width;
@@ -110,8 +108,6 @@ public class FileLevelLoader extends LevelLoader {
 				}
 			}
 		}
-		// TODO: <DONE> phần code mẫu ở dưới để hướng dẫn cách thêm các loại Entity vào game
-		// TODO: <DONE> hãy xóa nó khi hoàn thành chức năng load màn chơi từ tệp cấu hình
 	}
 
 }

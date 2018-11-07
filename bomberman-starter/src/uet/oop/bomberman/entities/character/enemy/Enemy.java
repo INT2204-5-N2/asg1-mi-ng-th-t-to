@@ -98,29 +98,26 @@ public abstract class Enemy extends Character {
             default:
                 break;
         }
-        if(canMove(_x + xa, _y +ya)){
-            _moving = true;
-            move(xa, ya);
-        } else {
-            _moving = false;
-			_direction = _ai.calculateDirection();
-        }
-
+		move(xa, ya);
 	}
 	
 	@Override
 	public void move(double xa, double ya) {
-		if(!_alive) return;
-        _y += ya;
-        _x += xa;
+		_y += ya;
+		_x += xa;
+		if(_alive && canMove(_x, _y)){
+			_moving = true;
+		} else {
+			_moving = false;
+			_x -= xa;
+			_y -= ya;
+            _direction = _ai.calculateDirection();
+		}
 	}
 	
 	@Override
 	public boolean canMove(double x, double y) {
 		// TODO: <DONE> kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
-        if(x < 0 || y < 0 || Coordinates.pixelToTile(x) >= _board.getWidth() || Coordinates.pixelToTile(y) >= _board.getHeight()){
-            return false;
-        }
         Entity other = _board.getEntity(getXTile(), getYTile(), this);
         return (other == null || collide(other) || other.collide(this));
 	}

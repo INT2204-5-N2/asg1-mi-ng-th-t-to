@@ -149,6 +149,7 @@ public class Bomber extends Character {
     public boolean canMove(double x, double y) {
         // TODO: <DONE> kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
         Entity other = _board.getEntity(getXTile(), getYTile(), this);
+        System.out.println(getXTile() + " " + getYTile() + "\n");
         return (other == null || collide(other) || other.collide(this));
     }
 
@@ -157,9 +158,9 @@ public class Bomber extends Character {
         // TODO: <DONE> sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và thực hiện thay đổi tọa độ _x, _y
         // TODO: <DONE> nhớ cập nhật giá trị _direction sau khi di chuyển
         // TODO: di chuyển vào chính giữa ô
-        if(_alive && canMove(_x + xa,_y + ya)){
-            _x += xa;
-            _y += ya;
+        _x += xa;
+        _y += ya;
+        if(_alive && canMove(_x,_y)){
             if(xa < 0){
                 _direction = Direction.LEFT;
             }
@@ -170,6 +171,9 @@ public class Bomber extends Character {
             } else {
                 _direction = Direction.DOWN;
             }
+        } else {
+            _x -= xa;
+            _y -= ya;
         }
     }
 
