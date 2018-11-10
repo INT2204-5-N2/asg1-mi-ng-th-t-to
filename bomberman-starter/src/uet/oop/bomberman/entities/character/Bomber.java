@@ -148,9 +148,20 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) {
         // TODO: <DONE> kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
-        Entity other = _board.getEntity(getXTile(), getYTile(), this);
+        /*Entity other = _board.getEntity(getXTile(), getYTile(), this);
         System.out.println(getXTile() + " " + getYTile() + "\n");
-        return (other == null || collide(other) || other.collide(this));
+        return (other == null || collide(other) || other.collide(this));*/
+        for (int addX = 0; addX <= Game.TILES_SIZE; addX += Game.TILES_SIZE){
+            for (int addY = -Game.TILES_SIZE; addY <= 0; addX += Game.TILES_SIZE){
+                Entity other = _board.getEntity(Coordinates.pixelToTile(x + addX), Coordinates.pixelToTile(y + addY), this);
+                if(other != null){
+                    if(!collide(other)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -158,22 +169,19 @@ public class Bomber extends Character {
         // TODO: <DONE> sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và thực hiện thay đổi tọa độ _x, _y
         // TODO: <DONE> nhớ cập nhật giá trị _direction sau khi di chuyển
         // TODO: di chuyển vào chính giữa ô
-        _x += xa;
-        _y += ya;
-        if(_alive && canMove(_x,_y)){
-            if(xa < 0){
-                _direction = Direction.LEFT;
-            }
-            else if(xa > 0){
-                _direction = Direction.RIGHT;
-            } else if(ya < 0){
-                _direction = Direction.UP;
-            } else {
-                _direction = Direction.DOWN;
-            }
+        if(xa < 0){
+            _direction = Direction.LEFT;
+        }
+        else if(xa > 0){
+            _direction = Direction.RIGHT;
+        } else if(ya < 0){
+            _direction = Direction.UP;
         } else {
-            _x -= xa;
-            _y -= ya;
+            _direction = Direction.DOWN;
+        }
+        if(_alive && canMove(_x + xa,_y + ya)){
+            _x += xa;
+            _y += ya;
         }
     }
 

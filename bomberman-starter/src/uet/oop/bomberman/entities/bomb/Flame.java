@@ -3,6 +3,7 @@ package uet.oop.bomberman.entities.bomb;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Direction;
+import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.level.Coordinates;
@@ -76,28 +77,28 @@ public class Flame extends Entity {
 		switch (_direction){
 			case RIGHT:
 				for(int i = xOrigin + 1; i <= xOrigin + _radius; i++){
-					if(_board.getEntityAt(i, yOrigin) instanceof Brick){
+					if(_board.getEntityAt(i, yOrigin) instanceof Wall){
 						return i - xOrigin - 1;
 					}
 				}
 				break;
 			case LEFT:
-				for(int i = xOrigin - 1; i >= xOrigin - _radius; i--){
-					if(_board.getEntityAt(i, yOrigin) instanceof Brick){
+				for(int i = xOrigin - 1; i > 0 && i >= xOrigin - _radius; i--){
+					if(_board.getEntityAt(i, yOrigin) instanceof Wall){
 						return xOrigin - 1 - i;
 					}
 				}
 				break;
 			case DOWN:
 				for(int i = yOrigin + 1; i <= yOrigin + _radius; i++){
-					if(_board.getEntityAt(xOrigin, i) instanceof Brick){
+					if(_board.getEntityAt(xOrigin, i) instanceof Wall){
 						return i - yOrigin - 1;
 					}
 				}
 				break;
 			case UP:
-				for(int i = yOrigin - 1; i >= yOrigin - _radius; i--){
-					if(_board.getEntityAt(xOrigin, i) instanceof Brick){
+				for(int i = yOrigin - 1; i > 0 && i >= yOrigin - _radius; i--){
+					if(_board.getEntityAt(xOrigin, i) instanceof Wall){
 						return yOrigin - 1 - i;
 					}
 				}

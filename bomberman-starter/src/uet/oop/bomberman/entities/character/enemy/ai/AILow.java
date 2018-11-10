@@ -11,7 +11,7 @@ public class AILow extends AI {
 		int randomDirection = random.nextInt(4);
 		switch (randomDirection){
 			case 0:
-				return Direction.UP;
+				return Direction.UP ;
 			case 1:
 				return Direction.RIGHT;
 			case 2:
