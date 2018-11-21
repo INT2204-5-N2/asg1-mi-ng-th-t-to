@@ -5,13 +5,11 @@ import java.awt.geom.Rectangle2D;
 
 public abstract class Enemy extends MovableObject{
     public abstract Status generateMove();
-    //viết nốt hàm kill
-    //cập nhật ảnh lên
-    //nhắc viết todo
     @Override
     public void kill() {
         this.status=Status.DEAD;
-        gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
+        this.render();
+        //gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
     }
     @Override
     public boolean checkCollideCharacter(MovableObject movableObject) {
