@@ -11,7 +11,7 @@ public abstract class MovableObject extends GameObject {
     protected int indexOfFrame = 0;
     public abstract void kill();
 
-    public abstract boolean checkCollideCharacter();
+    public abstract boolean checkCollideCharacter(MovableObject other);
 
     public void move(int addX, int addY){
         if(canMove(x + addX, y + addY)){

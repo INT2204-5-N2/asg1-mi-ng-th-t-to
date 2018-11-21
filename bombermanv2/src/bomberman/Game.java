@@ -13,7 +13,7 @@ public class Game {
     private static Game instance;
     private int width, heigh;
     private Game(Stage primaryStage){
-        goManager = new GameObjectManager();
+        goManager = new GameObjectManager(width,heigh);
         gameScene = new GameScene(goManager);
         Group root = new Group();
         root.getChildren().add(gameScene);
