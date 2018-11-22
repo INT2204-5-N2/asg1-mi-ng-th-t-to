@@ -3,10 +3,9 @@ package bomberman.Entity;
 import javafx.scene.image.Image;
 
 public class Wall extends FixedObject {
-    private Image img;
+    private static Image img = new Image(Wall.class.getResource("/sprite/wall.png").toExternalForm());
     public Wall(int xInGrid, int yInGrid) {
         super(xInGrid, yInGrid);
-        img = new Image(getClass().getResource("/sprite/wall.png").toExternalForm());
     }
 
     @Override

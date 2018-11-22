@@ -5,6 +5,9 @@ import java.awt.geom.Rectangle2D;
 
 public abstract class Enemy extends MovableObject{
     public abstract Status generateMove();
+    public Enemy(int posX, int posY){
+        //TODO: set các giá trị (tham khảo bomber)
+    }
     @Override
     public void kill() {
         this.status=Status.DEAD;
@@ -29,7 +32,7 @@ public abstract class Enemy extends MovableObject{
             indexOfFrame = 0;
             status = newStatus;
         }
-        checkCollideCharacter();
+       // checkCollideCharacter();
         render();
     }
 }

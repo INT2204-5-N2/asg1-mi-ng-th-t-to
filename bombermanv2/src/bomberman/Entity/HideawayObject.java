@@ -1,10 +1,10 @@
 package bomberman.Entity;
 
-public abstract class HideableObject extends FixedObject{
+public abstract class HideawayObject extends FixedObject{
     private boolean isHiding = true;
     private Brick hidingBrick;
 
-    public HideableObject(int xInGrid, int yInGrid) {
+    public HideawayObject(int xInGrid, int yInGrid) {
         super(xInGrid, yInGrid);
         this.hidingBrick = new Brick(xInGrid, yInGrid);
     }

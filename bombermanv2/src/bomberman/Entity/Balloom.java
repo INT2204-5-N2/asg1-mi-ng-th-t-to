@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class Balloom extends Enemy {
     public Balloom(int posX, int posY){
-        //TODO: khởi tạo các giá trị
+        super(posX, posY);
+        //TODO: load ảnh
     }
     @Override
     public Status generateMove() {

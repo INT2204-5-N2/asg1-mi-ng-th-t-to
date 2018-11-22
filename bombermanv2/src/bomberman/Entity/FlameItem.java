@@ -2,7 +2,7 @@ package bomberman.Entity;
 
 import javafx.scene.image.Image;
 
-public class FlameItem extends HideableObject {
+public class FlameItem extends HideawayObject {
     private static Image sprite;
     static {
         sprite = new Image(FlameItem.class.getResource("/sprite/powerup_flames.png").toExternalForm());
