@@ -29,9 +29,9 @@ public class Bomber extends MovableObject {
     public boolean checkCollideCharacter(MovableObject other) {
         return false;
     }
+    
 
     public void placeBomb(int posX, int posY){
-
     }
     public void handleKeyEvent(KeyEvent event){
         switch (event.getCode()){
