@@ -1,10 +1,19 @@
 package bomberman.Entity;
 
+import javafx.scene.image.Image;
+
 import java.util.Random;
 
 public class Balloom extends Enemy {
     public Balloom(int posX, int posY){
         super(posX, posY);
+        for (Status d: Status.values()){
+            Image[] temp = new Image[3];
+            temp[0] = new Image(getClass().getResource("/sprite/balloom_" + d +"1.png").toExternalForm());
+            temp[1] = new Image(getClass().getResource("/sprite/balloom_" + d +"2.png").toExternalForm());
+            temp[2] = new Image(getClass().getResource("/sprite/balloom_" + d +"3.png").toExternalForm());
+            imageLists[d.getVal()] = temp;
+        }
         //TODO: load ảnh
     }
     @Override

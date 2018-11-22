@@ -1,12 +1,24 @@
 package bomberman.Entity;
 
+import bomberman.GameScene;
+import javafx.scene.image.Image;
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public abstract class Enemy extends MovableObject{
+    private final  int SPEED=1;
     public abstract Status generateMove();
     public Enemy(int posX, int posY){
         //TODO: set các giá trị (tham khảo bomber)
+        imageLists = new Image[5][];
+        x = posX;
+        y = posY;
+        width = GameScene.GAMETILE_SIZE;
+        heigh = GameScene.GAMETILE_SIZE;
+        speed = SPEED;
+        status = Status.GO_DOWN;
+        isMoving = false;
     }
     @Override
     public void kill() {
