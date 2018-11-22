@@ -8,7 +8,7 @@ public class Bomber extends MovableObject {
     private final static int SPEED = 1;
 
     public Bomber(int posX, int posY){
-        imageLists = new Image[5][];
+        imageLists = new Image[5][];//số trạng thái và số hình
         x = posX;
         y = posY;
         width = GameScene.GAMETILE_SIZE;
@@ -26,7 +26,7 @@ public class Bomber extends MovableObject {
     }
 
     @Override
-    public boolean checkCollideCharacter() {
+    public boolean checkCollideCharacter(MovableObject other) {
         return false;
     }
 

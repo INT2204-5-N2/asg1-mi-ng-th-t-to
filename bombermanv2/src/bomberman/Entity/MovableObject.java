@@ -12,7 +12,7 @@ public abstract class MovableObject extends GameObject {
 
     public abstract void kill();
 
-    public abstract boolean checkCollideCharacter();
+    public abstract boolean checkCollideCharacter(MovableObject other);
 
     public abstract void update();
 
