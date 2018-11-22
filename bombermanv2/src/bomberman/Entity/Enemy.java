@@ -11,7 +11,7 @@ public abstract class Enemy extends MovableObject{
     @Override
     public void kill() {
         this.status=Status.DEAD;
-        this.render();
+        this.update();
         //gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
     }
     @Override
@@ -33,6 +33,6 @@ public abstract class Enemy extends MovableObject{
             status = newStatus;
         }
        // checkCollideCharacter();
-        render();
+        super.update();
     }
 }

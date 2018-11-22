@@ -30,17 +30,10 @@ public class Bomb extends FixedObject{
             isExploded = true;
             indexOfSprite = 0;
         }
-        if(isExploded && indexOfSprite > 2){
+        gc.drawImage(sprites[isExploded ? 1: 0][indexOfSprite % 3], x, y, width, heigh);
+        if(isExploded && indexOfSprite >= 2){
             Game.getInstance().getGoManager().removeObject(this);
         }
     }
 
-    @Override
-    public void render() {
-        int status = 0;
-        if(isExploded){
-            status = 1;
-        }
-        gc.drawImage(sprites[status][indexOfSprite % 3], x, y, width, heigh);
-    }
 }

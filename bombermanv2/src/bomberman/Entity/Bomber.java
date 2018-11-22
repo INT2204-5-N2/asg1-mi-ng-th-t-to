@@ -66,10 +66,4 @@ public class Bomber extends MovableObject {
         indexOfFrame = 0;
     }
 
-    @Override
-    public void update() {
-        if(alive && isMoving){
-            indexOfFrame++;
-        }
-    }
 }

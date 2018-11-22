@@ -10,16 +10,12 @@ public abstract class HideawayObject extends FixedObject{
     }
     public abstract void show();
     @Override
-    public void render() {
+    public void update() {
         if (isHiding){
-            hidingBrick.render();
+            hidingBrick.update();
         } else {
             show();
         }
     }
 
-    @Override
-    public void update() {
-
-    }
 }

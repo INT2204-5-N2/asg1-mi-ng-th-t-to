@@ -7,12 +7,8 @@ public class Brick extends FixedObject{
     }
 
     @Override
-    public void render() {
-
-    }
-
-    @Override
     public void update() {
-
+        //TODO -h
     }
+
 }

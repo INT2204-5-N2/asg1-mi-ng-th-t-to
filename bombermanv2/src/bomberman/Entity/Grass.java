@@ -7,12 +7,8 @@ public class Grass extends FixedObject {
     }
 
     @Override
-    public void render() {
-
-    }
-
-    @Override
     public void update() {
-
+        //TODO: -h
     }
+
 }

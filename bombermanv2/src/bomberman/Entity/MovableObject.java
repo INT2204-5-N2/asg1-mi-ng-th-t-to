@@ -1,5 +1,6 @@
 package bomberman.Entity;
 
+import bomberman.Game;
 import javafx.scene.image.Image;
 
 public abstract class MovableObject extends GameObject {
@@ -14,8 +15,6 @@ public abstract class MovableObject extends GameObject {
 
     public abstract boolean checkCollideCharacter(MovableObject other);
 
-    public abstract void update();
-
     public void move(int addX, int addY){
         if(canMove(x + addX, y + addY)){
             x += addX;
@@ -24,8 +23,14 @@ public abstract class MovableObject extends GameObject {
     }
 
     @Override
-    public void render() {
+    public void update() {
+        if(!alive && indexOfFrame >= 2){
+            Game.getInstance().getGoManager().removeObject(this);
+        }
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
+        if(isMoving){
+            indexOfFrame++;
+        }
     }
 
     public boolean checkCollideFixedObject(int posX, int posY){

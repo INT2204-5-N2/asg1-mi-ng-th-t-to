@@ -24,12 +24,6 @@ public class Game {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
     }
-    public static Game createInstance(Stage primaryStage){
-        if(instance == null){
-            instance = new Game();
-        }
-        return instance;
-    }
 
     public static Game getInstance(){
         if(instance == null){

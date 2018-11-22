@@ -10,11 +10,6 @@ public class Wall extends FixedObject {
 
     @Override
     public void update() {
-
-    }
-
-    @Override
-    public void render() {
         gc.drawImage(img, x, y, width, heigh);
     }
 }
