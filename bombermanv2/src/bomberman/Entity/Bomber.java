@@ -65,4 +65,11 @@ public class Bomber extends MovableObject {
         status = Status.DEAD;
         indexOfFrame = 0;
     }
+
+    @Override
+    public void update() {
+        if(alive && isMoving){
+            indexOfFrame++;
+        }
+    }
 }

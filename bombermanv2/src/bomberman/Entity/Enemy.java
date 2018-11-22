@@ -17,4 +17,15 @@ public abstract class Enemy extends MovableObject{
     public boolean checkCollideCharacter() {
         return false;
     }
+
+    @Override
+    public void update() {
+        Status newStatus = generateMove();
+        if(newStatus != status){
+            indexOfFrame = 0;
+            status = newStatus;
+        }
+        checkCollideCharacter();
+        render();
+    }
 }

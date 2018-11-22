@@ -9,9 +9,12 @@ public abstract class MovableObject extends GameObject {
     protected boolean isMoving;
     protected Image[][] imageLists;
     protected int indexOfFrame = 0;
+
     public abstract void kill();
 
     public abstract boolean checkCollideCharacter();
+
+    public abstract void update();
 
     public void move(int addX, int addY){
         if(canMove(x + addX, y + addY)){

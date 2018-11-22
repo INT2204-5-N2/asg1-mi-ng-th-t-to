@@ -15,7 +15,7 @@ public class GameScene extends Canvas {
     }
     public void update(){
         for(int i = 0; i < goManager.getFixedObjectList().length; i++){
-            for(int j = 0; j < goManager.getFixedObjectList()[j].length; i++){
+            for(int j = 0; j < goManager.getFixedObjectList()[i].length; j++){
                 goManager.getFixedObjectList()[i][j].render();
             }
 

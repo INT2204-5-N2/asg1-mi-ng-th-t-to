@@ -9,7 +9,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Bomberman");
-        game = Game.getInstance(primaryStage);
+        game = Game.getInstance();
+        game.start(primaryStage);
         primaryStage.show();
         final long startNanoTime = System.nanoTime();
         new AnimationTimer()

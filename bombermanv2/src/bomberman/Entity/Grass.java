@@ -1,0 +1,18 @@
+package bomberman.Entity;
+
+public class Grass extends FixedObject {
+
+    public Grass(int xInGrid, int yInGrid) {
+        super(xInGrid, yInGrid);
+    }
+
+    @Override
+    public void render() {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+}

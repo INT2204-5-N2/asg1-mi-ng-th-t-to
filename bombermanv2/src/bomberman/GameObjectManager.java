@@ -12,6 +12,7 @@ public class GameObjectManager {
     public GameObjectManager(int width, int height){
         fixedObjectList = new FixedObject[height][width];
     }
+
     public ArrayList<MovableObject> getCharacters() {
         return characters;
     }
@@ -27,6 +28,12 @@ public class GameObjectManager {
         else {
             FixedObject fixedRef = (FixedObject) obj;
             fixedObjectList[fixedRef.getyInGrid()][fixedRef.getxInGrid()] = fixedRef;
+        }
+    }
+
+    public void removeObject(GameObject obj){
+        if(obj instanceof MovableObject){
+
         }
     }
 }
