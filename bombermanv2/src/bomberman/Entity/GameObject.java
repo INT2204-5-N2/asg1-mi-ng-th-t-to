@@ -8,7 +8,5 @@ public abstract class GameObject {
     protected int width;
     protected int heigh;
     protected GraphicsContext gc = Game.getInstance().getGameScene().getGraphicsContext2D();
-    public abstract void render();
     public abstract void update();
-
 }

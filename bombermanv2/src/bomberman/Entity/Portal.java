@@ -7,12 +7,8 @@ public class Portal extends FixedObject {
     }
 
     @Override
-    public void render() {
-
-    }
-
-    @Override
     public void update() {
-
+        //TODO: -h
     }
+
 }

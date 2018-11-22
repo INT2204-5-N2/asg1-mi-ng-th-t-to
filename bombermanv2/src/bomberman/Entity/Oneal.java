@@ -7,6 +7,7 @@ public class Oneal extends Enemy {
     }
     @Override
     public Status generateMove() {
-        return null;
+        //TODO: viết hàm sinh bước tiếp theo cho quái
+        return Status.GO_DOWN;
     }
 }
