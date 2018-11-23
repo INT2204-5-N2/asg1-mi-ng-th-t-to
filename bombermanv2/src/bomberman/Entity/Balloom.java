@@ -7,6 +7,7 @@ import java.util.Random;
 public class Balloom extends Enemy {
     public Balloom(int posX, int posY){
         super(posX, posY);
+        //TODO: load ảnh
         for (Status d: Status.values()){
             Image[] temp = new Image[3];
             temp[0] = new Image(getClass().getResource("/sprite/balloom_" + d +"1.png").toExternalForm());
@@ -14,7 +15,7 @@ public class Balloom extends Enemy {
             temp[2] = new Image(getClass().getResource("/sprite/balloom_" + d +"3.png").toExternalForm());
             imageLists[d.getVal()] = temp;
         }
-        //TODO: load ảnh
+
     }
     @Override
     public Status generateMove() {
