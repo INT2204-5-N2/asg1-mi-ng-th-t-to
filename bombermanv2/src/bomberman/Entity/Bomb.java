@@ -10,6 +10,7 @@ public class Bomb extends FixedObject{
     private boolean isExploded = false;
     private int indexOfSprite = 0;
     private long timeToExplode;
+    private int strength;
     static {
         sprites = new Image[2][3];
         for (int i = 0; i < 3; i++){
@@ -18,9 +19,10 @@ public class Bomb extends FixedObject{
         }
     }
 
-    public Bomb(int xInGrid, int yInGrid) {
+    public Bomb(int xInGrid, int yInGrid, int strength) {
         super(xInGrid, yInGrid);
         timeToExplode = System.currentTimeMillis() + TIME_ALIVE;
+        this.strength = strength;
     }
 
     @Override

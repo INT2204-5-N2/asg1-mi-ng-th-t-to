@@ -27,7 +27,7 @@ public abstract class Enemy extends MovableObject{
         //gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
     }
     @Override
-    public boolean checkCollideCharacter(MovableObject movableObject) {
+    public boolean processCollideWithOtherCharacter(MovableObject movableObject) {
         Rectangle2D recThis=new Rectangle(this.x,this.y,this.width,this.heigh);
         Rectangle2D recMovableObject=new Rectangle( movableObject.x,
                                                     movableObject.y,
@@ -44,13 +44,21 @@ public abstract class Enemy extends MovableObject{
             indexOfFrame = 0;
             status = newStatus;
         }
-       // checkCollideCharacter();
-        else if(status == Status.DEAD){
+       // processCollideWithOtherCharacter();
+        if(status == Status.DEAD){
             gc.drawImage(imageLists[4][0], x, y, width, heigh);
             Game.getInstance().getGoManager().removeObject(this);
         }
         else {
+            move(status);
             gc.drawImage(imageLists[status.getVal()][indexOfFrame], x, y, width, heigh);
         }
+    }
+
+    @Override
+    public boolean checkCollideWithFixedObject(int posX, int posY) {
+        //TODO: xử lý va chạm với HideawayObject - mặc định không cho đi qua
+        //TODO: nhớ gọi super cho các trường hợp còn lại
+        return super.checkCollideWithFixedObject(posX, posY);
     }
 }

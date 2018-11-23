@@ -12,4 +12,10 @@ public class Portal extends HideawayObject {
     public void show() {
         gc.drawImage(img, x, y, width, heigh);
     }
+
+    @Override
+    public boolean collide() {
+        //TODO: xử lý va chạm với bomber
+        return false;
+    }
 }

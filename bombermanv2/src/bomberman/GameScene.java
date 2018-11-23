@@ -3,6 +3,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.Screen;
 
 public class GameScene extends Canvas {
+    //TODO: tính toán lại GAMETILE_SIZE và with, heigh của cửa sổ
     public static final int GAMETILE_SIZE = 16;
     private GameObjectManager goManager;
     public GameScene(GameObjectManager gameObjectManager){

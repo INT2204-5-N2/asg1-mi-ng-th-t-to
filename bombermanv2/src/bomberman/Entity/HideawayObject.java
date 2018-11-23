@@ -9,9 +9,7 @@ public abstract class HideawayObject extends FixedObject{
         this.hidingBrick = new Brick(xInGrid, yInGrid);
     }
     public abstract void show();
-    public boolean canPick(){
-        return !isHiding;
-    }
+    public abstract boolean collide();
     @Override
     public void update() {
         if (isHiding){

@@ -27,30 +27,32 @@ public class Bomber extends MovableObject {
     }
 
     @Override
-    public boolean checkCollideCharacter(MovableObject other) {
+    public boolean processCollideWithOtherCharacter(MovableObject other) {
         return false;
     }
     
 
     public void placeBomb(int posX, int posY){
+        //TODO: tạo bomb và đặt vào vị trí
+        //TODO: lưu ý convert từ tọa độ pixel sang tọa độ lưới
     }
     public void handleKeyEvent(KeyEvent event){
         switch (event.getCode()){
             case RIGHT:
                 status = Status.GO_RIGHT;
-                move(1, 0);
+                move(status);
                 break;
             case LEFT:
                 status = Status.GO_LEFT;
-                move(-1, 0);
+                move(status);
                 break;
             case DOWN:
                 status = Status.GO_DOWN;
-                move(0, 1);
+                move(status);
                 break;
             case UP:
                 status = Status.GO_UP;
-                move(0, -1);
+                move(status);
                 break;
             case SPACE:
                 placeBomb(x, y);
@@ -75,5 +77,13 @@ public class Bomber extends MovableObject {
         if(isMoving){
             indexOfFrame++;
         }
+    }
+
+    @Override
+    public boolean checkCollideWithFixedObject(int posX, int posY) {
+        //TODO: xử lý va chạm với HideawayObject bằng cách gọi hàm collide
+        // TODO: (hàm này trả về true nếu brick bị phá hủy, bomber có thể ăn các item hoặc đi vào portal)
+        //TODO: nhớ gọi super cho các trường hợp còn lại
+        return super.checkCollideWithFixedObject(posX, posY);
     }
 }

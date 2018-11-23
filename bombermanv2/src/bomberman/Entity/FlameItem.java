@@ -16,4 +16,10 @@ public class FlameItem extends HideawayObject {
         gc.drawImage(sprite, x, y, width, heigh);
     }
 
+    @Override
+    public boolean collide() {
+        //TODO: xử lý va chạm với bomber
+        return false;
+    }
+
 }
