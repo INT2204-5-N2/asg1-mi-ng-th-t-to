@@ -52,7 +52,7 @@ public class LevelLoader {
                         goManager.addObject(new Grass(x, y));
                         break;
                     case '1':
-                        goManager.addObject(new Balloom(x * GameScene.GAMETILE_SIZE, y * GameScene.GAMETILE_SIZE));
+                        goManager.addObject(new Balloon(x * GameScene.GAMETILE_SIZE, y * GameScene.GAMETILE_SIZE));
                         goManager.addObject(new Grass(x, y));
                         break;
                     case '2':

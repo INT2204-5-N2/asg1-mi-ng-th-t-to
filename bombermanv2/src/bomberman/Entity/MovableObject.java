@@ -22,18 +22,9 @@ public abstract class MovableObject extends GameObject {
         }
     }
 
-    @Override
-    public void update() {
-        if(!alive && indexOfFrame >= 2){
-            Game.getInstance().getGoManager().removeObject(this);
-        }
-        gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
-        if(isMoving){
-            indexOfFrame++;
-        }
-    }
-
     public boolean checkCollideFixedObject(int posX, int posY){
+        //TODO: lấy đối tượng trong mảng FIXEDOBJECT và xử lý colide
+        //TODO: nếu là HideawayObject thì gọi hàm collide
         return false;
     }
     public boolean canMove(int newX, int newY){

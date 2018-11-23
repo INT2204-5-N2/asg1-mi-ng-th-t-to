@@ -9,6 +9,9 @@ public abstract class HideawayObject extends FixedObject{
         this.hidingBrick = new Brick(xInGrid, yInGrid);
     }
     public abstract void show();
+    public boolean canPick(){
+        return !isHiding;
+    }
     @Override
     public void update() {
         if (isHiding){

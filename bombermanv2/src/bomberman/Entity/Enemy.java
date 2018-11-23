@@ -1,5 +1,6 @@
 package bomberman.Entity;
 
+import bomberman.Game;
 import bomberman.GameScene;
 import javafx.scene.image.Image;
 
@@ -10,7 +11,6 @@ public abstract class Enemy extends MovableObject{
     private final  int SPEED=1;
     public abstract Status generateMove();
     public Enemy(int posX, int posY){
-        //TODO: set các giá trị (tham khảo bomber)
         imageLists = new Image[5][];
         x = posX;
         y = posY;
@@ -40,11 +40,17 @@ public abstract class Enemy extends MovableObject{
     @Override
     public void update() {
         Status newStatus = generateMove();
-        if(newStatus != status){
+        if(status != Status.DEAD && newStatus != status){
             indexOfFrame = 0;
             status = newStatus;
         }
        // checkCollideCharacter();
-        super.update();
+        else if(status == Status.DEAD){
+            gc.drawImage(imageLists[4][0], x, y, width, heigh);
+            Game.getInstance().getGoManager().removeObject(this);
+        }
+        else {
+            gc.drawImage(imageLists[status.getVal()][indexOfFrame], x, y, width, heigh);
+        }
     }
 }

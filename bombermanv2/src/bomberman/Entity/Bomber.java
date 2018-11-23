@@ -1,5 +1,6 @@
 package bomberman.Entity;
 
+import bomberman.Game;
 import bomberman.GameScene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -65,5 +66,14 @@ public class Bomber extends MovableObject {
         status = Status.DEAD;
         indexOfFrame = 0;
     }
-
+    @Override
+    public void update() {
+        if(!alive && indexOfFrame >= 2){
+            Game.getInstance().getGoManager().removeObject(this);
+        }
+        gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
+        if(isMoving){
+            indexOfFrame++;
+        }
+    }
 }

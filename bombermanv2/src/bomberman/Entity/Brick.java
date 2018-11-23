@@ -6,7 +6,6 @@ public class Brick extends FixedObject{
     private static Image img = new Image(Wall.class.getResource("/sprite/brick.png").toExternalForm());
     public Brick(int xInGrid, int yInGrid) {
         super(xInGrid, yInGrid);
-        //TODO: load ảnh
     }
 
     @Override
