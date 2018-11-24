@@ -21,6 +21,7 @@ public class BombItem extends HideawayObject {
     @Override
     public boolean collide() {
         //TODO: xử lý va chạm với bomber
+
         return false;
     }
 }

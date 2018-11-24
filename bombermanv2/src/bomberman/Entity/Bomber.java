@@ -35,6 +35,8 @@ public class Bomber extends MovableObject {
     public void placeBomb(int posX, int posY){
         //TODO: tạo bomb và đặt vào vị trí
         //TODO: lưu ý convert từ tọa độ pixel sang tọa độ lưới
+        Bomb bomb=new Bomb(posX,posY,1);
+
     }
     public void handleKeyEvent(KeyEvent event){
         switch (event.getCode()){
