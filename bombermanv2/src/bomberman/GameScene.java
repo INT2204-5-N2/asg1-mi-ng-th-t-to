@@ -4,7 +4,6 @@ import javafx.stage.Screen;
 
 public class GameScene extends Canvas {
     //TODO: tính toán lại GAMETILE_SIZE và with, heigh của cửa sổ
-    //DONE: có chỉnhsửa file level1
     public static final int GAMETILE_SIZE = (int) Screen.getPrimary().getVisualBounds().getWidth()/31;
     private GameObjectManager goManager;
     public GameScene(GameObjectManager gameObjectManager){
@@ -12,6 +11,7 @@ public class GameScene extends Canvas {
         goManager = gameObjectManager;
     }
     public void update(){
+        getGraphicsContext2D().clearRect(0, 0, getWidth(), getHeight());
         for(int i = 0; i < goManager.getFixedObjectList().length; i++){
             for(int j = 0; j < goManager.getFixedObjectList()[i].length; j++){
                 goManager.getFixedObjectList()[i][j].update();

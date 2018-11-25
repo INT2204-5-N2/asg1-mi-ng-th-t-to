@@ -1,11 +1,11 @@
 package bomberman.Entity;
 
 import bomberman.Game;
+import bomberman.GameObjectManager;
 import bomberman.GameScene;
 import javafx.scene.image.Image;
 
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 public abstract class MovableObject extends GameObject {
     //TODO: thay ảnh của nhân vật (các ảnh hiện tại in lên có nền hồng)
@@ -21,6 +21,12 @@ public abstract class MovableObject extends GameObject {
     public abstract boolean processCollideWithOtherCharacter(MovableObject other);
 
     public void move(Status status){
+        if(status == this.status){
+            indexOfFrame++;
+        } else {
+            indexOfFrame = 0;
+            this.status = status;
+        }
         int addX = 0, addY = 0;
         switch (status){
             case GO_UP:
@@ -33,7 +39,7 @@ public abstract class MovableObject extends GameObject {
                 addX = -1;
                 break;
             case GO_RIGHT:
-                addY = 1;
+                addX = 1;
                 break;
             default:
                 break;
@@ -48,22 +54,20 @@ public abstract class MovableObject extends GameObject {
         //TODO: lấy đối tượng trong mảng FIXEDOBJECT và xử lý va cham
         //TODO: xử lý các trường hợp còn lại (va chạm với bomb, wall, grass, brick)
         //TODO: nếu là HideawayObject thì xử lý riêng ở từng đối tượng
-        Rectangle2D recThis=new Rectangle(this.x,this.y,this.width,this.heigh);
-        Rectangle2D recHideawayObject=new Rectangle(posX,posY,this.width,this.heigh);
-        FixedObject fixedObject=new FixedObject(posX,posY) {
-            @Override
-            public void update() {
-
+        GameObjectManager manager = Game.getInstance().getGoManager();
+        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(x, y, width, heigh);
+        for (int i = 0; i < collideObjs.size(); i++){
+            if(collideObjs.get(i) instanceof  Wall || collideObjs.get(i) instanceof  Brick){
+                return false;
             }
-        };
-        if(((Rectangle) recThis).intersects(recHideawayObject))
-        {
-            if((fixedObject instanceof  Grass)) return false;
-            return true;
+            if(collideObjs.get(i) instanceof Flame){
+                kill();
+                return true;
+            }
         }
-        return false;
+        return true;
     }
     public boolean canMove(int newX, int newY){
-        return !checkCollideWithFixedObject(newX, newY);
+        return checkCollideWithFixedObject(newX, newY);
     }
 }

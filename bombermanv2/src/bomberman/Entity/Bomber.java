@@ -1,9 +1,12 @@
 package bomberman.Entity;
 
 import bomberman.Game;
+import bomberman.GameObjectManager;
 import bomberman.GameScene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+
+import java.util.ArrayList;
 
 public class Bomber extends MovableObject {
     private final static int SPEED = 1;
@@ -39,29 +42,26 @@ public class Bomber extends MovableObject {
 
     }
     public void handleKeyEvent(KeyEvent event){
+        if(event == null){
+            isMoving = false;
+            indexOfFrame = 0;
+            return;
+        }
         switch (event.getCode()){
             case RIGHT:
-                status = Status.GO_RIGHT;
-                move(status);
+                move(Status.GO_RIGHT);
                 break;
             case LEFT:
-                status = Status.GO_LEFT;
-                move(status);
+                move(Status.GO_LEFT);
                 break;
             case DOWN:
-                status = Status.GO_DOWN;
-                move(status);
+                move(Status.GO_DOWN);
                 break;
             case UP:
-                status = Status.GO_UP;
-                move(status);
+                move(Status.GO_UP);
                 break;
             case SPACE:
                 placeBomb(x, y);
-            default:
-                isMoving = false;
-                indexOfFrame = 0;
-                break;
         }
     }
 
@@ -76,9 +76,6 @@ public class Bomber extends MovableObject {
             Game.getInstance().getGoManager().removeObject(this);
         }
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
-        if(isMoving){
-            indexOfFrame++;
-        }
     }
 
     @Override
@@ -86,6 +83,13 @@ public class Bomber extends MovableObject {
         //TODO: xử lý va chạm với HideawayObject bằng cách gọi hàm collide
         // TODO: (hàm này trả về true nếu brick bị phá hủy, bomber có thể ăn các item hoặc đi vào portal)
         //TODO: nhớ gọi super cho các trường hợp còn lại
+        GameObjectManager manager = Game.getInstance().getGoManager();
+        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(x, y, width, heigh);
+        for (int i = 0; i < collideObjs.size(); i++){
+            if(collideObjs.get(i) instanceof HideawayObject){
+                return ((HideawayObject) collideObjs.get(i)).collide();
+            }
+        }
         return super.checkCollideWithFixedObject(posX, posY);
     }
 }

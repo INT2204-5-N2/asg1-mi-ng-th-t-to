@@ -1,11 +1,13 @@
 package bomberman.Entity;
 
 import bomberman.Game;
+import bomberman.GameObjectManager;
 import bomberman.GameScene;
 import javafx.scene.image.Image;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 public abstract class Enemy extends MovableObject{
     private final  int SPEED=1;
@@ -40,18 +42,18 @@ public abstract class Enemy extends MovableObject{
     @Override
     public void update() {
         Status newStatus = generateMove();
-        if(status != Status.DEAD && newStatus != status){
+        /*if(status != Status.DEAD && newStatus != status){
             indexOfFrame = 0;
             status = newStatus;
-        }
+        }*/
        // processCollideWithOtherCharacter();
         if(status == Status.DEAD){
             gc.drawImage(imageLists[4][0], x, y, width, heigh);
             Game.getInstance().getGoManager().removeObject(this);
         }
         else {
-            move(status);
-            gc.drawImage(imageLists[status.getVal()][indexOfFrame], x, y, width, heigh);
+            move(newStatus);
+            gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
         }
     }
 
@@ -59,6 +61,13 @@ public abstract class Enemy extends MovableObject{
     public boolean checkCollideWithFixedObject(int posX, int posY) {
         //TODO: xử lý va chạm với HideawayObject - mặc định không cho đi qua
         //TODO: nhớ gọi super cho các trường hợp còn lại
+        GameObjectManager manager = Game.getInstance().getGoManager();
+        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(x, y, width, heigh);
+        for (int i = 0; i < collideObjs.size(); i++){
+            if(collideObjs.get(i) instanceof HideawayObject){
+                return false;
+            }
+        }
         return super.checkCollideWithFixedObject(posX, posY);
     }
 }

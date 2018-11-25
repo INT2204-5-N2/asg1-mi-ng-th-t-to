@@ -5,6 +5,7 @@ production
 out
 .iml
 *.iml
+*.xml
 .idea/*
 target/*
 production/*
