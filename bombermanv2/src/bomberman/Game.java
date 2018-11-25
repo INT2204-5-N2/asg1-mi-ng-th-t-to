@@ -1,7 +1,9 @@
 package bomberman;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class Game {
@@ -17,8 +19,21 @@ public class Game {
         levelLoader = new LevelLoader();
         levelLoader.loadLevelInfo(1);
         goManager = new GameObjectManager(width, heigh);
-        gameScene = new GameScene(goManager);
+        gameScene = new GameScene(goManager, width, heigh);
         levelLoader.loadGameObject(goManager);
+        gameScene.setFocusTraversable(true);
+        gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                goManager.getBomber().handleKeyEvent(event);
+            }
+        });
+        gameScene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                goManager.getBomber().handleKeyEvent(null);
+            }
+        });
         Group root = new Group();
         root.getChildren().add(gameScene);
         Scene scene = new Scene(root);
