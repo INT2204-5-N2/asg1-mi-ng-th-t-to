@@ -11,6 +11,7 @@ public class Brick extends FixedObject{
     @Override
     public void update() {
         //TODO -h
+        //DONE
         gc.drawImage(img, x, y, width, heigh);
     }
 
