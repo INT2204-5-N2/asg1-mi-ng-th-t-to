@@ -10,7 +10,7 @@ public class Grass extends FixedObject {
 
     @Override
     public void update() {
-        //TODO: -h
+        //TODO: DONE -h
         gc.drawImage(img, x, y, width, heigh);
     }
 

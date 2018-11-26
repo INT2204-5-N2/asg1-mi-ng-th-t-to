@@ -53,9 +53,9 @@ public abstract class MovableObject extends GameObject {
     }
 
     public boolean checkCollideWithFixedObject(int posX, int posY){
-        //TODO: lấy đối tượng trong mảng FIXEDOBJECT và xử lý va cham
-        //TODO: xử lý các trường hợp còn lại (va chạm với bomb, wall, grass, brick)
-        //TODO: nếu là HideawayObject thì xử lý riêng ở từng đối tượng
+        //TODO: DONE Lấy đối tượng trong mảng FIXEDOBJECT và xử lý va cham
+        //TODO: DONE xử lý các trường hợp còn lại (va chạm với bomb, wall, grass, brick)
+        //TODO: DONE nếu là HideawayObject thì xử lý riêng ở từng đối tượng
         GameObjectManager manager = Game.getInstance().getGoManager();
         ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(x, y, width, heigh);
         for (int i = 0; i < collideObjs.size(); i++){

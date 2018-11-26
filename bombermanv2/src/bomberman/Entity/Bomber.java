@@ -17,8 +17,8 @@ public class Bomber extends MovableObject {
         imageLists = new Image[5][];//số trạng thái và số hình
         x = posX;
         y = posY;
-        width = GameScene.GAMETILE_SIZE;
-        heigh = GameScene.GAMETILE_SIZE;
+        width = GameScene.GAMETILE_SIZE-10;
+        heigh = GameScene.GAMETILE_SIZE-10;
         speed = SPEED;
         status = Status.GO_DOWN;
         isMoving = false;
@@ -40,8 +40,8 @@ public class Bomber extends MovableObject {
     
 
     public void placeBomb(int posXPixel, int posYPixel){
-        //TODO: tạo bomb và đặt vào vị trí
-        //TODO: lưu ý convert từ tọa độ pixel sang tọa độ lưới
+        //TODO: DONE tạo bomb và đặt vào vị trí
+        //TODO: DONE lưu ý convert từ tọa độ pixel sang tọa độ lưới
         Bomb bomb=new Bomb((posXPixel+this.width)/GameScene.GAMETILE_SIZE,(posYPixel+this.heigh)/GameScene.GAMETILE_SIZE,Bomber.STRENGTH);
 
     }
@@ -84,9 +84,9 @@ public class Bomber extends MovableObject {
 
     @Override
     public boolean checkCollideWithFixedObject(int posX, int posY) {
-        //TODO: xử lý va chạm với HideawayObject bằng cách gọi hàm collide
-        // TODO: (hàm này trả về true nếu brick bị phá hủy, bomber có thể ăn các item hoặc đi vào portal)
-        //TODO: nhớ gọi super cho các trường hợp còn lại
+        //TODO: DONE xử lý va chạm với HideawayObject bằng cách gọi hàm collide
+        //TODO:DONE(hàm này trả về true nếu brick bị phá hủy, bomber có thể ăn các item hoặc đi vào portal)
+        //TODO: DONE nhớ gọi super cho các trường hợp còn lại
         GameObjectManager manager = Game.getInstance().getGoManager();
         ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(x, y, width, heigh);
         for (int i = 0; i < collideObjs.size(); i++){
