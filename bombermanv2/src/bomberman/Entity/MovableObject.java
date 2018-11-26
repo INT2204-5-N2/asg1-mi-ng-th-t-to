@@ -44,6 +44,8 @@ public abstract class MovableObject extends GameObject {
             default:
                 break;
         }
+        addX *= speed;
+        addY *= speed;
         if(canMove(x + addX, y + addY)){
             x += addX;
             y += addY;
@@ -70,4 +72,5 @@ public abstract class MovableObject extends GameObject {
     public boolean canMove(int newX, int newY){
         return checkCollideWithFixedObject(newX, newY);
     }
+    
 }

@@ -19,7 +19,7 @@ public class Game {
         levelLoader = new LevelLoader();
         levelLoader.loadLevelInfo(1);
         goManager = new GameObjectManager(width, heigh);
-        gameScene = new GameScene(goManager, width, heigh);
+        gameScene = new GameScene(goManager);
         levelLoader.loadGameObject(goManager);
         gameScene.setFocusTraversable(true);
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
