@@ -72,5 +72,5 @@ public abstract class MovableObject extends GameObject {
     public boolean canMove(int newX, int newY){
         return checkCollideWithFixedObject(newX, newY);
     }
-    
+
 }

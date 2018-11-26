@@ -2,6 +2,7 @@ package bomberman.Entity;
 
 
 import bomberman.Game;
+import bomberman.GameObjectManager;
 import javafx.scene.image.Image;
 
 public class Bomb extends FixedObject{
@@ -38,4 +39,14 @@ public class Bomb extends FixedObject{
         }
     }
 
+    public void explode(){
+        //create flame
+        for (int i = 1; i < strength; i++){
+            GameObjectManager manager = Game.getInstance().getGoManager();
+            manager.addObject(new FlameItem(getxInGrid() - 1, getyInGrid()));
+            manager.addObject(new FlameItem(getxInGrid() + 1, getyInGrid()));
+            manager.addObject(new FlameItem(getxInGrid(), getyInGrid() - 1));
+            manager.addObject(new FlameItem(getxInGrid(), getyInGrid() + 1));
+        }
+    }
 }
