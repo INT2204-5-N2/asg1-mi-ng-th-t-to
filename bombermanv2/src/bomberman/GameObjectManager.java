@@ -5,6 +5,8 @@ import bomberman.Entity.*;
 import java.util.ArrayList;
 
 public class GameObjectManager {
+
+    private int numOfEnemy;
     private ArrayList<MovableObject> characters = new ArrayList<MovableObject>();
     private FixedObject[][] fixedObjectList;
     private Bomber bomber;
@@ -53,5 +55,13 @@ public class GameObjectManager {
 
     public Bomber getBomber() {
         return bomber;
+    }
+    public int getNumOfEnemy()
+    {
+        return numOfEnemy;
+    }
+    public void setNumOfEnemy(int numOfEnemy)
+    {
+        this.numOfEnemy=numOfEnemy;
     }
 }

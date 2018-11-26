@@ -2,6 +2,9 @@ package bomberman.Entity;
 
 import javafx.scene.image.Image;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
 public class BombItem extends HideawayObject {
 
     private static Image sprite;
@@ -19,9 +22,11 @@ public class BombItem extends HideawayObject {
     }
 
     @Override
-    public boolean collide() {
+    public boolean collide(Bomber bomber) {
         //TODO: xử lý va chạm với bomber
-
-        return false;
+        if (!isHiding) {
+            bomber.setMaxBomb(3);
+            return true;
+        } else return false;
     }
 }

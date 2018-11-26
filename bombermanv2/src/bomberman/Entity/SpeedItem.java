@@ -18,8 +18,16 @@ public class SpeedItem extends HideawayObject {
     }
 
     @Override
-    public boolean collide() {
+    public boolean collide(Bomber bomber) {
         //TODO: xử lý va chạm với bomber
-        return false;
+        //TODO: đầu tiên kiểm tra cái isHiding, nếu true nghĩa là vẫn còn cái che ở trên => return false
+        //TODO: ngược lại, bomber được thưởng (thưởng gì tuy loại item), muốn lấy bomber thì có thể truyền nó vào tham số
+        //TODO: sau đó return true
+        if(this.isHiding) return false;
+        else
+        {
+            bomber.speed*=2;
+            return true;
+        }
     }
 }
