@@ -25,6 +25,7 @@ public class Balloon extends Enemy {
     }
     @Override
     public Status generateMove() {
+        //TODO: sửa lại hàm (vì random nên nó toàn đứng 1 một chỗ)
         Random random=new Random();
         int move=random.nextInt(4);
         switch (move)

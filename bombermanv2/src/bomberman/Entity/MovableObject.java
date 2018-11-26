@@ -21,43 +21,43 @@ public abstract class MovableObject extends GameObject {
     public abstract boolean processCollideWithOtherCharacter(MovableObject other);
 
     public void move(Status status){
-        if(status == this.status){
-            indexOfFrame++;
-        } else {
+        if(status != this.status) {
             indexOfFrame = 0;
             this.status = status;
         }
-        int addX = 0, addY = 0;
+        int newX = 0, newY = 0;
         switch (status){
             case GO_UP:
-                addY = -1;
+                newY = -speed;
                 break;
             case GO_DOWN:
-                addY = 1;
+                newY = speed;
                 break;
             case GO_LEFT:
-                addX = -1;
+                newX = -speed;
                 break;
             case GO_RIGHT:
-                addX = 1;
+                newX = speed;
                 break;
             default:
                 break;
         }
-        addX *= speed;
-        addY *= speed;
-        if(canMove(x + addX, y + addY)){
-            x += addX;
-            y += addY;
+        if(newX == 0){
+            newX = centerlizeCoordinate(x);
+            newY += y;
+        } else {
+            newY = centerlizeCoordinate(y);
+            newX += x;
+        }
+        if(canMove(newX, newY)){
+            x = newX;
+            y = newY;
         }
     }
 
     public boolean checkCollideWithFixedObject(int posX, int posY){
-        //TODO: DONE Lấy đối tượng trong mảng FIXEDOBJECT và xử lý va cham
-        //TODO: DONE xử lý các trường hợp còn lại (va chạm với bomb, wall, grass, brick)
-        //TODO: DONE nếu là HideawayObject thì xử lý riêng ở từng đối tượng
         GameObjectManager manager = Game.getInstance().getGoManager();
-        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(x, y, width, heigh);
+        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width, heigh);
         for (int i = 0; i < collideObjs.size(); i++){
             if(collideObjs.get(i) instanceof  Wall || collideObjs.get(i) instanceof  Brick){
                 return false;
@@ -73,4 +73,7 @@ public abstract class MovableObject extends GameObject {
         return checkCollideWithFixedObject(newX, newY);
     }
 
+    private int centerlizeCoordinate(int point){
+        return (point + GameScene.GAMETILE_SIZE / 2) / GameScene.GAMETILE_SIZE * GameScene.GAMETILE_SIZE;
+    }
 }

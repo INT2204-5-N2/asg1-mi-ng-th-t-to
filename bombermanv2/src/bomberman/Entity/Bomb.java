@@ -7,23 +7,22 @@ import javafx.scene.image.Image;
 
 public class Bomb extends FixedObject{
     private static final int TIME_ALIVE = 2000;
-    private static Image[][] sprites;
+    private Image[][] sprites;
     private boolean isExploded = false;
     private int indexOfSprite = 0;
     private long timeToExplode;
     private int strength;
-    static {
-        sprites = new Image[2][3];
-        for (int i = 0; i < 3; i++){
-            sprites[0][i] = new Image(Bomb.class.getResource("/sprite/bomb_" + i +".png").toExternalForm());
-            sprites[1][i] = new Image(Bomb.class.getResource("/sprite/bomb_exploded_" + i +".png").toExternalForm());
-        }
-    }
 
     public Bomb(int xInGrid, int yInGrid, int strength) {
         super(xInGrid, yInGrid);
         timeToExplode = System.currentTimeMillis() + TIME_ALIVE;
         this.strength = strength;
+        sprites = new Image[2][3];
+        for (int i = 0; i < 3; i++){
+            sprites[0][i] = new Image(Bomb.class.getResource("/sprite/bomb_" + i +".png").toExternalForm());
+            sprites[1][i] = new Image(Bomb.class.getResource("/sprite/bomb_exploded" + i +".png").toExternalForm());
+        }
+        Game.getInstance().getGoManager().addObject(this);
     }
 
     @Override

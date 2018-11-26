@@ -12,11 +12,12 @@ public class Main extends Application {
         game = Game.getInstance();
         game.start(primaryStage);
         primaryStage.show();
-        final long startNanoTime = System.nanoTime();
         new AnimationTimer()
         {
+            private long lastUpdate = 0 ;
             public void handle(long currentNanoTime)
             {
+                if(currentNanoTime - lastUpdate >= 28000)
                 game.update();
             }
         }.start();

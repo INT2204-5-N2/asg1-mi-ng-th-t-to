@@ -18,10 +18,9 @@ public class FlameItem extends HideawayObject {
 
     @Override
     public boolean collide(Bomber bomber) {
-        //TODO: DONE xử lý va chạm với bomber
         if(!isHiding)
         {
-            bomber.setStrength(bomber.getStrength()*2);
+            bomber.setStrength(bomber.getStrength() + 1);
             return true;
         }
         return false;

@@ -36,9 +36,9 @@ public class GameObjectManager {
     }
     public ArrayList<FixedObject> getFixedObjectInRect(int x, int y, int width, int heigh){
         int xInGridLeft, xInGridRight, yInGridUp, yInGridDown;
-        xInGridLeft = (x + 1) / GameScene.GAMETILE_SIZE;
+        xInGridLeft = x / GameScene.GAMETILE_SIZE;
         xInGridRight = (x + width - 1) / GameScene.GAMETILE_SIZE;
-        yInGridUp = (y + 1) / GameScene.GAMETILE_SIZE;
+        yInGridUp = y / GameScene.GAMETILE_SIZE;
         yInGridDown = (y + heigh - 1) / GameScene.GAMETILE_SIZE;
         ArrayList<FixedObject> result = new ArrayList<>();
         result.add(fixedObjectList[yInGridUp][xInGridLeft]);

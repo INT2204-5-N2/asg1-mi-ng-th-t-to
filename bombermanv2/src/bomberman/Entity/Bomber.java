@@ -40,9 +40,7 @@ public class Bomber extends MovableObject {
     
 
     public void placeBomb(int posXPixel, int posYPixel){
-        //TODO: DONE tạo bomb và đặt vào vị trí
-        //TODO: DONE lưu ý convert từ tọa độ pixel sang tọa độ lưới
-        Bomb bomb=new Bomb((posXPixel+this.width)/GameScene.GAMETILE_SIZE,(posYPixel+this.heigh)/GameScene.GAMETILE_SIZE,Bomber.STRENGTH);
+        Bomb bomb=new Bomb((posXPixel+this.width / 2)/GameScene.GAMETILE_SIZE,(posYPixel+this.heigh / 2)/GameScene.GAMETILE_SIZE,Bomber.STRENGTH);
 
     }
     public void handleKeyEvent(KeyEvent event){
@@ -79,16 +77,17 @@ public class Bomber extends MovableObject {
         if(!alive && indexOfFrame >= 2){
             Game.getInstance().getGoManager().removeObject(this);
         }
+        //TODO: sửa lại cách load hình
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
+        if(isMoving){
+            indexOfFrame++;
+        }
     }
 
     @Override
     public boolean checkCollideWithFixedObject(int posX, int posY) {
-        //TODO: DONE xử lý va chạm với HideawayObject bằng cách gọi hàm collide
-        //TODO:DONE(hàm này trả về true nếu brick bị phá hủy, bomber có thể ăn các item hoặc đi vào portal)
-        //TODO: DONE nhớ gọi super cho các trường hợp còn lại
         GameObjectManager manager = Game.getInstance().getGoManager();
-        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(x, y, width, heigh);
+        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width, heigh);
         for (int i = 0; i < collideObjs.size(); i++){
             if(collideObjs.get(i) instanceof HideawayObject){
                 return ((HideawayObject) collideObjs.get(i)).collide(this);
