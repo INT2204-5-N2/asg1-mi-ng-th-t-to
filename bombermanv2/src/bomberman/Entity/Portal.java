@@ -1,5 +1,6 @@
 package bomberman.Entity;
 
+import bomberman.Game;
 import javafx.scene.image.Image;
 
 public class Portal extends HideawayObject {
@@ -14,8 +15,13 @@ public class Portal extends HideawayObject {
     }
 
     @Override
-    public boolean collide() {
+    public boolean collide(Bomber bomber) {
         //TODO: xử lý va chạm với bomber
+        if(!isHiding&& Game.getInstance().getGoManager().getNumOfEnemy()==0)
+        {
+            //Todo: Qua màn
+            return true;
+        }
         return false;
     }
 }
