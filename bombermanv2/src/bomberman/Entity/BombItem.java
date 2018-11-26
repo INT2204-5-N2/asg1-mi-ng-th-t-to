@@ -23,7 +23,7 @@ public class BombItem extends HideawayObject {
 
     @Override
     public boolean collide(Bomber bomber) {
-        //TODO: xử lý va chạm với bomber
+        //TODO: DONE xử lý va chạm với bomber
         if (!isHiding) {
             bomber.setMaxBomb(3);
             return true;

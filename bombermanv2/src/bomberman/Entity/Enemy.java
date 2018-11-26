@@ -59,8 +59,8 @@ public abstract class Enemy extends MovableObject{
 
     @Override
     public boolean checkCollideWithFixedObject(int posX, int posY) {
-        //TODO: xử lý va chạm với HideawayObject - mặc định không cho đi qua
-        //TODO: nhớ gọi super cho các trường hợp còn lại
+        //TODO: DONE xử lý va chạm với HideawayObject - mặc định không cho đi qua
+        //TODO: DONE nhớ gọi super cho các trường hợp còn lại
         GameObjectManager manager = Game.getInstance().getGoManager();
         ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(x, y, width, heigh);
         for (int i = 0; i < collideObjs.size(); i++){
