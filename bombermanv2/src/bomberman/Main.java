@@ -17,8 +17,11 @@ public class Main extends Application {
             private long lastUpdate = 0 ;
             public void handle(long currentNanoTime)
             {
-                if(currentNanoTime - lastUpdate >= 28000)
-                game.update();
+                if(currentNanoTime - lastUpdate >= 50000000){
+                    game.update();
+                    lastUpdate = currentNanoTime;
+                }
+
             }
         }.start();
 

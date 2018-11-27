@@ -28,9 +28,10 @@ public class Bomb extends FixedObject{
     @Override
     public void update() {
         indexOfSprite++;
-        if(timeToExplode >= System.currentTimeMillis()){
+        if(!isExploded && timeToExplode < System.currentTimeMillis()){
             isExploded = true;
             indexOfSprite = 0;
+            explode();
         }
         gc.drawImage(sprites[isExploded ? 1: 0][indexOfSprite % 3], x, y, width, heigh);
         if(isExploded && indexOfSprite >= 2){
@@ -40,12 +41,65 @@ public class Bomb extends FixedObject{
 
     public void explode(){
         //create flame
-        for (int i = 1; i < strength; i++){
-            GameObjectManager manager = Game.getInstance().getGoManager();
-            manager.addObject(new FlameItem(getxInGrid() - 1, getyInGrid()));
-            manager.addObject(new FlameItem(getxInGrid() + 1, getyInGrid()));
-            manager.addObject(new FlameItem(getxInGrid(), getyInGrid() - 1));
-            manager.addObject(new FlameItem(getxInGrid(), getyInGrid() + 1));
+        GameObjectManager manager = Game.getInstance().getGoManager();
+        for (int i = xInGrid + 1; i <= xInGrid + strength; i++){
+            if(manager.getFixedObjectAt(i, yInGrid) == null || manager.getFixedObjectAt(i, yInGrid) instanceof Wall ){
+                i--;
+                if(i != xInGrid && manager.getFixedObjectAt(i, yInGrid) != null){
+                    new Flame(i , yInGrid, Flame.FlameStatus.horizontal_right_last);
+                }
+                break;
+            }
+            if(i == xInGrid + strength){
+                new Flame(i, yInGrid, Flame.FlameStatus.horizontal_right_last);
+            } else
+            new Flame(i, yInGrid, Flame.FlameStatus.horizontal);
         }
+
+        for (int i = xInGrid - 1; i >= xInGrid - strength; i--){
+            if(manager.getFixedObjectAt(i, yInGrid) == null || manager.getFixedObjectAt(i, yInGrid) instanceof Wall ){
+                i--;
+                if(i != xInGrid && manager.getFixedObjectAt(i, yInGrid) != null){
+                    new Flame(i, yInGrid, Flame.FlameStatus.horizontal_left_last);
+                }
+                break;
+            }
+            if(i == xInGrid - strength){
+                new Flame(i, yInGrid, Flame.FlameStatus.horizontal_right_last);
+            } else
+            new Flame(i, yInGrid, Flame.FlameStatus.horizontal);
+        }
+
+        for (int i = yInGrid + 1; i <= yInGrid + strength; i++){
+            if(manager.getFixedObjectAt(xInGrid, i) == null || manager.getFixedObjectAt(xInGrid, i) instanceof Wall ){
+                i--;
+                if(i != yInGrid && manager.getFixedObjectAt(xInGrid, i ) != null){
+                    new Flame(xInGrid, i, Flame.FlameStatus.vertical_down_last);
+                }
+                break;
+            }
+            if(i == yInGrid + strength){
+                new Flame(xInGrid, i, Flame.FlameStatus.vertical_down_last);
+            } else
+            new Flame(xInGrid, i, Flame.FlameStatus.vertical);
+        }
+
+        for (int i = yInGrid - 1; i >= yInGrid - strength; i++){
+            if(manager.getFixedObjectAt(xInGrid, i) == null || manager.getFixedObjectAt(xInGrid, i) instanceof Wall ){
+                i--;
+                if(i != yInGrid && manager.getFixedObjectAt(xInGrid, i) != null ){
+                    new Flame(xInGrid, i, Flame.FlameStatus.vertical_top_last);
+                }
+                break;
+            }
+            if(i == yInGrid + strength){
+                new Flame(xInGrid, i, Flame.FlameStatus.vertical_top_last);
+            } else
+            new Flame(xInGrid, i, Flame.FlameStatus.vertical);
+        }
+    }
+
+    public boolean isExploded(){
+        return isExploded;
     }
 }

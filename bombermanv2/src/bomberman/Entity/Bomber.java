@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 
 public class Bomber extends MovableObject {
-    private final static int SPEED = 1;
+    private final static int SPEED = 5;
     private final static int STRENGTH=1;
     private int maxBomb;
     private int strength;
@@ -45,8 +45,6 @@ public class Bomber extends MovableObject {
     }
     public void handleKeyEvent(KeyEvent event){
         if(event == null){
-            isMoving = false;
-            indexOfFrame = 0;
             return;
         }
         switch (event.getCode()){
@@ -74,14 +72,12 @@ public class Bomber extends MovableObject {
     }
     @Override
     public void update() {
-        if(!alive && indexOfFrame >= 2){
+        if(status == Status.DEAD && indexOfFrame >= 2){
             Game.getInstance().getGoManager().removeObject(this);
         }
+        handleKeyEvent(Game.getInstance().getEventQueue().poll());
         //TODO: sửa lại cách load hình
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
-        if(isMoving){
-            indexOfFrame++;
-        }
     }
 
     @Override

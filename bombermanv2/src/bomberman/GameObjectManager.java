@@ -10,7 +10,11 @@ public class GameObjectManager {
     private ArrayList<MovableObject> characters = new ArrayList<MovableObject>();
     private FixedObject[][] fixedObjectList;
     private Bomber bomber;
+    private int width;
+    private int height;
     public GameObjectManager(int width, int height){
+        this.width = width;
+        this.height = height;
         fixedObjectList = new FixedObject[height][width];
     }
 
@@ -47,9 +51,21 @@ public class GameObjectManager {
         result.add(fixedObjectList[yInGridDown][xInGridRight]);
         return result;
     }
+    public FixedObject getFixedObjectAt(int xInGrid, int yInGrid){
+        if(xInGrid < 0 || xInGrid > width || yInGrid < 0 || yInGrid > height){
+            return null;
+        }
+        return (fixedObjectList[yInGrid][xInGrid]);
+    }
     public void removeObject(GameObject obj){
-        if(obj instanceof MovableObject){
-
+        if(obj instanceof FixedObject){
+            FixedObject fixedRef = (FixedObject) obj;
+            int x = fixedRef.getxInGrid();
+            int y = fixedRef.getyInGrid();
+            fixedObjectList[y][x] = new Grass(x, y);
+        }
+        if (obj instanceof MovableObject){
+            characters.remove(obj);
         }
     }
 

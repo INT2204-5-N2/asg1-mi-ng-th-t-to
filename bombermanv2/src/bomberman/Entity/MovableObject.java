@@ -21,9 +21,11 @@ public abstract class MovableObject extends GameObject {
     public abstract boolean processCollideWithOtherCharacter(MovableObject other);
 
     public void move(Status status){
-        if(status != this.status) {
-            indexOfFrame = 0;
+        if(status == this.status){
+            indexOfFrame++;
+        } else {
             this.status = status;
+            indexOfFrame = 0;
         }
         int newX = 0, newY = 0;
         switch (status){
@@ -59,10 +61,17 @@ public abstract class MovableObject extends GameObject {
         GameObjectManager manager = Game.getInstance().getGoManager();
         ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width, heigh);
         for (int i = 0; i < collideObjs.size(); i++){
-            if(collideObjs.get(i) instanceof  Wall || collideObjs.get(i) instanceof  Brick){
+            FixedObject curObj = collideObjs.get(i);
+            if(curObj instanceof  Wall || curObj instanceof  Brick){
                 return false;
             }
-            if(collideObjs.get(i) instanceof Flame){
+            if(curObj instanceof Bomb){
+                if(((Bomb) curObj).isExploded()){
+                    kill();
+                    return true;
+                }
+            }
+            if(curObj instanceof Flame){
                 kill();
                 return true;
             }

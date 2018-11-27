@@ -6,10 +6,14 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Game {
     private GameObjectManager goManager;
     private LevelLoader levelLoader;
     private GameScene gameScene;
+    private Queue<KeyEvent> eventQueue = new LinkedList<>();
     private static Game instance;
     private int width, heigh;
     private Game(){
@@ -25,13 +29,9 @@ public class Game {
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                goManager.getBomber().handleKeyEvent(event);
-            }
-        });
-        gameScene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                goManager.getBomber().handleKeyEvent(null);
+                if(eventQueue.isEmpty() || eventQueue.peek().getCode() != event.getCode()){
+                    eventQueue.add(event);
+                }
             }
         });
         Group root = new Group();
@@ -72,5 +72,9 @@ public class Game {
 
     public void setHeigh(int heigh) {
         this.heigh = heigh;
+    }
+
+    public Queue<KeyEvent> getEventQueue() {
+        return eventQueue;
     }
 }

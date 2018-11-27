@@ -1,8 +1,9 @@
 package bomberman.Entity;
+import bomberman.Game;
 import bomberman.GameScene;
 public abstract class FixedObject extends GameObject {
-    private int xInGrid;
-    private int yInGrid;
+    protected int xInGrid;
+    protected int yInGrid;
     public FixedObject(int xInGrid, int yInGrid){
         this.xInGrid = xInGrid;
         this.yInGrid = yInGrid;
@@ -18,5 +19,10 @@ public abstract class FixedObject extends GameObject {
 
     public int getyInGrid() {
         return yInGrid;
+    }
+
+    public void remove(){
+        Game.getInstance().getGoManager().removeObject(this);
+       // Game.getInstance().getGoManager().addObject(new Grass(xInGrid, yInGrid));
     }
 }

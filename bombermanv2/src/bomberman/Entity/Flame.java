@@ -9,10 +9,12 @@ public class Flame extends FixedObject{
         vertical_top_last
     }
     private int indexOfImage = 0;
+    private long startTime;
     private Image[] imageList;
     public Flame(int xInGrid, int yInGrid, FlameStatus status) {
         super(xInGrid, yInGrid);
         imageList = new Image[3];
+        startTime = System.currentTimeMillis();
         for (int i = 0; i < 3; i++){
             imageList[i] = new Image(getClass().getResource("/sprite/explosion_" + status + i + ".png").toExternalForm());
         }
@@ -21,8 +23,13 @@ public class Flame extends FixedObject{
 
     @Override
     public void update() {
+        if(System.currentTimeMillis() - startTime > 150){
+            startTime = System.currentTimeMillis();
+            indexOfImage++;
+        }
+
         if(indexOfImage >= imageList.length){
-            Game.getInstance().getGoManager().removeObject(this);
+            remove();
         } else {
             gc.drawImage(imageList[indexOfImage], x, y, width, heigh);
         }

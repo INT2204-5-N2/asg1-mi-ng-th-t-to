@@ -24,7 +24,7 @@ public abstract class Enemy extends MovableObject{
     }
     @Override
     public void kill() {
-        this.status=Status.DEAD;
+        this.status =Status.DEAD;
         this.update();
         //gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
     }
@@ -42,19 +42,19 @@ public abstract class Enemy extends MovableObject{
     @Override
     public void update() {
         Status newStatus = generateMove();
-        if(status != Status.DEAD && newStatus != status){
+        if(this.status != Status.DEAD && newStatus != this.status){
             indexOfFrame = 0;
-            status = newStatus;
+            this.status = newStatus;
         }
        // processCollideWithOtherCharacter();
-        if(status == Status.DEAD){
+        if(this.status == Status.DEAD){
             gc.drawImage(imageLists[4][0], x, y, width, heigh);
             Game.getInstance().getGoManager().removeObject(this);
         }
         else {
             move(newStatus);
             //TODO: sửa lại cách load hình
-            gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
+            gc.drawImage(imageLists[this.status.getVal()][indexOfFrame / 5 % imageLists[this.status.getVal()].length], x, y, width, heigh);
         }
     }
 
