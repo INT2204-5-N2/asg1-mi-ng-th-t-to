@@ -3,6 +3,7 @@ package bomberman.Entity;
 import bomberman.Game;
 import bomberman.GameObjectManager;
 import bomberman.GameScene;
+import bomberman.Sound.SoundPlay;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 
@@ -47,6 +48,7 @@ public class Bomber extends MovableObject {
         if(event == null){
             return;
         }
+        SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
         switch (event.getCode()){
             case RIGHT:
                 move(Status.GO_RIGHT);

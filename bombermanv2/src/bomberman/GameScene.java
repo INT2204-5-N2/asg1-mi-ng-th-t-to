@@ -7,7 +7,7 @@ import javafx.stage.Screen;
 import java.util.Queue;
 
 public class GameScene extends Canvas {
-    //TODO: tính toán lại GAMETILE_SIZE và with, heigh của cửa sổ
+    //TODO: DONE tính toán lại GAMETILE_SIZE và with, heigh của cửa sổ
     public static final int GAMETILE_SIZE = (int) Screen.getPrimary().getVisualBounds().getWidth()/31;
     private GameObjectManager goManager;
     public GameScene(GameObjectManager gameObjectManager){

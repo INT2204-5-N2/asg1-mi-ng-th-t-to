@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public abstract class MovableObject extends GameObject {
-    //TODO: thay ảnh của nhân vật (các ảnh hiện tại in lên có nền hồng)
+    //TODO: DONE thay ảnh của nhân vật (các ảnh hiện tại in lên có nền hồng)
     protected Status status;
     protected int speed;
     protected boolean alive;
