@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 
 public class Bomber extends MovableObject {
-    private final static int SPEED = 5;
+    private final static int SPEED = 10;
     private final static int STRENGTH=1;
     private int maxBomb;
     private int strength;
@@ -42,7 +42,6 @@ public class Bomber extends MovableObject {
 
     public void placeBomb(int posXPixel, int posYPixel){
         Bomb bomb=new Bomb((posXPixel+this.width / 2)/GameScene.GAMETILE_SIZE,(posYPixel+this.heigh / 2)/GameScene.GAMETILE_SIZE,Bomber.STRENGTH);
-
     }
     public void handleKeyEvent(KeyEvent event){
         if(event == null){
@@ -71,6 +70,7 @@ public class Bomber extends MovableObject {
     public void kill() {
         status = Status.DEAD;
         indexOfFrame = 0;
+        this.update();
     }
     @Override
     public void update() {
@@ -80,7 +80,7 @@ public class Bomber extends MovableObject {
         handleKeyEvent(Game.getInstance().getEventQueue().poll());
         //TODO: sửa lại cách load hình
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
-    }
+}
 
     @Override
     public boolean checkCollideWithFixedObject(int posX, int posY) {
