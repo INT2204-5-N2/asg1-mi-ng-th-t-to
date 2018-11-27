@@ -3,6 +3,7 @@ package bomberman.Entity;
 import bomberman.Game;
 import bomberman.GameObjectManager;
 import bomberman.GameScene;
+import bomberman.Sound.SoundPlay;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 
@@ -80,6 +81,7 @@ public class Bomber extends MovableObject {
         //TODO: sửa lại cách load hình
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
         if(isMoving){
+            SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
             indexOfFrame++;
         }
     }
