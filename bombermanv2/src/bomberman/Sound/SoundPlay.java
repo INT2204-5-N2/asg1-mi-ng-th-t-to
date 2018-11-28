@@ -5,11 +5,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class SoundPlay {
-    public static final String LEVEL_1_SOUND="C:\\Github\\asg1-mi-ng-th-t-to\\bombermanv2\\res\\BombermanSound\\04 Level 1.wav";
+    public static String LEVEL_1_SOUND;
     public static final String MENU_SOUND=null;
-    public static final String BOMB_FIRE="C:\\Github\\assignment-2-bomberman-japanteam\\src\\sound\\bomb_bang.wav";
-    public static final String BOMBER_RUN_SOUND="C:\\Github\\asg1-mi-ng-th-t-to\\bombermanv2\\res\\BombermanSound\\foot.wav";
-    public static final String START_SOUND="C:\\Github\\asg1-mi-ng-th-t-to\\bombermanv2\\res\\BombermanSound\\03 Start.wav" ;
+    public static String BOMB_FIRE;
+    public static String BOMBER_RUN_SOUND;
+    public static String START_SOUND;
+    static {
+        LEVEL_1_SOUND = SoundPlay.class.getResource("/BombermanSound/04 Level 1.wav").getFile();
+        BOMBER_RUN_SOUND=SoundPlay.class.getResource("/BombermanSound/foot.wav").getFile();
+        START_SOUND=SoundPlay.class.getResource("/BombermanSound/03 Start.wav").getFile();
+        BOMB_FIRE = SoundPlay.class.getResource("/BombermanSound/foot.wav").getFile();
+    }
     public static void playSound(String soundPath)  {
         try {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(soundPath));

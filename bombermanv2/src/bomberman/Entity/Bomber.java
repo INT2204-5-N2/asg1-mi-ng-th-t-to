@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Bomber extends MovableObject {
@@ -36,8 +38,19 @@ public class Bomber extends MovableObject {
     }
 
     @Override
-    public boolean processCollideWithOtherCharacter(MovableObject other) {
-        return false;
+    public boolean processCollideWithOtherCharacter(MovableObject movableObject) {
+        Rectangle2D recThis=new Rectangle(this.x,this.y,this.width,this.heigh);
+        Rectangle2D recMovableObject=new Rectangle( movableObject.x,
+                movableObject.y,
+                movableObject.width,
+                movableObject.heigh);
+        if(((Rectangle) recThis).intersects(recMovableObject)){
+            if(movableObject instanceof Enemy){
+                kill();
+            }
+            return true;
+        }
+        else return false;
     }
     
 

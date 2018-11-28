@@ -1,6 +1,9 @@
 package bomberman;
+import bomberman.Entity.MovableObject;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Screen;
+
+import java.util.ArrayList;
 
 public class GameScene extends Canvas {
     //TODO: DONE tính toán lại GAMETILE_SIZE và with, heigh của cửa sổ
@@ -19,6 +22,16 @@ public class GameScene extends Canvas {
         }
         for(int i = 0; i < goManager.getCharacters().size(); i++){
             goManager.getCharacters().get(i).update();
+        }
+        checkCharacterCollide();
+    }
+
+    public void checkCharacterCollide(){
+        ArrayList<MovableObject> characterList = goManager.getCharacters();
+        for (int i = 0; i < characterList.size(); i++){
+            for (int j = i + 1; j < characterList.size(); j++){
+                characterList.get(i).processCollideWithOtherCharacter(characterList.get(j));
+            }
         }
     }
 
