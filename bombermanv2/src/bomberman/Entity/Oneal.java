@@ -1,5 +1,6 @@
 package bomberman.Entity;
 
+import bomberman.Game;
 import javafx.scene.image.Image;
 
 public class Oneal extends Enemy {
@@ -22,7 +23,8 @@ public class Oneal extends Enemy {
     }
     @Override
     public Status generateMove() {
-        //TODO: viết hàm sinh bước tiếp theo cho quái
+        //TODO: viết hàm sinh bước tiếp theo cho quá
+        //Game.getInstance().getGoManager().getBomber().x;
         return Status.GO_LEFT;
     }
 

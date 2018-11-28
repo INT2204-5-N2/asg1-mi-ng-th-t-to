@@ -10,7 +10,8 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public abstract class Enemy extends MovableObject{
-    private final  int SPEED=1;
+    private final  int SPEED=2;
+    public static Status oldStatus;
     public abstract Status generateMove();
     public Enemy(int posX, int posY){
         imageLists = new Image[5][];
@@ -42,6 +43,10 @@ public abstract class Enemy extends MovableObject{
     @Override
     public void update() {
         Status newStatus = generateMove();
+        /*if(!isMoving)
+        {
+            this.status=generateMove();
+        }*/
         if(this.status != Status.DEAD && newStatus != this.status){
             indexOfFrame = 0;
             this.status = newStatus;
@@ -52,9 +57,9 @@ public abstract class Enemy extends MovableObject{
             Game.getInstance().getGoManager().removeObject(this);
         }
         else {
-            move(newStatus);
+            move(status);
             //TODO: sửa lại cách load hình
-            gc.drawImage(imageLists[this.status.getVal()][indexOfFrame / 5 % imageLists[this.status.getVal()].length], x, y, width, heigh);
+            gc.drawImage(imageLists[this.status.getVal()][indexOfFrame % imageLists[this.status.getVal()].length], x, y, width, heigh);
         }
     }
 

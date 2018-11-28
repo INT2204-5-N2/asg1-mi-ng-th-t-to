@@ -23,6 +23,5 @@ public abstract class FixedObject extends GameObject {
 
     public void remove(){
         Game.getInstance().getGoManager().removeObject(this);
-       // Game.getInstance().getGoManager().addObject(new Grass(xInGrid, yInGrid));
     }
 }
