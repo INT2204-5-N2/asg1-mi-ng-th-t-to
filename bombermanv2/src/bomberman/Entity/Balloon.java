@@ -1,6 +1,7 @@
 package bomberman.Entity;
 
 import bomberman.Game;
+import bomberman.GameScene;
 import javafx.scene.image.Image;
 
 import java.util.Random;
@@ -33,6 +34,7 @@ public class Balloon extends Enemy {
         }
         Random random=new Random();
         int move=random.nextInt(4);
+        this.checkCollideWithFixedObject(this.x- GameScene.GAMETILE_SIZE,this.y-GameScene.GAMETILE_SIZE);
         switch (move)
         {
             case 0:
