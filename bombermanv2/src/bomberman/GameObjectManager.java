@@ -8,21 +8,21 @@ public class GameObjectManager {
 
     private int numOfEnemy;
     private ArrayList<MovableObject> characters = new ArrayList<MovableObject>();
-    private FixedObject[][] fixedObjectList;
+    private ObjectStack[][] fixedObjectList;
     private Bomber bomber;
     private int width;
     private int height;
     public GameObjectManager(int width, int height){
         this.width = width;
         this.height = height;
-        fixedObjectList = new FixedObject[height][width];
+        fixedObjectList = new ObjectStack[height][width];
     }
 
     public ArrayList<MovableObject> getCharacters() {
         return characters;
     }
 
-    public FixedObject[][] getFixedObjectList() {
+    public ObjectStack[][] getFixedObjectList() {
         return fixedObjectList;
     }
 
@@ -35,8 +35,16 @@ public class GameObjectManager {
         }
         else {
             FixedObject fixedRef = (FixedObject) obj;
-            fixedObjectList[fixedRef.getyInGrid()][fixedRef.getxInGrid()] = fixedRef;
+            int x = fixedRef.getxInGrid();
+            int y = fixedRef.getyInGrid();
+            if(fixedObjectList[y][x] == null){
+                fixedObjectList[y][x] = new ObjectStack();
+            }
+            fixedObjectList[y][x].add(fixedRef);
         }
+    }
+    public void removeAt(int xInGrid, int yInGrid){
+        fixedObjectList[yInGrid][xInGrid].removeLast();
     }
     public ArrayList<FixedObject> getFixedObjectInRect(int x, int y, int width, int heigh){
         int xInGridLeft, xInGridRight, yInGridUp, yInGridDown;
@@ -45,24 +53,24 @@ public class GameObjectManager {
         yInGridUp = y / GameScene.GAMETILE_SIZE;
         yInGridDown = (y + heigh - 1) / GameScene.GAMETILE_SIZE;
         ArrayList<FixedObject> result = new ArrayList<>();
-        result.add(fixedObjectList[yInGridUp][xInGridLeft]);
-        result.add(fixedObjectList[yInGridDown][xInGridLeft]);
-        result.add(fixedObjectList[yInGridUp][xInGridRight]);
-        result.add(fixedObjectList[yInGridDown][xInGridRight]);
+        result.add(fixedObjectList[yInGridUp][xInGridLeft].getLast());
+        result.add(fixedObjectList[yInGridDown][xInGridLeft].getLast());
+        result.add(fixedObjectList[yInGridUp][xInGridRight].getLast());
+        result.add(fixedObjectList[yInGridDown][xInGridRight].getLast());
         return result;
     }
     public FixedObject getFixedObjectAt(int xInGrid, int yInGrid){
         if(xInGrid < 0 || xInGrid > width || yInGrid < 0 || yInGrid > height){
             return null;
         }
-        return (fixedObjectList[yInGrid][xInGrid]);
+        return (fixedObjectList[yInGrid][xInGrid].getLast());
     }
     public void removeObject(GameObject obj){
         if(obj instanceof FixedObject){
             FixedObject fixedRef = (FixedObject) obj;
             int x = fixedRef.getxInGrid();
             int y = fixedRef.getyInGrid();
-            fixedObjectList[y][x] = new Grass(x, y);
+            fixedObjectList[y][x].remove(fixedRef);
         }
         if (obj instanceof MovableObject){
             characters.remove(obj);

@@ -33,6 +33,7 @@ public class Bomb extends FixedObject{
             isExploded = true;
             indexOfSprite = 0;
             explode();
+            Game.getInstance().getGoManager().getBomber().decreaseActiveBomb();
         }
         gc.drawImage(sprites[isExploded ? 1: 0][indexOfSprite % 3], x, y, width, heigh);
         if(isExploded)
@@ -64,7 +65,7 @@ public class Bomb extends FixedObject{
 
         for (int i = xInGrid - 1; i >= xInGrid - strength; i--){
             if(manager.getFixedObjectAt(i, yInGrid) == null || manager.getFixedObjectAt(i, yInGrid) instanceof Wall ){
-                i--;
+                i++;
                 if(i != xInGrid && manager.getFixedObjectAt(i, yInGrid) != null){
                     new Flame(i, yInGrid, Flame.FlameStatus.horizontal_left_last);
                 }
@@ -92,7 +93,7 @@ public class Bomb extends FixedObject{
 
         for (int i = yInGrid - 1; i >= yInGrid - strength; i--){
             if(manager.getFixedObjectAt(xInGrid, i) == null || manager.getFixedObjectAt(xInGrid, i) instanceof Wall ){
-                i--;
+                i++;
                 if(i != yInGrid && manager.getFixedObjectAt(xInGrid, i) != null ){
                     new Flame(xInGrid, i, Flame.FlameStatus.vertical_top_last);
                 }

@@ -39,6 +39,8 @@ public abstract class Enemy extends MovableObject{
         if(((Rectangle) recThis).intersects(recMovableObject)){
             if(movableObject instanceof Bomber){
                 movableObject.kill();
+            } else {
+                isMoving = false;
             }
             return true;
         }

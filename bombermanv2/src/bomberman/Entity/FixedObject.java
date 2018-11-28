@@ -1,6 +1,9 @@
 package bomberman.Entity;
 import bomberman.Game;
 import bomberman.GameScene;
+
+import java.util.LinkedList;
+
 public abstract class FixedObject extends GameObject {
     protected int xInGrid;
     protected int yInGrid;

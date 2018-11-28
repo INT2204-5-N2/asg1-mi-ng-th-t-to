@@ -17,7 +17,7 @@ public class GameScene extends Canvas {
         getGraphicsContext2D().clearRect(0, 0, getWidth(), getHeight());
         for(int i = 0; i < goManager.getFixedObjectList().length; i++){
             for(int j = 0; j < goManager.getFixedObjectList()[i].length; j++){
-                goManager.getFixedObjectList()[i][j].update();
+                goManager.getFixedObjectList()[i][j].getLast().update();
             }
         }
         for(int i = 0; i < goManager.getCharacters().size(); i++){

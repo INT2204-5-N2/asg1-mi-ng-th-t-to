@@ -1,6 +1,7 @@
 package bomberman.Entity;
 
 import bomberman.Game;
+import bomberman.GameObjectManager;
 import javafx.scene.image.Image;
 
 public class Flame extends FixedObject{
@@ -18,7 +19,11 @@ public class Flame extends FixedObject{
         for (int i = 0; i < 3; i++){
             imageList[i] = new Image(getClass().getResource("/sprite/explosion_" + status + i + ".png").toExternalForm());
         }
-        Game.getInstance().getGoManager().addObject(this);
+        GameObjectManager manager = Game.getInstance().getGoManager();
+        if(!(manager.getFixedObjectAt(xInGrid, yInGrid) instanceof Grass)){
+            manager.removeAt(xInGrid, yInGrid);
+        }
+        manager.addObject(this);
     }
 
     @Override

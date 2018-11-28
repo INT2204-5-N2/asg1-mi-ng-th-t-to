@@ -42,10 +42,13 @@ public class LevelLoader {
                         goManager.addObject(new Wall(x, y));
                         break;
                     case '*':
+                        goManager.addObject(new Grass(x, y));
                         goManager.addObject(new Brick(x, y));
                         break;
                     case 'x':
+                        goManager.addObject(new Grass(x, y));
                         goManager.addObject(new Portal(x, y));
+                        goManager.addObject(new Brick(x, y));
                         break;
                     case 'p':
                         goManager.addObject(new Bomber(x * GameScene.GAMETILE_SIZE, y * GameScene.GAMETILE_SIZE));
@@ -60,13 +63,19 @@ public class LevelLoader {
                         goManager.addObject(new Grass(x, y));
                         break;
                     case 'b':
+                        goManager.addObject(new Grass(x, y));
                         goManager.addObject(new BombItem(x, y));
+                        goManager.addObject(new Brick(x, y));
                         break;
                     case 'f':
+                        goManager.addObject(new Grass(x, y));
                         goManager.addObject(new FlameItem(x, y));
+                        goManager.addObject(new Brick(x, y));
                         break;
                     case 's':
+                        goManager.addObject(new Grass(x, y));
                         goManager.addObject(new SpeedItem(x, y));
+                        goManager.addObject(new Brick(x, y));
                         break;
                     default:
                         goManager.addObject(new Grass(x, y));

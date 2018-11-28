@@ -1,22 +1,17 @@
 package bomberman.Entity;
 
-public abstract class HideawayObject extends FixedObject{
-    protected boolean isHiding = true;//cái này làm gì
-    private Brick hidingBrick;//cái này làm gì
 
-    public HideawayObject(int xInGrid, int yInGrid) {//đây á
+import javafx.scene.image.Image;
+
+public abstract class HideawayObject extends FixedObject{
+    protected Image sprite;
+    public HideawayObject(int xInGrid, int yInGrid) {
         super(xInGrid, yInGrid);
-        this.hidingBrick = new Brick(xInGrid, yInGrid);
     }
-    public abstract void show();
     public abstract boolean collide(Bomber bomber);//truyền tham số vào đây á uk
     @Override
     public void update() {
-        if (isHiding){
-            hidingBrick.update();
-        } else {
-            show();
-        }
+        gc.drawImage(sprite, x, y, width, heigh);
     }
 
 }

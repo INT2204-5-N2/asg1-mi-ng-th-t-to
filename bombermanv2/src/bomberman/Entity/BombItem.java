@@ -7,25 +7,15 @@ import java.awt.geom.Rectangle2D;
 
 public class BombItem extends HideawayObject {
 
-    private static Image sprite;
     public BombItem(int xInGrid, int yInGrid) {
         super(xInGrid, yInGrid);
-    }
-
-    static {
         sprite = new Image(SpeedItem.class.getResource("/sprite/powerup_bombs.png").toExternalForm());
     }
 
     @Override
-    public void show() {
-        gc.drawImage(sprite, x, y, width, heigh);
-    }
-
-    @Override
     public boolean collide(Bomber bomber) {
-        if (!isHiding) {
-            bomber.setMaxBomb(bomber.getMaxBomb() + 1);
-            return true;
-        } else return false;
+        bomber.setMaxBomb(bomber.getMaxBomb() + 1);
+        remove();
+        return true;
     }
 }

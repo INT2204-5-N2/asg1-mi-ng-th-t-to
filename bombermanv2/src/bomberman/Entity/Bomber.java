@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class Bomber extends MovableObject {
     private final static int SPEED = 10;
-    private final static int STRENGTH=1;
     private int maxBomb;
-    private int strength;
+    private int numOfActiveBomb;
+    private int strength = 1;
     public Bomber(int posX, int posY){
         imageLists = new Image[5][];//số trạng thái và số hình
         x = posX;
@@ -26,8 +26,8 @@ public class Bomber extends MovableObject {
         speed = SPEED;
         status = Status.GO_DOWN;
         isMoving = false;
-        strength=STRENGTH;
         maxBomb=1;
+        numOfActiveBomb = 0;
         for (Status d: Status.values()){
             Image[] temp = new Image[3];
             temp[0] = new Image(getClass().getResource("/sprite/player_" + d +".png").toExternalForm());
@@ -52,10 +52,13 @@ public class Bomber extends MovableObject {
         }
         else return false;
     }
-    
 
-    public void placeBomb(int posXPixel, int posYPixel){
-        Bomb bomb=new Bomb((posXPixel+this.width / 2)/GameScene.GAMETILE_SIZE,(posYPixel+this.heigh / 2)/GameScene.GAMETILE_SIZE,Bomber.STRENGTH);
+    public void placeBomb(int posXPixel, int posYPixel) {
+        if (numOfActiveBomb < maxBomb) {
+            new Bomb((posXPixel + this.width / 2) / GameScene.GAMETILE_SIZE, (posYPixel + this.heigh / 2) / GameScene.GAMETILE_SIZE, strength);
+            numOfActiveBomb++;
+        }
+
     }
     public void handleKeyEvent(KeyEvent event){
         if(event == null){
@@ -129,5 +132,9 @@ public class Bomber extends MovableObject {
     public void setStrength(int strength)
     {
         this.strength=strength;
+    }
+
+    public void decreaseActiveBomb(){
+        numOfActiveBomb--;
     }
 }
