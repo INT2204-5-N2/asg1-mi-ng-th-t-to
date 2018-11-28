@@ -24,8 +24,20 @@ public class Oneal extends Enemy {
     @Override
     public Status generateMove() {
         //TODO: viết hàm sinh bước tiếp theo cho quá
-        //Game.getInstance().getGoManager().getBomber().x;
-        return Status.GO_LEFT;
+        if(isMoving)
+        {
+            this.status=status;
+        }
+        else
+        {
+            if(this.x<Game.getInstance().getGoManager().getBomber().x&&isMoving) this.status=Status.GO_LEFT;
+            else if(this.x<Game.getInstance().getGoManager().getBomber().x&&isMoving) this.status= Status.GO_RIGHT;
+            else if(this.y<Game.getInstance().getGoManager().getBomber().x&&isMoving) this.status= Status.GO_UP;
+            else if(this.y<Game.getInstance().getGoManager().getBomber().x&&isMoving) this.status= Status.GO_DOWN;
+//        else this.status=Status.GO_DOWN;
+        }
+
+        return  this.status;
     }
 
     public Status goRow()
