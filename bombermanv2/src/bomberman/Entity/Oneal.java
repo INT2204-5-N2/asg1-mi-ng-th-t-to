@@ -30,10 +30,15 @@ public class Oneal extends Enemy {
         }
         else
         {
-            if(this.x<Game.getInstance().getGoManager().getBomber().x&&isMoving) this.status=Status.GO_LEFT;
-            else if(this.x<Game.getInstance().getGoManager().getBomber().x&&isMoving) this.status= Status.GO_RIGHT;
-            else if(this.y<Game.getInstance().getGoManager().getBomber().x&&isMoving) this.status= Status.GO_UP;
-            else if(this.y<Game.getInstance().getGoManager().getBomber().x&&isMoving) this.status= Status.GO_DOWN;
+            if(this.x<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x+5,this.y)) this.status=Status.GO_RIGHT;
+            else if(this.x>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x-5,this.y)) this.status= Status.GO_LEFT;
+            else if(this.y<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y+5)) this.status= Status.GO_UP;
+            else if(this.y>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y-5)) this.status= Status.GO_DOWN;
+            if(this.x>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x+5,this.y)) this.status=Status.GO_RIGHT;
+            else if(this.x<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x-5,this.y)) this.status= Status.GO_LEFT;
+            else if(this.y>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y+5)) this.status= Status.GO_UP;
+            else if(this.y<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y-5)) this.status= Status.GO_DOWN;
+            
 //        else this.status=Status.GO_DOWN;
         }
 
