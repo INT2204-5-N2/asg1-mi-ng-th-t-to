@@ -23,15 +23,15 @@ public class Flame extends FixedObject{
 
     @Override
     public void update() {
-        if(System.currentTimeMillis() - startTime > 150){
+        /*if(System.currentTimeMillis() - startTime > 150){
             startTime = System.currentTimeMillis();
-            indexOfImage++;
-        }
 
+        }*/
         if(indexOfImage >= imageList.length){
             remove();
         } else {
             gc.drawImage(imageList[indexOfImage], x, y, width, heigh);
+            indexOfImage++;
         }
     }
 }

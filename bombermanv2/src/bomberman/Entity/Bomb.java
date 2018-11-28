@@ -90,7 +90,7 @@ public class Bomb extends FixedObject{
             new Flame(xInGrid, i, Flame.FlameStatus.vertical);
         }
 
-        for (int i = yInGrid - 1; i >= yInGrid - strength; i++){
+        for (int i = yInGrid - 1; i >= yInGrid - strength; i--){
             if(manager.getFixedObjectAt(xInGrid, i) == null || manager.getFixedObjectAt(xInGrid, i) instanceof Wall ){
                 i--;
                 if(i != yInGrid && manager.getFixedObjectAt(xInGrid, i) != null ){
@@ -98,7 +98,7 @@ public class Bomb extends FixedObject{
                 }
                 break;
             }
-            if(i == yInGrid + strength){
+            if(i == yInGrid - strength){
                 new Flame(xInGrid, i, Flame.FlameStatus.vertical_top_last);
             } else
             new Flame(xInGrid, i, Flame.FlameStatus.vertical);

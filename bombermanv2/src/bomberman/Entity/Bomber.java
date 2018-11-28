@@ -5,6 +5,7 @@ import bomberman.GameObjectManager;
 import bomberman.GameScene;
 import bomberman.Sound.SoundPlay;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
@@ -70,16 +71,21 @@ public class Bomber extends MovableObject {
     public void kill() {
         status = Status.DEAD;
         indexOfFrame = 0;
-        this.update();
     }
     @Override
     public void update() {
-        if(status == Status.DEAD && indexOfFrame >= 2){
-            Game.getInstance().getGoManager().removeObject(this);
-        } else {
-            if(status != Status.DEAD){
-                handleKeyEvent(Game.getInstance().getEventQueue().poll());
+        if(status == Status.DEAD){
+            if(indexOfFrame >= 2){
+                Game.getInstance().getGoManager().removeObject(this);
+            } else {
+                indexOfFrame++;
             }
+        } else {
+            KeyEvent event = Game.getInstance().getEventQueue().poll();
+            if(event == null || event.getCode() == KeyCode.SPACE){
+                checkCollideWithFixedObject(x, y);
+            }
+            handleKeyEvent(event);
         }
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
 }
