@@ -76,9 +76,11 @@ public class Bomber extends MovableObject {
     public void update() {
         if(status == Status.DEAD && indexOfFrame >= 2){
             Game.getInstance().getGoManager().removeObject(this);
+        } else {
+            if(status != Status.DEAD){
+                handleKeyEvent(Game.getInstance().getEventQueue().poll());
+            }
         }
-        handleKeyEvent(Game.getInstance().getEventQueue().poll());
-        //TODO: sửa lại cách load hình
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
     }
 
