@@ -3,6 +3,7 @@ package bomberman.Entity;
 
 import bomberman.Game;
 import bomberman.GameObjectManager;
+import bomberman.Sound.SoundPlay;
 import javafx.scene.image.Image;
 
 public class Bomb extends FixedObject{
@@ -34,7 +35,12 @@ public class Bomb extends FixedObject{
             explode();
         }
         gc.drawImage(sprites[isExploded ? 1: 0][indexOfSprite % 3], x, y, width, heigh);
+        if(isExploded)
+        {
+            SoundPlay.playSound(SoundPlay.BOMB_FIRE);
+        }
         if(isExploded && indexOfSprite >= 2){
+
             Game.getInstance().getGoManager().removeObject(this);
         }
     }
