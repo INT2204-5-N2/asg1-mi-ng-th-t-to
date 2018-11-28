@@ -19,8 +19,8 @@ public class Bomber extends MovableObject {
         imageLists = new Image[5][];//số trạng thái và số hình
         x = posX;
         y = posY;
-        width = GameScene.GAMETILE_SIZE;
-        heigh = GameScene.GAMETILE_SIZE;
+        width = GameScene.GAMETILE_SIZE-2;
+        heigh = GameScene.GAMETILE_SIZE-2;
         speed = SPEED;
         status = Status.GO_DOWN;
         isMoving = false;
