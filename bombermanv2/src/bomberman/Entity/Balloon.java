@@ -1,5 +1,6 @@
 package bomberman.Entity;
 
+import bomberman.Game;
 import javafx.scene.image.Image;
 
 import java.util.Random;
@@ -27,13 +28,11 @@ public class Balloon extends Enemy {
     @Override
     public Status generateMove(){
         //TODO: sửa lại hàm (vì random nên nó toàn đứng 1 một chỗ)
+        if(isMoving){
+            return status;
+        }
         Random random=new Random();
         int move=random.nextInt(4);
-//        try {
-//            Thread.sleep(100);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         switch (move)
         {
             case 0:
@@ -45,11 +44,6 @@ public class Balloon extends Enemy {
             case 3:
                 return Status.GO_UP;
         }
-        return Status.GO_DOWN;
-//        i++;
-//        if(i%2==0) return Status.GO_RIGHT;
-//        else if(i%3==0) return Status.GO_DOWN;
-//        else if(i%5==0) return Status.GO_UP;
-//        else return Status.GO_LEFT;
+        return Status.GO_RIGHT;
     }
 }

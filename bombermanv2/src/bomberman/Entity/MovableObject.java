@@ -51,7 +51,8 @@ public abstract class MovableObject extends GameObject {
             newY = centerlizeCoordinate(y);
             newX += x;
         }
-        if(canMove(newX, newY)){
+        isMoving = canMove(newX, newY);
+        if(isMoving){
             x = newX;
             y = newY;
         }
