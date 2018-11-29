@@ -1,11 +1,15 @@
 package bomberman.Entity;
 
 import bomberman.Game;
+import bomberman.GameScene;
 import javafx.scene.image.Image;
+
+import java.util.Random;
 
 public class Oneal extends Enemy {
     public Oneal(int posX, int posY){
         super(posX, posY);
+        this.speed=5;
         for (Status d: Status.values()){
             Image[] temp;
             if(d != Status.DEAD){
@@ -24,33 +28,225 @@ public class Oneal extends Enemy {
     @Override
     public Status generateMove() {
         //TODO: viết hàm sinh bước tiếp theo cho quá
-        if(isMoving)
+//        if(isMoving)
+//        {
+//            this.status=status;
+//        }
+//        else
+//        {
+//            if((this.x<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x+5,this.y))
+//                        this.status=Status.GO_RIGHT;
+//            else if((this.y>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y+5))||
+//                    (this.y<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y+5)))
+//                this.status= Status.GO_DOWN;
+//            else if((this.x>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x-5,this.y))||
+//                    (this.x<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x-5,this.y)))
+//                this.status= Status.GO_LEFT;
+//            else if((this.y<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y-5))||
+//                    (this.y>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y-5)))
+//                this.status= Status.GO_UP;
+//        }
+//
+//        return  this.status;
+//        if(isMoving)
+//        {
+//            this.status=status;
+//        }
+////        if(!isMoving)
+//        else
+//        {
+//            Random random=new Random();
+//            int randomMove= random.nextInt(2);
+//            if(randomMove==0)
+//            {
+//                status=goRow();
+//                if(status==Status.GO_DOWN&&canMove(this.x,this.y+1)||this.canMove(this.x,this.y-1))
+//                    status=goColum();
+//            }
+//            else
+//            {
+//                status=goColum();
+//                if(status==Status.GO_RIGHT&&(canMove(this.x+1,this.y)||canMove(this.x-1,this.y)))
+//                {
+//                    status=goRow();
+//                }
+//            }
+//        }
+////        else this.status=status;
+//        return status;
+        Random random=new Random();
+        int move;
+        if(Game.getInstance().getGoManager().getBomber().isMoving==false)
         {
-            this.status=status;
+            if(isMoving){
+                this.status=status;
+            }
+            else
+            {
+                move=random.nextInt(4);
+                switch (move)
+                {
+                    case 0:
+                        if (canMove(this.x-1,this.y))
+                        {
+                            this.status=Status.GO_LEFT;
+                        }
+                        else
+                        {
+                            this.status=randomColum();
+                        }
+                        break;
+                    case 1:
+                        if (canMove(this.x+1,this.y))
+                        {
+                            this.status=Status.GO_RIGHT;
+                        }
+                        else
+                        {
+                            this.status=randomColum();
+                        }
+                        break;
+                    case 2:
+                        if (canMove(this.x,this.y+1))
+                        {
+                            this.status=Status.GO_DOWN;
+                        }
+                        else
+                        {
+                            this.status=randomRow();
+                        }
+                        break;
+                    case 3:
+                        if (canMove(this.x,this.y-1))
+                        {
+                            this.status=Status.GO_UP;
+                        }
+                        else
+                        {
+                            this.status=randomRow();
+                        }
+                        break;
+                }
+            }
+
         }
         else
         {
-            if(this.x<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x+5,this.y)) this.status=Status.GO_RIGHT;
-            else if(this.x>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x-5,this.y)) this.status= Status.GO_LEFT;
-            else if(this.y<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y+5)) this.status= Status.GO_UP;
-            else if(this.y>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y-5)) this.status= Status.GO_DOWN;
-            if(this.x>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x+5,this.y)) this.status=Status.GO_RIGHT;
-            else if(this.x<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x-5,this.y)) this.status= Status.GO_LEFT;
-            else if(this.y>Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y+5)) this.status= Status.GO_UP;
-            else if(this.y<Game.getInstance().getGoManager().getBomber().x&&canMove(this.x,this.y-5)) this.status= Status.GO_DOWN;
-            
-//        else this.status=Status.GO_DOWN;
+            if(Game.getInstance().getGoManager().getBomber().isMoving)
+            {
+                if(this.isMoving)
+                {
+                    if(Game.getInstance().getGoManager().getBomber().status==Status.GO_DOWN)
+                    {
+                        if(this.canMove(this.x,this.y-1))
+                        {
+                            this.status=Status.GO_UP;
+                        }
+                        else if (this.canMove(Status.GO_DOWN)) this.status=Status.GO_DOWN;
+                        else this.status=randomRow();
+                    }
+                    else if(Game.getInstance().getGoManager().getBomber().status==Status.GO_UP)
+                    {
+                        if(this.canMove(this.x,this.y+1))
+                        {
+                            this.status=Status.GO_DOWN;
+                        }
+                        else if (this.canMove(Status.GO_UP)) this.status=Status.GO_UP;
+                        else this.status=randomRow();
+                    }
+                    else if(Game.getInstance().getGoManager().getBomber().status==Status.GO_RIGHT)
+                    {
+                        if(this.canMove(this.x-1,this.y))
+                        {
+                            this.status=Status.GO_LEFT;
+                        }
+                        else if (this.canMove(Status.GO_RIGHT)) this.status=Status.GO_RIGHT;
+                        else this.status=randomColum();
+                    }
+                    else if(Game.getInstance().getGoManager().getBomber().status==Status.GO_LEFT)
+                    {
+                        if (this.canMove(this.x+1,this.y))
+                        {
+                            this.status = Status.GO_RIGHT;
+                        }
+                        else if (this.canMove(Status.GO_LEFT)) this.status=Status.GO_LEFT;
+                        else this.status=randomColum();
+
+                    }
+                }
+                else
+                {
+                    move=random.nextInt(4);
+                    switch (move) {
+                        case 0:
+                            if (canMove(this.x-1,this.y))
+                            {
+                              this.status=Status.GO_LEFT;
+                            }
+                            else
+                            {
+                                this.status=Status.GO_RIGHT;
+                            }
+                            break;
+                        case 1:
+                            if (canMove(this.x+1,this.y))
+                            {
+                                this.status=Status.GO_RIGHT;
+                            }
+                            else
+                            {
+                                this.status=Status.GO_LEFT;
+                            }
+                            break;
+                        case 2:
+                            if (canMove(this.x,this.y+1))
+                            {
+                                this.status=Status.GO_DOWN;
+                            }
+                            else
+                            {
+                                this.status=Status.GO_UP;
+                            }
+                            break;
+                        case 3:
+                            if (canMove(this.x,this.y-1))
+                            {
+                                this.status=Status.GO_UP;
+                            }
+                            else
+                            {
+                                this.status=Status.GO_DOWN;
+                            }
+                            break;
+                    }
+                }
+            }
+
         }
 
-        return  this.status;
+        return this.status;
+
     }
 
-    public Status goRow()
+    public Status randomColum()
     {
-        return Status.GO_RIGHT;
+        if (this.canMove(Status.GO_UP)) return Status.GO_UP;
+        else if(this.canMove(Status.GO_DOWN)) return Status.GO_DOWN;
+        return Status.GO_LEFT;
     }
-    public Status goColum()
+    public Status randomRow()
     {
-        return Status.GO_DOWN;
+        if (this.canMove(Status.GO_RIGHT)) return Status.GO_RIGHT;
+        else if(this.canMove(Status.GO_LEFT)) return Status.GO_LEFT;
+        return Status.GO_UP;
+    }
+
+    private boolean canMove(Status status)
+    {
+        if(status==Status.GO_UP&&this.canMove(this.x,this.y-1)) return true;
+        else if(status==Status.GO_DOWN&&this.canMove(this.x,this.y+1)) return true;
+        else if(status==Status.GO_RIGHT&&this.canMove(this.x+1,this.y)) return true;
+        else if(status==Status.GO_LEFT&&this.canMove(this.x-1,this.y)) return true;
+        return false;
     }
 }

@@ -29,7 +29,7 @@ public class Balloon extends Enemy {
     }
     @Override
     public Status generateMove(){
-        //TODO: sửa lại hàm (vì random nên nó toàn đứng 1 một chỗ)
+        //TODO: DONE sửa lại hàm (vì random nên nó toàn đứng 1 một chỗ)
         if(isMoving){
             return status;
         }
