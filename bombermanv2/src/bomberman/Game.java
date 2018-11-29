@@ -1,8 +1,8 @@
 package bomberman;
 
+import bomberman.Sound.SoundPlay;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -22,14 +22,19 @@ public class Game {
     private static Game instance;
     private int width, heigh;
     private InfoBar infoBar;
+    private boolean endGame = false;
+    private int level;
+    private boolean changeLevel = false;
+    private int delayFrame = 0;
     private Game(){
 
     }
     public void start(Stage primaryStage){
+        level = 1;
         levelLoader = new LevelLoader();
-        levelLoader.loadLevelInfo(1);
-        goManager = new GameObjectManager(width, heigh);
+        levelLoader.loadLevelInfo(level);
         GameScene.GAMETILE_SIZE =((int) Screen.getPrimary().getVisualBounds().getHeight() * 3 / 4) / heigh;
+        goManager = new GameObjectManager(width, heigh);
         gameScene = new GameScene(goManager, width, heigh);
         levelLoader.loadGameObject(goManager);
         gameScene.setFocusTraversable(true);
@@ -41,8 +46,9 @@ public class Game {
                 }
             }
         });
-        infoBar = new InfoBar();
         AnchorPane root = new AnchorPane();
+
+        infoBar = new InfoBar();
         Node infoNode = null;
         try {
             FXMLLoader infoLoader = new FXMLLoader(getClass().getResource("InfoBar.fxml"));
@@ -51,14 +57,15 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        root.getChildren().add(infoNode);
-        root.getChildren().add(gameScene);
-        infoNode.setLayoutX(0);
-        infoNode.setLayoutY(0);
-        gameScene.setLayoutX(0);
-        gameScene.setLayoutY(infoNode.getBoundsInParent().getHeight());
         AnchorPane.setRightAnchor(infoNode, 0d);
         AnchorPane.setLeftAnchor(infoNode, 0d);
+
+        root.getChildren().add(infoNode);
+        infoNode.setLayoutX(0);
+        infoNode.setLayoutY(0);
+        root.getChildren().add(gameScene);
+        gameScene.setLayoutY(infoNode.getBoundsInParent().getHeight());
+
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
     }
@@ -78,8 +85,21 @@ public class Game {
     }
 
     public void update(){
-        gameScene.update();
-        infoBar.update();
+        if(endGame){
+            gameScene.drawText("GAMEOVER");
+            SoundPlay.playSound(SoundPlay.GAME_OVER);
+        } else if(changeLevel){
+            if(delayFrame <= 1){
+                loadLevel(level + 1);
+                changeLevel = false;
+            } else {
+                delayFrame--;
+            }
+        }
+        else {
+            gameScene.update();
+            infoBar.update();
+        }
     }
 
     public InfoBar getInfoBar() {
@@ -104,5 +124,21 @@ public class Game {
 
     public Queue<KeyEvent> getEventQueue() {
         return eventQueue;
+    }
+
+    public void setEndGame(boolean endGame) {
+        this.endGame = endGame;
+    }
+
+    public void loadLevel(int level){
+        this.level = level;
+        levelLoader.loadLevelInfo(level);
+        levelLoader.loadGameObject(goManager);
+        infoBar.reset();
+    }
+    public void loadNextLevel(){
+        changeLevel = true;
+        delayFrame = 100;
+        gameScene.drawText("LEVEL " + level);
     }
 }

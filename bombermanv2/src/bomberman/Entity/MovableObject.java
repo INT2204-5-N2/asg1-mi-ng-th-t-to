@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public abstract class MovableObject extends GameObject {
-    //TODO: DONE thay ảnh của nhân vật (các ảnh hiện tại in lên có nền hồng)
+
     protected Status status;
     protected int speed;
     protected boolean alive;
@@ -60,7 +60,7 @@ public abstract class MovableObject extends GameObject {
 
     public boolean checkCollideWithFixedObject(int posX, int posY){
         GameObjectManager manager = Game.getInstance().getGoManager();
-        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width, heigh);
+        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width - 5, heigh - 5);
         for (int i = 0; i < collideObjs.size(); i++){
             FixedObject curObj = collideObjs.get(i);
             if(curObj instanceof  Wall || curObj instanceof  Brick){

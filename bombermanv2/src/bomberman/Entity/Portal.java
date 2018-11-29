@@ -13,9 +13,9 @@ public class Portal extends HideawayObject {
     @Override
     public boolean collide(Bomber bomber) {
         //TODO: xử lý va chạm với bomber
-        if(Game.getInstance().getGoManager().getNumOfEnemy()==0)
+        if(Game.getInstance().getGoManager().getNumOfEnemy()<=0)
         {
-            //Todo: Qua màn
+            Game.getInstance().loadNextLevel();
             return true;
         }
         return false;

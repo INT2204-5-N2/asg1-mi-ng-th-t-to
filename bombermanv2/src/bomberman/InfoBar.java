@@ -20,20 +20,27 @@ public class InfoBar implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        time = 200000;
-        lastTime = System.currentTimeMillis();
-        score = 0;
-        lbScore.setText(score + "");
+        reset();
     }
     public void update(){
         long newTime = System.currentTimeMillis();
         time = time + lastTime - newTime;
         lastTime = newTime;
+        if(time < 0){
+            Game.getInstance().setEndGame(true);
+            lbTime.setText("TIMEOUT");
+        }
         lbTime.setText(time / 1000 + "");
+
     }
 
-    public void increaseScore(){
-        score += 100;
+    public void addScore(int addScore){
+        score += addScore;
         lbScore.setText(score + "");
+    }
+
+    public void reset(){
+        time = 200000;
+        lastTime = System.currentTimeMillis();
     }
 }

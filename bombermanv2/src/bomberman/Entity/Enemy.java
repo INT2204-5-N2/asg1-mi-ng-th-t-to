@@ -26,7 +26,8 @@ public abstract class Enemy extends MovableObject{
     @Override
     public void kill() {
         this.status =Status.DEAD;
-        Game.getInstance().getInfoBar().increaseScore();
+        Game.getInstance().getInfoBar().addScore(100);
+        Game.getInstance().getGoManager().addEnemy(-1);
     }
     @Override
     public boolean processCollideWithOtherCharacter(MovableObject movableObject) {
@@ -36,7 +37,7 @@ public abstract class Enemy extends MovableObject{
                                                     movableObject.width,
                                                     movableObject.heigh);
         if(((Rectangle) recThis).intersects(recMovableObject)){
-            if(movableObject instanceof Bomber){
+            if(status != Status.DEAD && movableObject instanceof Bomber){
                 movableObject.kill();
             } else {
                 isMoving = false;
@@ -49,15 +50,10 @@ public abstract class Enemy extends MovableObject{
     @Override
     public void update() {
         Status newStatus = generateMove();
-        /*if(!isMoving)
-        {
-            this.status=generateMove();
-        }*/
         if(this.status != Status.DEAD && newStatus != this.status){
             indexOfFrame = 0;
             this.status = newStatus;
         }
-       // processCollideWithOtherCharacter();
         if(this.status == Status.DEAD){
             gc.drawImage(imageLists[4][0], x, y, width, heigh);
             Game.getInstance().getGoManager().removeObject(this);
