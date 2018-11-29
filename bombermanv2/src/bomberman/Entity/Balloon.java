@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class Balloon extends Enemy {
     private static int i=1;
+    private Random random = new Random();
     public Balloon(int posX, int posY){
         super(posX, posY);
         for (Status d: Status.values()){
@@ -32,7 +33,7 @@ public class Balloon extends Enemy {
         if(isMoving){
             return status;
         }
-        Random random=new Random();
+
         int move=random.nextInt(4);
         this.checkCollideWithFixedObject(this.x- GameScene.GAMETILE_SIZE,this.y-GameScene.GAMETILE_SIZE);
         switch (move)

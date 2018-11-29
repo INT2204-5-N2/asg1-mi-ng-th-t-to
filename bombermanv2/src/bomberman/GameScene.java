@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class GameScene extends Canvas {
     //TODO: DONE tính toán lại GAMETILE_SIZE và with, heigh của cửa sổ
-    public static final int GAMETILE_SIZE = (int) Screen.getPrimary().getVisualBounds().getWidth()/31;
+    public static int GAMETILE_SIZE;
     private GameObjectManager goManager;
-    public GameScene(GameObjectManager gameObjectManager){
-        super(Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
+    public GameScene(GameObjectManager gameObjectManager, int w, int h){
+        super(w * GAMETILE_SIZE, h * GAMETILE_SIZE);
         goManager = gameObjectManager;
     }
     public void update(){

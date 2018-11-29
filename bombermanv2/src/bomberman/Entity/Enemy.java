@@ -26,8 +26,7 @@ public abstract class Enemy extends MovableObject{
     @Override
     public void kill() {
         this.status =Status.DEAD;
-        this.update();
-        //gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
+        Game.getInstance().getInfoBar().increaseScore();
     }
     @Override
     public boolean processCollideWithOtherCharacter(MovableObject movableObject) {
