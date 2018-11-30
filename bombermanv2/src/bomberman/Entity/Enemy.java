@@ -28,6 +28,10 @@ public abstract class Enemy extends MovableObject{
         this.status =Status.DEAD;
         Game.getInstance().getInfoBar().addScore(100);
         Game.getInstance().getGoManager().addEnemy(-1);
+        if(this instanceof Oneal)
+        {
+            System.out.println("Đã giết");
+        }
     }
     @Override
     public boolean processCollideWithOtherCharacter(MovableObject movableObject) {

@@ -78,7 +78,7 @@ public class Oneal extends Enemy {
         int move;
         if(Game.getInstance().getGoManager().getBomber().isMoving==false)
         {
-            if(isMoving){
+            if(this.isMoving){
                 this.status=status;
             }
             else
@@ -87,7 +87,7 @@ public class Oneal extends Enemy {
                 switch (move)
                 {
                     case 0:
-                        if (canMove(this.x-1,this.y))
+                        if (canMove(this.x-5,this.y))
                         {
                             this.status=Status.GO_LEFT;
                         }
@@ -97,7 +97,7 @@ public class Oneal extends Enemy {
                         }
                         break;
                     case 1:
-                        if (canMove(this.x+1,this.y))
+                        if (canMove(this.x+5,this.y))
                         {
                             this.status=Status.GO_RIGHT;
                         }
@@ -107,7 +107,7 @@ public class Oneal extends Enemy {
                         }
                         break;
                     case 2:
-                        if (canMove(this.x,this.y+1))
+                        if (canMove(this.x,this.y+5))
                         {
                             this.status=Status.GO_DOWN;
                         }
@@ -117,7 +117,7 @@ public class Oneal extends Enemy {
                         }
                         break;
                     case 3:
-                        if (canMove(this.x,this.y-1))
+                        if (canMove(this.x,this.y-5))
                         {
                             this.status=Status.GO_UP;
                         }
@@ -138,7 +138,7 @@ public class Oneal extends Enemy {
                 {
                     if(Game.getInstance().getGoManager().getBomber().status==Status.GO_DOWN)
                     {
-                        if(this.canMove(this.x,this.y-1))
+                        if(this.canMove(this.x,this.y-5))
                         {
                             this.status=Status.GO_UP;
                         }
@@ -147,7 +147,7 @@ public class Oneal extends Enemy {
                     }
                     else if(Game.getInstance().getGoManager().getBomber().status==Status.GO_UP)
                     {
-                        if(this.canMove(this.x,this.y+1))
+                        if(this.canMove(this.x,this.y+5))
                         {
                             this.status=Status.GO_DOWN;
                         }
@@ -156,7 +156,7 @@ public class Oneal extends Enemy {
                     }
                     else if(Game.getInstance().getGoManager().getBomber().status==Status.GO_RIGHT)
                     {
-                        if(this.canMove(this.x-1,this.y))
+                        if(this.canMove(this.x-5,this.y))
                         {
                             this.status=Status.GO_LEFT;
                         }
@@ -165,7 +165,7 @@ public class Oneal extends Enemy {
                     }
                     else if(Game.getInstance().getGoManager().getBomber().status==Status.GO_LEFT)
                     {
-                        if (this.canMove(this.x+1,this.y))
+                        if (this.canMove(this.x+5,this.y))
                         {
                             this.status = Status.GO_RIGHT;
                         }
@@ -179,7 +179,7 @@ public class Oneal extends Enemy {
                     move=random.nextInt(4);
                     switch (move) {
                         case 0:
-                            if (canMove(this.x-1,this.y))
+                            if (canMove(this.x-5,this.y))
                             {
                               this.status=Status.GO_LEFT;
                             }
@@ -189,7 +189,7 @@ public class Oneal extends Enemy {
                             }
                             break;
                         case 1:
-                            if (canMove(this.x+1,this.y))
+                            if (canMove(this.x+5,this.y))
                             {
                                 this.status=Status.GO_RIGHT;
                             }
@@ -199,7 +199,7 @@ public class Oneal extends Enemy {
                             }
                             break;
                         case 2:
-                            if (canMove(this.x,this.y+1))
+                            if (canMove(this.x,this.y+5))
                             {
                                 this.status=Status.GO_DOWN;
                             }
@@ -209,7 +209,7 @@ public class Oneal extends Enemy {
                             }
                             break;
                         case 3:
-                            if (canMove(this.x,this.y-1))
+                            if (canMove(this.x,this.y-5))
                             {
                                 this.status=Status.GO_UP;
                             }
@@ -243,10 +243,10 @@ public class Oneal extends Enemy {
 
     private boolean canMove(Status status)
     {
-        if(status==Status.GO_UP&&this.canMove(this.x,this.y-1)) return true;
-        else if(status==Status.GO_DOWN&&this.canMove(this.x,this.y+1)) return true;
-        else if(status==Status.GO_RIGHT&&this.canMove(this.x+1,this.y)) return true;
-        else if(status==Status.GO_LEFT&&this.canMove(this.x-1,this.y)) return true;
+        if(status==Status.GO_UP&&this.canMove(this.x,this.y-5)) return true;
+        else if(status==Status.GO_DOWN&&this.canMove(this.x,this.y+5)) return true;
+        else if(status==Status.GO_RIGHT&&this.canMove(this.x+5,this.y)) return true;
+        else if(status==Status.GO_LEFT&&this.canMove(this.x-5,this.y)) return true;
         return false;
     }
 }
