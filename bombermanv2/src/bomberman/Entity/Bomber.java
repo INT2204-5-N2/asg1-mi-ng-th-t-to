@@ -14,9 +14,10 @@ import java.util.ArrayList;
 
 public class Bomber extends MovableObject {
     private static int SPEED = 10;
-    private static int maxBomb =1;
+    private static int maxBomb = 1;
     private int numOfActiveBomb;
-    private static int strength =1;
+    private static int strength = 1;
+    private boolean canGoThroughBomb;
     public Bomber(int posX, int posY){
         imageLists = new Image[5][];//số trạng thái và số hình
         x = posX;
@@ -56,6 +57,7 @@ public class Bomber extends MovableObject {
         if (numOfActiveBomb < maxBomb) {
             new Bomb((posXPixel + this.width / 2) / GameScene.GAMETILE_SIZE, (posYPixel + this.heigh / 2) / GameScene.GAMETILE_SIZE, strength);
             numOfActiveBomb++;
+            canGoThroughBomb = true;
         }
 
     }
@@ -63,22 +65,27 @@ public class Bomber extends MovableObject {
         if(event == null){
             return;
         }
-        SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
         switch (event.getCode()){
             case RIGHT:
                 move(Status.GO_RIGHT);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
                 break;
             case LEFT:
                 move(Status.GO_LEFT);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
                 break;
             case DOWN:
                 move(Status.GO_DOWN);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
                 break;
             case UP:
                 move(Status.GO_UP);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
                 break;
             case SPACE:
                 placeBomb(x, y);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
+                break;
         }
     }
 
@@ -91,7 +98,7 @@ public class Bomber extends MovableObject {
     public void update() {
         if(status == Status.DEAD){
             if(indexOfFrame >= 2){
-                Game.getInstance().setEndGame(true);
+                Game.getInstance().endGame();
             } else {
                 indexOfFrame++;
             }
@@ -103,6 +110,16 @@ public class Bomber extends MovableObject {
             handleKeyEvent(event);
         }
         gc.drawImage(imageLists[status.getVal()][indexOfFrame % imageLists[status.getVal()].length], x, y, width, heigh);
+        if(canGoThroughBomb){
+            canGoThroughBomb = false;
+            ArrayList<FixedObject> list = manager.getFixedObjectInRect(x, y, width, heigh);
+            for (int i = 0; i < list.size(); i++){
+                if(list.get(i) instanceof Bomb){
+                    canGoThroughBomb = true;
+                    break;
+                }
+            }
+        }
 }
 
     @Override
@@ -135,5 +152,9 @@ public class Bomber extends MovableObject {
 
     public void decreaseActiveBomb(){
         numOfActiveBomb--;
+    }
+
+    public boolean checkGoThrough(){
+        return canGoThroughBomb;
     }
 }

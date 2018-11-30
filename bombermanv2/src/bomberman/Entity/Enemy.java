@@ -28,10 +28,6 @@ public abstract class Enemy extends MovableObject{
         this.status =Status.DEAD;
         Game.getInstance().getInfoBar().addScore(100);
         Game.getInstance().getGoManager().addEnemy(-1);
-        if(this instanceof Oneal)
-        {
-            System.out.println("Đã giết");
-        }
     }
     @Override
     public boolean processCollideWithOtherCharacter(MovableObject movableObject) {
@@ -53,18 +49,16 @@ public abstract class Enemy extends MovableObject{
 
     @Override
     public void update() {
-        Status newStatus = generateMove();
-        if(this.status != Status.DEAD && newStatus != this.status){
-            indexOfFrame = 0;
-            this.status = newStatus;
-        }
         if(this.status == Status.DEAD){
             gc.drawImage(imageLists[4][0], x, y, width, heigh);
             Game.getInstance().getGoManager().removeObject(this);
-        }
-        else {
+        } else {
+            Status newStatus = generateMove();
+            if(newStatus != this.status){
+                indexOfFrame = 0;
+                this.status = newStatus;
+            }
             move(status);
-            //TODO: sửa lại cách load hình
             gc.drawImage(imageLists[this.status.getVal()][indexOfFrame % imageLists[this.status.getVal()].length], x, y, width, heigh);
         }
     }

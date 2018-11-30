@@ -15,7 +15,7 @@ public abstract class MovableObject extends GameObject {
     protected boolean isMoving;
     protected Image[][] imageLists;
     protected int indexOfFrame = 0;
-
+    protected GameObjectManager manager = Game.getInstance().getGoManager();
     public abstract void kill();
 
     public abstract boolean processCollideWithOtherCharacter(MovableObject other);
@@ -55,12 +55,14 @@ public abstract class MovableObject extends GameObject {
         if(isMoving){
             x = newX;
             y = newY;
+        } else {
+            x = centerlizeCoordinate(x);
+            y = centerlizeCoordinate(y);
         }
     }
 
     public boolean checkCollideWithFixedObject(int posX, int posY){
-        GameObjectManager manager = Game.getInstance().getGoManager();
-        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width - 5, heigh - 5);
+        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width, heigh );
         for (int i = 0; i < collideObjs.size(); i++){
             FixedObject curObj = collideObjs.get(i);
             if(curObj instanceof  Wall || curObj instanceof  Brick){
@@ -70,6 +72,10 @@ public abstract class MovableObject extends GameObject {
                 if(((Bomb) curObj).isExploded()){
                     kill();
                     return true;
+                } else if(this instanceof Enemy){
+                    return false;
+                } else if(this instanceof Bomber){
+                    return ((Bomber) this).checkGoThrough();
                 }
             }
             if(curObj instanceof Flame){

@@ -1,13 +1,11 @@
 package bomberman.Entity;
 
-import bomberman.Game;
 import bomberman.GameScene;
 import javafx.scene.image.Image;
 
 import java.util.Random;
 
 public class Balloon extends Enemy {
-    private static int i=1;
     private Random random = new Random();
     public Balloon(int posX, int posY){
         super(posX, posY);
