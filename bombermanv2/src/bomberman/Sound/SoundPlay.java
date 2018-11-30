@@ -6,7 +6,6 @@ import java.io.IOException;
 
 public class SoundPlay {
     public static String LEVEL_1_SOUND;
-    public static final String MENU_SOUND=null;
     public static String BOMB_FIRE;
     public static String BOMBER_RUN_SOUND;
     public static String START_SOUND;
@@ -24,8 +23,6 @@ public class SoundPlay {
             Clip clip = AudioSystem.getClip();
             clip.open(audioIn);
             clip.start();
-            //Thread.sleep(clip.getMicrosecondLength()/1000);
-            //clip.close();
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -33,10 +30,6 @@ public class SoundPlay {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        playSound(START_SOUND);
     }
 }
 
