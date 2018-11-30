@@ -10,4 +10,5 @@ out
 target/*
 production/*
 out/*
+bomberman-starter/*
 # End of https://www.gitignore.io/api/java

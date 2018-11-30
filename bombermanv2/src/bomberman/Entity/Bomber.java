@@ -65,22 +65,27 @@ public class Bomber extends MovableObject {
         if(event == null){
             return;
         }
-        SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
         switch (event.getCode()){
             case RIGHT:
                 move(Status.GO_RIGHT);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
                 break;
             case LEFT:
                 move(Status.GO_LEFT);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
                 break;
             case DOWN:
                 move(Status.GO_DOWN);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
                 break;
             case UP:
                 move(Status.GO_UP);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
                 break;
             case SPACE:
                 placeBomb(x, y);
+                SoundPlay.playSound(SoundPlay.BOMBER_RUN_SOUND);
+                break;
         }
     }
 
