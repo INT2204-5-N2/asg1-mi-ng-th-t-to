@@ -101,12 +101,12 @@ public class Game {
                 infoBar.update();
                 break;
             case LOAD_NEW_LEVEL:
-                if(delayFrame == 0){
+                if(delayFrame <= 0){
                     eventQueue = new LinkedList<>();
                     status = GameStatus.ON_PLAYING;
                     infoBar.resetTime();
                 } else {
-                    gameScene.drawText(0d, 0d,"LEVEL " + level + 1);
+                    gameScene.drawText(0d, 0d,"LEVEL " + level);
                     delayFrame--;
                 }
                 break;
@@ -142,10 +142,11 @@ public class Game {
     }
 
     public void loadNextLevel(){
-        delayFrame = 100;
+        delayFrame = 50;
         level++;
         levelLoader.loadLevelInfo(level);
         levelLoader.loadGameObject(goManager);
+        status = GameStatus.LOAD_NEW_LEVEL;
     }
 
     public void reset(){

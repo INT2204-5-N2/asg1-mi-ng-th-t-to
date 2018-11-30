@@ -94,5 +94,6 @@ public class GameObjectManager {
     public void reset(){
         fixedObjectList = new ObjectStack[height][width];
         characters = new ArrayList<>();
+        numOfEnemy = 0;
     }
 }
