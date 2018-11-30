@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class Bomber extends MovableObject {
     private static int SPEED = 10;
-    private static int maxBomb = 1;
+    private static int maxBomb =1;
     private int numOfActiveBomb;
-    private static int strength = 1;
+    private static int strength =1;
     public Bomber(int posX, int posY){
         imageLists = new Image[5][];//số trạng thái và số hình
         x = posX;

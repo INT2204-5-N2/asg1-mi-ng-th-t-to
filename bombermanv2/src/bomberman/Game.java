@@ -133,7 +133,9 @@ public class Game {
     }
 
     public void setEndGame(boolean endGame) {
-        this.endGame = endGame;
+        if(endGame){
+            status = GameStatus.END_GAME;
+        }
     }
 
     public void loadLevel(int level){
