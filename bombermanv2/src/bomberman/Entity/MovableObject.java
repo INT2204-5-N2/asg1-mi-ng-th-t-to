@@ -55,11 +55,14 @@ public abstract class MovableObject extends GameObject {
         if(isMoving){
             x = newX;
             y = newY;
+        } else {
+            x = centerlizeCoordinate(x);
+            y = centerlizeCoordinate(y);
         }
     }
 
     public boolean checkCollideWithFixedObject(int posX, int posY){
-        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width - 5, heigh - 5);
+        ArrayList<FixedObject> collideObjs = manager.getFixedObjectInRect(posX, posY, width, heigh );
         for (int i = 0; i < collideObjs.size(); i++){
             FixedObject curObj = collideObjs.get(i);
             if(curObj instanceof  Wall || curObj instanceof  Brick){
