@@ -31,6 +31,8 @@ public class GameObjectManager {
             characters.add((MovableObject) obj);
             if(obj instanceof Bomber){
                 bomber = (Bomber) obj;
+            } else if (obj instanceof Enemy){
+                numOfEnemy++;
             }
         }
         else {
@@ -84,8 +86,13 @@ public class GameObjectManager {
     {
         return numOfEnemy;
     }
-    public void setNumOfEnemy(int numOfEnemy)
+    public void addEnemy(int add)
     {
-        this.numOfEnemy=numOfEnemy;
+        numOfEnemy += add;
+    }
+
+    public void reset(){
+        fixedObjectList = new ObjectStack[height][width];
+        characters = new ArrayList<>();
     }
 }

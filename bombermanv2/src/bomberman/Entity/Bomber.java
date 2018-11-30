@@ -13,20 +13,19 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class Bomber extends MovableObject {
-    private final static int SPEED = 10;
-    private int maxBomb;
+    private static int SPEED = 10;
+    private static int maxBomb = 1;
     private int numOfActiveBomb;
-    private int strength = 1;
+    private static int strength = 1;
     public Bomber(int posX, int posY){
         imageLists = new Image[5][];//số trạng thái và số hình
         x = posX;
         y = posY;
-        width = GameScene.GAMETILE_SIZE-2;
-        heigh = GameScene.GAMETILE_SIZE-2;
+        width = GameScene.GAMETILE_SIZE;
+        heigh = GameScene.GAMETILE_SIZE;
         speed = SPEED;
         status = Status.GO_DOWN;
         isMoving = false;
-        maxBomb=1;
         numOfActiveBomb = 0;
         for (Status d: Status.values()){
             Image[] temp = new Image[3];
@@ -45,7 +44,7 @@ public class Bomber extends MovableObject {
                 movableObject.width,
                 movableObject.heigh);
         if(((Rectangle) recThis).intersects(recMovableObject)){
-            if(movableObject instanceof Enemy){
+            if(movableObject instanceof Enemy && movableObject.status != Status.DEAD){
                 kill();
             }
             return true;
@@ -92,7 +91,7 @@ public class Bomber extends MovableObject {
     public void update() {
         if(status == Status.DEAD){
             if(indexOfFrame >= 2){
-                Game.getInstance().getGoManager().removeObject(this);
+                Game.getInstance().setEndGame(true);
             } else {
                 indexOfFrame++;
             }

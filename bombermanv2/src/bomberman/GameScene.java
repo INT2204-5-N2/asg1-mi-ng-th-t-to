@@ -1,7 +1,11 @@
 package bomberman;
 import bomberman.Entity.MovableObject;
+import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
-import javafx.stage.Screen;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 
@@ -26,6 +30,7 @@ public class GameScene extends Canvas {
         checkCharacterCollide();
     }
 
+
     public void checkCharacterCollide(){
         ArrayList<MovableObject> characterList = goManager.getCharacters();
         for (int i = 0; i < characterList.size(); i++){
@@ -35,5 +40,15 @@ public class GameScene extends Canvas {
         }
     }
 
-
+    public void drawText(String text){
+        GraphicsContext gc = getGraphicsContext2D();
+        gc.clearRect(0, 0, getWidth(), getHeight());
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0, getWidth(), getHeight());
+        gc.setTextAlign(TextAlignment.CENTER);
+        gc.setTextBaseline(VPos.CENTER);
+        gc.setFill(Color.WHITE);
+        gc.setFont(new Font(getHeight() / 10));
+        gc.fillText(text, getWidth() / 2, getHeight()/2);
+    }
 }

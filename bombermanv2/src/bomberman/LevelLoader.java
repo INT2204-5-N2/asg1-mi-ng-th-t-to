@@ -35,6 +35,7 @@ public class LevelLoader {
     }
 
     public void loadGameObject(GameObjectManager goManager){
+        goManager.reset();
         for (int y = 0; y < height; y++){
             for (int x = 0; x < width; x++){
                 switch (map[y][x]){
