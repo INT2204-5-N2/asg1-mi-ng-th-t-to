@@ -40,7 +40,7 @@ public class GameScene extends Canvas {
         }
     }
 
-    public void drawText(String text){
+    public void drawText(double diffX, double diffY, String... text){
         GraphicsContext gc = getGraphicsContext2D();
         gc.clearRect(0, 0, getWidth(), getHeight());
         gc.setFill(Color.BLACK);
@@ -48,7 +48,16 @@ public class GameScene extends Canvas {
         gc.setTextAlign(TextAlignment.CENTER);
         gc.setTextBaseline(VPos.CENTER);
         gc.setFill(Color.WHITE);
-        gc.setFont(new Font(getHeight() / 10));
-        gc.fillText(text, getWidth() / 2, getHeight()/2);
+        double size = getHeight() / 10;
+        double txtX = getWidth() / 2;
+        double txtY = getHeight() / 2;
+        for (int i = 0; i < text.length; i++){
+            gc.setFont(new Font(size));
+            gc.fillText(text[i], txtX, txtY);
+            size /= 3;
+            txtX += diffX;
+            txtY += diffY;
+        }
+
     }
 }

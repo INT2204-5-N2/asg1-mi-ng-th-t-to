@@ -2,10 +2,8 @@ package bomberman;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,14 +18,15 @@ public class InfoBar implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        reset();
+        resetScore();
+        resetTime();
     }
     public void update(){
         long newTime = System.currentTimeMillis();
         time = time + lastTime - newTime;
         lastTime = newTime;
         if(time < 0){
-            Game.getInstance().setEndGame(true);
+            Game.getInstance().endGame();
             lbTime.setText("TIMEOUT");
         }
         lbTime.setText(time / 1000 + "");
@@ -39,8 +38,12 @@ public class InfoBar implements Initializable {
         lbScore.setText(score + "");
     }
 
-    public void reset(){
+    public void resetTime(){
         time = 200000;
         lastTime = System.currentTimeMillis();
+    }
+    public void resetScore(){
+        score = 0;
+        lbScore.setText(score + "");
     }
 }

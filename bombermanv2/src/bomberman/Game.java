@@ -1,13 +1,12 @@
 package bomberman;
 
-import bomberman.Sound.SoundPlay;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -90,7 +89,11 @@ public class Game {
     public void update(){
         switch (status){
             case END_GAME:
-                gameScene.drawText("GAMEOVER");
+                gameScene.drawText(0d, gameScene.getHeight() / 6,"GAMEOVER", "Press Enter to start new game");
+                if(!eventQueue.isEmpty()  && eventQueue.poll().getCode() == KeyCode.ENTER){
+                    reset();
+                    status = GameStatus.ON_PLAYING;
+                }
                 break;
             case ON_PLAYING:
                 gameScene.update();
@@ -98,10 +101,11 @@ public class Game {
                 break;
             case LOAD_NEW_LEVEL:
                 if(delayFrame == 0){
-                    loadLevel(level + 1);
+                    eventQueue = new LinkedList<>();
                     status = GameStatus.ON_PLAYING;
+                    infoBar.resetTime();
                 } else {
-                    gameScene.drawText("LEVEL " + level + 1);
+                    gameScene.drawText(0d, 0d,"LEVEL " + level + 1);
                     delayFrame--;
                 }
                 break;
@@ -132,19 +136,23 @@ public class Game {
         return eventQueue;
     }
 
-    public void setEndGame(boolean endGame) {
-        this.endGame = endGame;
+    public void endGame() {
+        status = GameStatus.END_GAME;
     }
 
-    public void loadLevel(int level){
-        this.level = level;
+    public void loadNextLevel(){
+        delayFrame = 100;
+        level++;
         levelLoader.loadLevelInfo(level);
         levelLoader.loadGameObject(goManager);
-        infoBar.reset();
-        eventQueue = new LinkedList<>();
     }
-    public void loadNextLevel(){
-        changeLevel = true;
-        delayFrame = 100;
+
+    public void reset(){
+        level = 1;
+        levelLoader.loadLevelInfo(level);
+        levelLoader.loadGameObject(goManager);
+        eventQueue = new LinkedList<>();
+        infoBar.resetScore();
+        infoBar.resetTime();
     }
 }

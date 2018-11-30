@@ -49,20 +49,22 @@ public abstract class Enemy extends MovableObject{
 
     @Override
     public void update() {
-        Status newStatus = generateMove();
-        if(this.status != Status.DEAD && newStatus != this.status){
-            indexOfFrame = 0;
-            this.status = newStatus;
-        }
         if(this.status == Status.DEAD){
             gc.drawImage(imageLists[4][0], x, y, width, heigh);
             Game.getInstance().getGoManager().removeObject(this);
+        } else {
+            Status newStatus = generateMove();
+            if(newStatus != this.status){
+                indexOfFrame = 0;
+                this.status = newStatus;
+            }
+            else {
+                move(status);
+                //TODO: sửa lại cách load hình
+                gc.drawImage(imageLists[this.status.getVal()][indexOfFrame % imageLists[this.status.getVal()].length], x, y, width, heigh);
+            }
         }
-        else {
-            move(status);
-            //TODO: sửa lại cách load hình
-            gc.drawImage(imageLists[this.status.getVal()][indexOfFrame % imageLists[this.status.getVal()].length], x, y, width, heigh);
-        }
+
     }
 
     @Override
